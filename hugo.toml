@@ -2,6 +2,7 @@ baseURL = 'https://structures.lv/notes/'
 languageCode = 'en-us'
 title = "Engineer's notes on design using FEA"
 theme = 'hugo-book'
+googleAnalytics = "G-7FJT3L107Y"
 
 # (Optional) Set this to true if you use capital letters in file names
 disablePathToLower = true
