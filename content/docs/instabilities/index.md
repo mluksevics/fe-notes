@@ -47,9 +47,9 @@ want to return to this broken model and re-start applying changes.
         axis?
     -  Are you trying to model 2D structure in 3D space and forgot some
         of degrees of freedom? A good example is a truss bottom chord.
-{{< expand "\"Spinning\" bottom chord of a truss" "show image v" >}}
+{{<details open=true title="\"Spinning\" bottom chord of a truss"  >}}
 ![Chord Instability](img/rotatingchord.png "Chord instability")
-{{< /expand >}}
+{{</details>}}
 
 
 5)  Do nodes "node-out"? Are there two **geometry nodes very very close** to each

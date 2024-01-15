@@ -59,24 +59,24 @@ The settings I suggest paying attention:
 Below are settings that are a good starting point for Autodesk Robot
 and Dlubal RFEM. Of course, adjust element size according to yor geometry.
 
-{{< expand "Mesh settings for Dlubal RFEM" "show image v" >}}
+{{<details open=true title="Mesh settings for Dlubal RFEM"  >}}
 ![RFEM mesh](img/rfem_mesh_settings.png "Mesh settings for Dlubal RFEM")
-{{< /expand >}}
-{{< expand "Mesh settings for Autodesk Robot" "show image v" >}}
+{{</details>}}
+{{<details open=true title="Mesh settings for Autodesk Robot"  >}}
 Image from Autodesk support article ([source](https://www.autodesk.com/support/technical/article/caas/sfdcarticles/sfdcarticles/Object-meshing-error-recommended-meshing-options-for-panels.html))
 ![Robot mesh](img/robot_mesh_settings.jpg "Mesh settings for Autodesk Robot")
-{{< /expand >}}
+{{</details>}}
 
 ### Quality of mesh
 
 The very short advice is - elements with equal sides are the best.
 I have very little to add to this topic myself, therefore I rather give you some good references:
 
-{{< expand "Shape guidelines" "show image v" >}}
+{{<details open=true title="Shape guidelines"  >}}
 Image from [How to design reinfroced concrete flat slabs using
 finite element analysis](https://www.concretecentre.com/Resources/Publications/How-to-design-reinforced-concrete-flat-slabs-using.aspx))
 ![FE shape guidelines](img/shape_guidelines.png "FE Shape guidelines")
-{{< /expand >}}
+{{</details>}}
 
 - <https://www.engmorph.com/mesh-quality-parameters>
 

@@ -94,10 +94,10 @@ frequently used in design:
 -   For checking whether the behaviour of surface elements is as
     expected, additional to bending moments, a **direction of principal
     shear forces** can be viewed.
-{{< expand "Assessing load paths using principal shear force directions" "show image v" >}}
+{{<details open=true title="Assessing load paths using principal shear force directions"  >}}
 ![Principal shear](img/principalshear.png "Principal shear")
 ![Principal shear](img/principalshear1.png "Principal shear")
-{{< /expand >}}
+{{</details>}}
 -   Remember that the static analysis results do not account for any
     **buckling effects**. If you see a considerable compression stress, it
     is up to you do judge whether buckling may be an issue within parts
@@ -138,7 +138,7 @@ Result beams are also useful if you need to communicate forces that are
 transferred via walls -- set of member forces are much easier to
 communicate than varying linear loads.
 
-{{< expand "Example of using Dlubal RFEM \"Result beam\" for shear wall assessment" "show image v" >}}
+{{<details open=true title="Example of using Dlubal RFEM \"Result beam\" for shear wall assessment"  >}}
 ![Robot mesh](img/resultbeam2.png "Mesh settings for Dlubal RFEM")
 ![Robot mesh](img/resultbeam1.png "Mesh settings for Dlubal RFEM")
-{{< /expand >}}
+{{</details>}}

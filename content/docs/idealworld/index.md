@@ -311,6 +311,6 @@ Examples of this statement are:
         that the beam under the load would have been designed to carry the
         entire load (the approach I support myself, see [Concrete design section]("/docs/concrete/")) and the beam would have been designed for 400kNm bending moment.
 
-    {{< expand "Example of \"stiffness game\" between beams and slabs" "show image v" >}}
+    {{<details open=true title="Example of \"stiffness game\" between beams and slabs"  >}}
 ![Stiffness game](img/ribbed.png "Stiffness game")
-{{< /expand >}}
+{{</details>}}

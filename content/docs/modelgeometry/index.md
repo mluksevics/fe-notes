@@ -15,13 +15,13 @@ nodes that define the geometry.\
 The finite element mesh will create more nodes -- both the line members
 and surfaces will have intermediate nodes defining finite elements.
 
-{{< expand "Geometry nodes vs. FE notes" "show image v" >}}
+{{<expand "Geometry nodes vs. FE notes" "show images v">}}
   **Geometry nodes**
 ![Geometry nodes](img/geonodes.png "Geometry nodes")
   
   **FE nodes**
 ![FE nodes](img/fenodes.png "FE nodes")
-{{< /expand >}}
+{{</expand>}}
 
 ### Parameters
 
@@ -55,13 +55,13 @@ decimal point.
     places;
 -   To check this with Dlubal RFEM, go to "full precision".
 
-{{< expand "See exact location of your geometry nodes" "show image v" >}}
+{{<details open=true title="See exact location of your geometry nodes"  >}}
 **Dlubal RFEM:**\
 ![Exact node coordinates](img/rfemfullprecision.png "Exact node coordinates")
 
 **Autodesk Robot:**\
 ![Exact node coordinates](img/robotfullprecision.png "Exact node coordinates")
-{{< /expand >}}
+{{</details>}}
 
 There are **two general approaches** to deal with rounding of
 coordinates:
@@ -70,13 +70,13 @@ coordinates:
     coordinates. Most frequently such updates are done when doing
     "regenerate model" (or similarly named) tool.
 
-{{< expand "Model regeneration functionality" "show image v" >}}
+{{<details open=true title="Model regeneration functionality"  >}}
 **Dlubal RFEM:**\
 ![Regenerate model](img/rfemregenerate.png "Regenerate model")
 
 **Autodesk Robot:**\
 ![Regenerate model](img/robotregenerate.png "Regenerate model")
-{{< /expand >}}
+{{</details>}}
 
 -   Doing it at the meshing stage -- if the auto-mesh feature is used,
     usually software has certain "tolerance" setting which determines
@@ -159,7 +159,7 @@ program:
         - Eccentricities at beam/column interface
         - Sizes of sections. Truss eccentricities -- from Eurocode.
 
-{{< expand "Use of rigid links" "show image v" >}}
+{{<details open=true title="Use of rigid links"  >}}
 **Modelling eccentricities in truss**\
 ![Truss eccentricities](img/rigidlinktruss.png "Truss eccentricities")
 
@@ -168,7 +168,7 @@ program:
 
 **Modelling column section sizes flat slabs**\
 ![Flat slabs](img/rigidlinkflatslab.png "Flat slabs")
-{{< /expand >}}
+{{</details>}}
 
 -   **Stiffness modifiers**:
     -   These are most widely used to model cracking/creep effects in
@@ -183,9 +183,9 @@ program:
         and compare internal forces between structure with stiffness
         modifiers and without.
 
-{{< expand "Surface stiffness modification in Dlubal RFEM" "show image v" >}}
+{{<details open=true title="Surface stiffness modification in Dlubal RFEM"  >}}
 ![Regenerate model](img/rfemmodifiers.png "Regenerate model")
-{{< /expand >}}
+{{</details>}}
 
 
 ## Surfaces
@@ -245,9 +245,9 @@ in steel details and glass panes. It **might be that you don't even need to mode
     And it can actually matter as it would have significant effect on
     stiffness and section modulus that the section has..
 
-{{< expand "Example - considering centreline of thickness" "show image v" >}}
+{{<details open=true title="Example - considering centreline of thickness"  >}}
 ![cantilevered beam](img/steelcentrelines.png "cantilevered beam")
-{{< /expand >}}
+{{</details>}}
 
 #### Material
 

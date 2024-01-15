@@ -21,9 +21,9 @@ multiple ways do to it:
 -   If the braces are the same size, you can model both braces, reduce
     axial stiffness by 0.5 and at the design stage manually account;
 
-{{< expand "Options for modeling tension bracing" "show image v" >}}
+{{<details open=true title="Options for modeling tension bracing"  >}}
 ![Steel bracing](img/bracing.png "Steel bracing")
-{{< /expand >}}
+{{</details>}}
 
 ## Buckling
 
@@ -85,14 +85,14 @@ deformations.
 For trusses composed of hollow sections, you should (almost) always
 treat connections as pinned, see Eurocode 1993-1-8 clause 5.1.5.
 
-{{< expand "Typical steel connections - pinned" "show image v" >}}
+{{<details open=true title="Typical steel connections - pinned"  >}}
 ![Examples of pinned connections](img/pinned.png "Examples of pinned connections")
-{{< /expand >}}
+{{</details>}}
 
-{{< expand "Typical steel connections - fixed" "show image v" >}}
+{{<details open=true title="Typical steel connections - fixed"  >}}
 ![Examples of fixed connections](img/fixed1.png "Examples of fixed connections")
 ![Examples of fixed connections](img/fixed2.png "Examples of fixed connections")
-{{< /expand >}}
+{{</details>}}
 
 ### Account for joint eccentricities
 
@@ -110,18 +110,18 @@ design by steelwork contractor, it makes sense to agree on these added
 can be accounted for at overall model by consultant and connection
 design by contractor.
 
-{{< expand "Eccentricities - assumed offset from column face" "show image v" >}}
+{{<details open=true title="Eccentricities - assumed offset from column face"  >}}
 ![Steel bracing](img/columnbeam.png "Steel bracing")
-{{< /expand >}}
+{{</details>}}
 
 For the **design of trusses composed of hollow sections**,
 Eurocode 1993-1-8 clause 5.1.5 gives limits of eccentricities that can
 be ignored. If eccentricities are larger, these should be considered in
 design.
 
-{{< expand "Eccentricities - trusses composed of hollow sections" "show image v" >}}
+{{<details open=true title="Eccentricities - trusses composed of hollow sections"  >}}
 ![Truss eccentricity](img/eccentricity.png "Truss eccentricity")
-{{< /expand >}}
+{{</details>}}
 
 As the additional of eccentricities is a straight-forward process, I
 suggest that you always model these in, even if the codified rules allow
@@ -132,9 +132,9 @@ you not to.
 This tip is devoted to my experience in one particular project. The
 connection looked like this:
 
-{{< expand "Primary-secondary beam connection" "show image v" >}}
+{{<details open=true title="Primary-secondary beam connection"  >}}
 ![Where is the pin?](img/primarysecondary.png "Where is the pin?")
-{{< /expand >}}
+{{</details>}}
 
 And the connection was designed to resist shear only, i.e. bolts have
 been designed to take vertical shear only.
@@ -156,9 +156,9 @@ results. Unfortunately, I learned it in the "hard way" -- there was
 a bit of lack of supervision at early stage of my career and I
 designed a truss like this:
 
-{{< expand "Truss - bottom chord connection" "show image v" >}}
+{{<details open=true title="Truss - bottom chord connection"  >}}
 ![Truss geometry](img/trussgeo.png "Truss geometry")
-{{< /expand >}}
+{{</details>}}
 
 Then they erected the truss.. and noticed that there are
 **unexpectedly large deflections** from dead load. Concerns were raised
@@ -172,12 +172,12 @@ for truss without slippage taken into account and truss with 2mm
 an example truss (not the real project), assuming trusses are placed
 at 6m centres and there are 1kN/m2 load at SLS.
 
-{{< expand "Truss - deflections considering the bolt slippage" "show image v" >}}
+{{<details open=true title="Truss - deflections considering the bolt slippage"  >}}
 Maximum deflection without slip = 12.6mm
 ![Truss geometry](img/trussnoslip.png "Truss geometry")
 Maximum deflection considering bolt slip = 17.5mm
 ![Truss geometry](img/trussslip.png "Truss geometry")
-{{< /expand >}}
+{{</details>}}
 
 At my real project it turned out not to be "critical" as for simple
 truss this had a nominal effect on forces and the deflections were
@@ -224,7 +224,7 @@ The notes below are ways how I have manually tried to represent these "component
     complexity "pays off" only if stresses around the bolt govern the
     plate design.
 
-{{< expand "Bolts - modelling behaviour in steel details" "show image v" >}}
+{{<details open=true title="Bolts - modelling behaviour in steel details"  >}}
 Rigid elements representing bolt:\
 ![Truss geometry](img/boltspider.png "Truss geometry")
 
@@ -233,7 +233,7 @@ Hinges at end of rigid links to represent bearing:\
 
 Forces in rigid elements:\
 ![Truss geometry](img/boltforces.png "Truss geometry")
-{{< /expand >}}
+{{</details>}}
 
 -   Another thing that you might want to account for -- is **slippage of
     the bolt**. Typically opening size is 1-3mm larger than bolt (EN 1090

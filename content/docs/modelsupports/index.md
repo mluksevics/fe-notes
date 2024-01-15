@@ -60,7 +60,7 @@ doesn't work.
 -   Firstly note, that if your building is fairly typical, structure is not exposed to weather, and you have introduced movement joints, then
     it is completely acceptable **not to design for thermal loads**.
 
-{{< expand "Excerpt from EN 1991-1-5 Thermal loads"  "show excerpt v">}}
+{{<details open=true title="Excerpt from EN 1991-1-5 Thermal loads"  >}}
 **Section 3 - Design situations** \
 (1)P Thermal actions shall be determined for each relevant design situation identified 
 in accordance with EN 1990. 
@@ -71,7 +71,7 @@ changes may not need to be considered for thermal actions.**
 (2)P The elements of loadbearing structures shall be checked to ensure that thermal 
 movement will not cause overstressing of the structure, either by the provision of 
 movement joints or by including the effects in the design. 
-{{< /expand >}}
+{{</details>}}
 
 -   For steel buildings, note that part of thermal movements will be
     accommodated by oversized holes in connections (unless you use HSFG friction bolts).
@@ -90,7 +90,7 @@ movement joints or by including the effects in the design.
 -   In most cases it will be enough to use supports without any spring
  stiffness. e.g. Eurocode suggests that a simplified supports can be used if the relative settlement between adjacent supports is L/500 or smaller.
 
-    {{< expand "EN 1997-1-1 Annex H" "show excerpt v" >}}
+    {{<details open=true title="EN 1997-1-1 Annex H"  >}}
 (2) The maximum acceptable relative rotations for open framed structures, infilled frames and 
 load bearing or continuous brick walls are unlikely to be the same but are likely to range from 
 about 1/2000 to about 1/300, to prevent the occurrence of a serviceability limit state in the 
@@ -100,10 +100,10 @@ rotation likely to cause an ultimate limit state is about 1/150.
 (5) These guidelines concerning limiting settlements apply to normal, routine structures. They 
 should not be applied to buildings or structures, which are out of the ordinary or for which the 
 loading intensity is markedly non-uniform.
-    {{< /expand >}}
+    {{</details>}}
 
     
-    {{< expand "EN 1992-1-1 section 2.3.1.3" "show excerpt v" >}}
+    {{<details open=true title="EN 1992-1-1 section 2.3.1.3"  >}}
 2.3.1.3 Differential settlements/movements 
 
 (2)  The effects of differential settlements should generally be taken into account for the 
@@ -113,7 +113,7 @@ verification for serviceability limit states.
 fatigue conditions, in the verification of stability where second order effects are of importance, 
 etc). In other cases for ultimate limit states they need not be considered, provided that the 
 ductility and rotation capacity of the elements are sufficient.  
-    {{< /expand >}}
+    {{</details>}}
 
     The way how I interpret the codes is that settlements within the
     Eurocode 1997-1-1 Annex H limits (L/500) Can be ignored for determination of ULS forces. However, the potential additional effects on the sway of the building should be considered.
@@ -140,9 +140,9 @@ ductility and rotation capacity of the elements are sufficient.
     on support and it is expected that there might be uplift at this
     beam end. 
 
-    {{< expand "Example of bearing support use" "show image v" >}}
+    {{<details open=true title="Example of bearing support use"  >}}
 ![Bearing support](img/bearing.png "Bearing support")
-{{< /expand >}}
+{{</details>}}
 
 -   Surface compression-only or "contact" supports can be very
     effectively used for design of **steel-to-concrete connections**. There is a good article on modelling "contact" in one of my favourite blogs [EnterFEA](https://enterfea.com/when-to-ignore-contact-in-fea/).

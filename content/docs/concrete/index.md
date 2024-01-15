@@ -41,13 +41,13 @@ then don't overcomplicate it:
 -   Just use one linear static model with uncracked properties for
     stability/column design;
 
-    {{< expand "EN 1992-1-1 section 5.4" "show excerpt v" >}}
+    {{<details open=true title="EN 1992-1-1 section 5.4"  >}}
 (1) Linear analysis of element based on the theory of elasticity may be user for both the serviceability and ultimate limit states.\
 (2) For the determination of the action effects, linear analysis may be carried out assuming: 
 i) uncracked cross sections,  
 ii) linear stress-strain relationships and  
 iii) mean value of the modulus of elasticity 
-    {{< /expand >}}
+    {{</details>}}
 
 -   Separate models for slab & beam design -- one model per floor. The
     separate model allows for refined mesh size and neglect of axial
@@ -127,9 +127,9 @@ most important part of the building.
 -   For modelling the supports of core walls, it is simpler to create
     single fixed support at the base. This allows to easy communicate
     loads.
-{{< expand "Using rigid links and single support for stability core" "show image v" >}}
+{{<details open=true title="Using rigid links and single support for stability core"  >}}
 ![Core wall support](img/coresupport.png "Core wall support")
-{{< /expand >}}
+{{</details>}}
 
 ## Stability design -- stiffness reduction due to cracking and creep
 
@@ -184,10 +184,10 @@ sway (SLS) checks these stiffness values can be multiplied by 1.4.
 So -- for cracked walls, the modifier is 0.35 x 1.4 = 0.5. Or -- the
 sway is twice larger than for uncracked stiffness.
 
-{{< expand "ACI318 guidance of concrete stiffness modification" "show image v" >}}
+{{<details open=true title="ACI318 guidance of concrete stiffness modification"  >}}
 Excerpt from [ACI318](https://www.concrete.org/tools/318buildingcodeportal.aspx.aspx)\
 ![ACI318](img/aci_modifiers.png "ACI318 guidance of concrete stiffness modification")
-{{< /expand >}}
+{{</details>}}
 
 
 #### Sustained lateral loads causing sway - accounting for creep
@@ -200,11 +200,11 @@ increase factor to be 2.5 to 3.0.
 Note that this assumes that sustained lateral loads does not impose permanent tension of stability structures. 
 If you have such structure, I believe that you are qualified enough to stop reading my notes :) 
 
-{{< expand "EN 1992-1-1 section 5.8.6(4) accounting for creep" "show image v" >}}
+{{<details open=true title="EN 1992-1-1 section 5.8.6(4) accounting for creep"  >}}
 (4)  In the absence of more refined models, creep may be taken into account by multiplying all 
 strain values in the concrete stress-strain diagram according to 5.8.6 (3) with a factor (1 + Mef), 
 where Mef is the effective creep ratio according to 5.8.4.
-{{< /expand >}}
+{{</details>}}
 
 My personal engineering judgement is that this combination of codes is acceptable.
 
@@ -354,9 +354,9 @@ My judgement for irregular slabs, where use of "strips" is hard to
 apply, has been to use moment averaging over column area + 2d<sub>eff</sub>
 (effective depth is distance from bottom face to centroid of top
 reinforcement). This generally leads to conservative design.
-{{< expand "Option for averaging area over top of column" "show image v" >}}
+{{<details open=true title="Option for averaging area over top of column"  >}}
 ![Averaging Hogging moment](img/column_hogging.png "Averaging Hogging moment")
-{{< /expand >}}
+{{</details>}}
 
 Tools for averaging moments varies for different programs:
 -   CSI SAFE uses design strips, that sums up the moment along the width
@@ -404,9 +404,9 @@ All models representing flat slabs will be statically indeterminate
 systems. Thus, moment distribution between columns/slab will be
 dependent on their stiffness. This distribution is also influenced by
 column support assumptions.
-{{< expand "Options for modelling column heights in flat slab models" "show image v" >}}
+{{<details open=true title="Options for modelling column heights in flat slab models"  >}}
 ![Modelling column height](img/column_height.png "Modelling column height")
-{{< /expand >}}
+{{</details>}}
 
 In my experience, the most frequently used option is the one with full column height and pinned supports at top and bottom.
 In my opinion, the right-most option with modelling half-of-height is the closest to "reality". 
@@ -417,9 +417,9 @@ However, **modelling the full height of columns** leads to smaller hogging momen
 Thermal breaks are inserts with some "breaking" compression element at
 the bottom and rebar threading through at the top.
 
-{{< expand "Thermal break" "show image v" >}}
+{{<details open=true title="Thermal break"  >}}
 ![Thermal break](img/thermal_break.jpg "Thermal break")
-{{< /expand >}}
+{{</details>}}
 
 I suggest modelling these as linear hinges with some stiffness. This is important
 because:

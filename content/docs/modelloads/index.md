@@ -78,9 +78,9 @@ DL/SDL/Facade
         don't worry. However, if you have steel edge beams -- note that there
         may add additional **torsion** imposed.
 
-{{< expand "Load application from unitized facade" "show image v" >}}
+{{<details open=true title="Load application from unitized facade"  >}}
 ![Unitized facade](img/unitized.png "Unitized facade")
-{{< /expand >}}
+{{</details>}}
 
 ### Live loads
 
@@ -139,10 +139,10 @@ DL/SDL/Facade
 -   Under the "snow" loads I also want to note that there will be regions in 
     the world where **rain or sand** loads will be relevant.
 
-{{< expand "Load application directions" "show image v" >}}
+{{<details open=true title="Load application directions"  >}}
 Images from software Dlubal RFEM
 ![Load application directions](img/directions.png "Load application directions")
-{{< /expand >}}
+{{</details>}}
 
 ### Imperfection (EHF)
 
