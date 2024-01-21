@@ -203,7 +203,7 @@ Timber as a material is:
 
 -   **Orthotropic**. Properties along the grain are significantly better
     than perpendicular to the grain.
--   **Non-linear**. Sustained loading causes creep -- with time the deflection increases
+-   **Linear. kind-of.** If the instant load is applied, the timber behaves linearly. However, sustained loading causes creep -- with time the deflection increases
     without stress increase in elements.
 
 The orthotropic nature in most cases is considered at the element
