@@ -2,10 +2,10 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Categories on Engineer&#39;s notes on design using FEA</title>
-    <link>https://structures.lv/notes/categories/</link>
+    <link>https://structures.lv/categories/</link>
     <description>Recent content in Categories on Engineer&#39;s notes on design using FEA</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <atom:link href="https://structures.lv/notes/categories/index.xml" rel="self" type="application/rss+xml" />
+    <atom:link href="https://structures.lv/categories/index.xml" rel="self" type="application/rss+xml" />
   </channel>
 </rss>

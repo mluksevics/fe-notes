@@ -2,38 +2,38 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
   <url>
-    <loc>https://structures.lv/notes/</loc>
+    <loc>https://structures.lv/</loc>
   </url><url>
-    <loc>https://structures.lv/notes/docs/introduction/</loc>
+    <loc>https://structures.lv/docs/introduction/</loc>
   </url><url>
-    <loc>https://structures.lv/notes/docs/designflow/</loc>
+    <loc>https://structures.lv/docs/designflow/</loc>
   </url><url>
-    <loc>https://structures.lv/notes/docs/idealworld/</loc>
+    <loc>https://structures.lv/docs/idealworld/</loc>
   </url><url>
-    <loc>https://structures.lv/notes/docs/modelgeometry/</loc>
+    <loc>https://structures.lv/docs/modelgeometry/</loc>
   </url><url>
-    <loc>https://structures.lv/notes/docs/modelsupports/</loc>
+    <loc>https://structures.lv/docs/modelsupports/</loc>
   </url><url>
-    <loc>https://structures.lv/notes/docs/modelloads/</loc>
+    <loc>https://structures.lv/docs/modelloads/</loc>
   </url><url>
-    <loc>https://structures.lv/notes/docs/meshing/</loc>
+    <loc>https://structures.lv/docs/meshing/</loc>
   </url><url>
-    <loc>https://structures.lv/notes/docs/instabilities/</loc>
+    <loc>https://structures.lv/docs/instabilities/</loc>
   </url><url>
-    <loc>https://structures.lv/notes/docs/analysis/</loc>
+    <loc>https://structures.lv/docs/analysis/</loc>
   </url><url>
-    <loc>https://structures.lv/notes/docs/results/</loc>
+    <loc>https://structures.lv/docs/results/</loc>
   </url><url>
-    <loc>https://structures.lv/notes/docs/concrete/</loc>
+    <loc>https://structures.lv/docs/concrete/</loc>
   </url><url>
-    <loc>https://structures.lv/notes/docs/steel/</loc>
+    <loc>https://structures.lv/docs/steel/</loc>
   </url><url>
-    <loc>https://structures.lv/notes/docs/about/</loc>
+    <loc>https://structures.lv/docs/about/</loc>
   </url><url>
-    <loc>https://structures.lv/notes/categories/</loc>
+    <loc>https://structures.lv/categories/</loc>
   </url><url>
-    <loc>https://structures.lv/notes/docs/</loc>
+    <loc>https://structures.lv/docs/</loc>
   </url><url>
-    <loc>https://structures.lv/notes/tags/</loc>
+    <loc>https://structures.lv/tags/</loc>
   </url>
 </urlset>

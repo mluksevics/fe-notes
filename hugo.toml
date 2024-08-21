@@ -1,4 +1,4 @@
-baseURL = 'https://structures.lv/notes/'
+baseURL = 'https://structures.lv/'
 languageCode = 'en-us'
 title = "Engineer's notes on design using FEA"
 theme = 'hugo-book'
