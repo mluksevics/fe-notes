@@ -1,0 +1,384 @@
+<!DOCTYPE html>
+<html lang="en-us" dir="ltr">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="About me#I am Marcis Luksevics. I studied BEng and MEng civil engineering in Latvia before moving to the UK and working for 5 years for BuroHappold in their head office in Bath. After achieving a chartership CEng MICE, I moved back to Latvia and helped UPB with their first project in London.
+There is a sad part about these notes - I wrote those at the time when I was about to pivot to the software engineering industry.">
+<meta name="theme-color" media="(prefers-color-scheme: light)" content="#ffffff">
+<meta name="theme-color" media="(prefers-color-scheme: dark)" content="#343a40">
+<meta name="color-scheme" content="light dark"><meta property="og:title" content="About me" />
+<meta property="og:description" content="About me#I am Marcis Luksevics. I studied BEng and MEng civil engineering in Latvia before moving to the UK and working for 5 years for BuroHappold in their head office in Bath. After achieving a chartership CEng MICE, I moved back to Latvia and helped UPB with their first project in London.
+There is a sad part about these notes - I wrote those at the time when I was about to pivot to the software engineering industry." />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://structures.lv/notes/docs/about/" /><meta property="article:section" content="docs" />
+
+
+
+<title>About me | Engineer&#39;s notes on design using FEA</title>
+<link rel="manifest" href="/notes/manifest.json">
+<link rel="icon" href="/notes/favicon.png" >
+<link rel="stylesheet" href="/notes/book.min.33a48f5432973b8ff9a82679d9e45d67f2c15d4399bd2829269455cfe390b5e8.css" integrity="sha256-M6SPVDKXO4/5qCZ52eRdZ/LBXUOZvSgpJpRVz&#43;OQteg=" crossorigin="anonymous">
+  <script defer src="/notes/flexsearch.min.js"></script>
+  <script defer src="/notes/en.search.min.91455c75d71f6e311cc359c3b69d34f78d8c70ef4059e70b66a2dc60ceddf6b7.js" integrity="sha256-kUVcddcfbjEcw1nDtp00942McO9AWecLZqLcYM7d9rc=" crossorigin="anonymous"></script>
+
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-7FJT3L107Y"></script>
+<script>
+var doNotTrack = false;
+if (!doNotTrack) {
+	window.dataLayer = window.dataLayer || [];
+	function gtag(){dataLayer.push(arguments);}
+	gtag('js', new Date());
+	gtag('config', 'G-7FJT3L107Y', { 'anonymize_ip': false });
+}
+</script>
+<!--
+Made with Book Theme
+https://github.com/alex-shpak/hugo-book
+-->
+  
+</head>
+<body dir="ltr">
+  <input type="checkbox" class="hidden toggle" id="menu-control" />
+  <input type="checkbox" class="hidden toggle" id="toc-control" />
+  <main class="container flex">
+    <aside class="book-menu">
+      <div class="book-menu-content">
+        
+  <nav>
+<h2 class="book-brand">
+  <a class="flex align-center" href="/notes/"><span>Engineer&#39;s notes on design using FEA</span>
+  </a>
+</h2>
+
+
+<div class="book-search">
+  <input type="text" id="book-search-input" placeholder="Search" aria-label="Search" maxlength="64" data-hotkeys="s/" />
+  <div class="book-search-spinner hidden"></div>
+  <ul id="book-search-results"></ul>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+  
+  <ul>
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/notes/docs/introduction/" class="">Introduction</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/notes/docs/designflow/" class="">01 Design Flow</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/notes/docs/idealworld/" class="">02 The Ideal World</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/notes/docs/modelgeometry/" class="">03 Geometry</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/notes/docs/modelsupports/" class="">04 Supports</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/notes/docs/modelloads/" class="">05 Loads and Combinations</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/notes/docs/meshing/" class="">06 Meshing</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/notes/docs/instabilities/" class="">07 Instabilities</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/notes/docs/analysis/" class="">08 Analysis</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/notes/docs/results/" class="">09 Results</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/notes/docs/concrete/" class="">10 Reinforced Concrete</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/notes/docs/steel/" class="">11 Steel</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/notes/docs/about/" class="active">About me</a>
+  
+
+        </li>
+      
+    
+  </ul>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</nav>
+
+
+
+
+  <script>(function(){var e=document.querySelector("aside .book-menu-content");addEventListener("beforeunload",function(){localStorage.setItem("menu.scrollTop",e.scrollTop)}),e.scrollTop=localStorage.getItem("menu.scrollTop")})()</script>
+
+
+ 
+      </div>
+    </aside>
+
+    <div class="book-page">
+      <header class="book-header">
+        
+  <div class="flex align-center justify-between">
+  <label for="menu-control">
+    <img src="/notes/svg/menu.svg" class="book-icon" alt="Menu" />
+  </label>
+
+  <strong>About me</strong>
+
+  <label for="toc-control">
+    
+    <img src="/notes/svg/toc.svg" class="book-icon" alt="Table of Contents" />
+    
+  </label>
+</div>
+
+
+  
+  <aside class="hidden clearfix">
+    
+  
+<nav id="TableOfContents"></nav>
+
+
+
+  </aside>
+  
+ 
+      </header>
+
+      
+      
+  <article class="markdown book-article"><h1 id="about-me">
+  About me
+  <a class="anchor" href="#about-me">#</a>
+</h1>
+<p>I am <a href="https://www.linkedin.com/in/luksevics/">Marcis Luksevics</a>.
+I studied BEng and MEng civil engineering in Latvia before moving to the UK and working for 5 years for <a href="https://www.burohappold.com/">BuroHappold</a> in their head office in Bath.
+After achieving a chartership CEng MICE, I moved back to Latvia and helped <a href="https://www.upb.lv/en">UPB</a> with their first project in London.</p>
+<p>There is a sad part about these notes - I wrote those at the time when I was about to pivot to the software engineering industry. In a way - these are notes to myself about lessons learned over the years working as a structural engineer.</p>
+<p>Currently (in 2023) I still do (and enjoy) structural engineering - but those are side jobs in parallel to working full-time as a .NET developer.</p>
+<p>Some of the buildings I have modelled myself are the <a href="https://batterseapowerstation.co.uk/apartments/prospect-place/">Prospect Place</a>
+buildings in London designed by Frank Gehry architects and entry canopies for the
+<a href="https://museumofthefuture.ae/en">Museum of The Future</a> in Dubai. I definitely do not claim to
+have taken a major role in the design of such prominent buildings, however,
+these are actual FE models I have created and have learned a lot by
+working on such signature and also smaller projects. Another good perspective was
+being responsible for the glass and aluminium facade structural design for the <a href="https://hbreavis.com/en/project/bloomclerkenwell/">Bloom Clerkenwell</a> building in London.</p>
+<p>I hope you find my notes useful to your journey in engineering.</p>
+</article>
+ 
+      
+
+      <footer class="book-footer">
+        
+  <div class="flex flex-wrap justify-between">
+
+
+
+
+
+</div>
+
+
+
+  <script>(function(){function e(e){const t=window.getSelection(),n=document.createRange();n.selectNodeContents(e),t.removeAllRanges(),t.addRange(n)}document.querySelectorAll("pre code").forEach(t=>{t.addEventListener("click",function(){if(window.getSelection().toString())return;e(t.parentElement),navigator.clipboard&&navigator.clipboard.writeText(t.parentElement.textContent)})})})()</script>
+
+
+ 
+        
+      </footer>
+
+      
+  
+ 
+
+      <label for="menu-control" class="hidden book-menu-overlay"></label>
+    </div>
+
+    
+    <aside class="book-toc">
+      <div class="book-toc-content">
+        
+  
+<nav id="TableOfContents"></nav>
+
+
+ 
+      </div>
+    </aside>
+    
+  </main>
+
+  
+</body>
+</html>
+
+
+
+
+
+
+
+
+
+
+
+

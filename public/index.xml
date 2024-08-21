@@ -1,0 +1,102 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Engineer&#39;s notes on Engineer&#39;s notes on design using FEA</title>
+    <link>https://structures.lv/notes/</link>
+    <description>Recent content in Engineer&#39;s notes on Engineer&#39;s notes on design using FEA</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <atom:link href="https://structures.lv/notes/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Introduction</title>
+      <link>https://structures.lv/notes/docs/introduction/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      <guid>https://structures.lv/notes/docs/introduction/</guid>
+      <description>Introduction&#xD;#&#xD;This is a set of notes, tips and tricks about the design of buildings using finite element analysis. These are notes about the questions I had on a path from a being a fresh graduate to a senior engineer. Notes are written in the summer of 2020.&#xA;Topics covered at a glance&#xD;#&#xD;What are the simplifications of material behaviour commonly used in FE models of built structures; What toolbox do you have for creating a model and how to choose the parameters of model components; How to apply loads and systematically create load combinations; How to prepare/check model for analysis and how to choose mesh size; Options for analysis types of your structure; How to systematically look for and &amp;ldquo;catch&amp;rdquo; instabilities that appear during calculation; Ways and workarounds to tackle challenges specific to RC and steel modelling and design; These should give guidance to answer questions such as:</description>
+    </item>
+    <item>
+      <title>01 Design Flow</title>
+      <link>https://structures.lv/notes/docs/designflow/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      <guid>https://structures.lv/notes/docs/designflow/</guid>
+      <description>Design flow&#xD;#&#xD;Overview of design flow&#xD;#&#xD;There is an idea that has stuck in my mind since I heard it from a technical director during my first months at Buro Happold: &amp;ldquo;Calculation write-up is a key deliverable&amp;rdquo;.&#xA;Your model should tell a &amp;ldquo;story&amp;rdquo;. Thinking of your design as a &amp;ldquo;story&amp;rdquo;, helps to systemize your actions and thinking.&#xA;The sections of every good &amp;ldquo;story&amp;rdquo;&#xD;#&#xD;Geometry: Location of the considered element; Is this an entire building?</description>
+    </item>
+    <item>
+      <title>02 The Ideal World</title>
+      <link>https://structures.lv/notes/docs/idealworld/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      <guid>https://structures.lv/notes/docs/idealworld/</guid>
+      <description>The (non)ideal world&#xD;#&#xD;Time vs. Quality vs. Cost&#xD;#&#xD;The choice between Time &amp;lt;&amp;gt; Quality &amp;lt;&amp;gt; Cost applies everywhere. Casting this idea on the design of buildings using FEA:&#xA;There is a limited time to create a model. There are number of modelling/analysis limitations that most structural engineering software has. Or it may be that buying new software is not commercially justifiable; Geometry - the real structure will be built imperfectly, there will be deviations from the designed geometry.</description>
+    </item>
+    <item>
+      <title>03 Geometry</title>
+      <link>https://structures.lv/notes/docs/modelgeometry/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      <guid>https://structures.lv/notes/docs/modelgeometry/</guid>
+      <description>Modelling Geometry&#xD;#&#xD;There are three sections about modelling - geometry, supports and loads. In these sections I am covering main &amp;ldquo;toolset&amp;rdquo; to create a finite element model.&#xA;Nodes&#xD;#&#xD;Geometry nodes vs. FE nodes&#xD;#&#xD;There are actually two types of nodes. In this section I talk about nodes that define the geometry.&#xA;The finite element mesh will create more nodes &amp;ndash; both the line members and surfaces will have intermediate nodes defining finite elements.</description>
+    </item>
+    <item>
+      <title>04 Supports</title>
+      <link>https://structures.lv/notes/docs/modelsupports/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      <guid>https://structures.lv/notes/docs/modelsupports/</guid>
+      <description>Modelling Supports&#xD;#&#xD;Although from pure FE perspective the restraints are added to nodes, from practical standpoint there are three types of supports:&#xA;Nodal Linear Surface Parameters&#xD;#&#xD;Basic parameters:&#xA;Translational stiffness Rotational stiffness Rotation (i.e. direction of local axis) Additional non-linearity parameters not available in all software:&#xA;Varying stiffness based on applied force; Compression/tension only supports (e.g. vertical bearings); What do the supports represent?&#xD;#&#xD;Are you modelling a part of the structure and supports represent surrounding beams/slabs/columns?</description>
+    </item>
+    <item>
+      <title>05 Loads and Combinations</title>
+      <link>https://structures.lv/notes/docs/modelloads/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      <guid>https://structures.lv/notes/docs/modelloads/</guid>
+      <description>Loads and combinations&#xD;#&#xD;Load types&#xD;#&#xD;The toolset you are most likely to have, is:&#xA;Imposed forces: Nodal loads Member loads Uniform load; Linearly variable load; Nodal load on member. Surface loads: Uniform load; Linearly variable load; Imposed displacements &amp;ndash; typically used to represent temperature or shrinkage effects; On Members; On surfaces; For each of load types there will be few main parameters:&#xA;Magnitude Direction of load; Local/Global/Custom axis And then there will be loads that are generated by software:</description>
+    </item>
+    <item>
+      <title>06 Meshing</title>
+      <link>https://structures.lv/notes/docs/meshing/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      <guid>https://structures.lv/notes/docs/meshing/</guid>
+      <description>Meshing&#xD;#&#xD;Mesh settings and quality of mesh&#xD;#&#xD;When the geometry and loads are defined, the next step is meshing &amp;ndash; creating actual FE elements and nodes from elements and surfaces.&#xA;This entire section assumes that you will be using a meshing engine provided in FEA software. There are cases when mesh is created manually, but if you feel comfortable to do that, then you might already know everything mentioned in these notes.</description>
+    </item>
+    <item>
+      <title>07 Instabilities</title>
+      <link>https://structures.lv/notes/docs/instabilities/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      <guid>https://structures.lv/notes/docs/instabilities/</guid>
+      <description>Dealing with instabilities&#xD;#&#xD;Now, when the meshing is done and calculation starts to run.. great! You just run the calculations and find out that.. model is unstable! This is a normal step of &amp;ldquo;debugging&amp;rdquo; your model.&#xA;I am intentionally devoting a separate section to this because you will spend a lot of time dealing with this - and there is no easy way out. Or actually there is - after hours spend fixing your models, you will gradually fix most of the problems during modelling stage.</description>
+    </item>
+    <item>
+      <title>08 Analysis</title>
+      <link>https://structures.lv/notes/docs/analysis/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      <guid>https://structures.lv/notes/docs/analysis/</guid>
+      <description>Static Analysis&#xD;#&#xD;This may be the most sophisticated part from theoretical standpoint, however, from user&amp;rsquo;s=engineer&amp;rsquo;s perspective there is relatively small number of choices &amp;ndash; there is not a lot you can do wrong here.&#xA;Firstly &amp;ndash; understand whether your model requires non-linear analysis. It could be that program automatically switches to non-linear solver as soon as you introduce any model features that require non-linear analysis (both Autodesk Robot and Dlubal RFEM will do this).</description>
+    </item>
+    <item>
+      <title>09 Results</title>
+      <link>https://structures.lv/notes/docs/results/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      <guid>https://structures.lv/notes/docs/results/</guid>
+      <description>Results&#xD;#&#xD;Results verification&#xD;#&#xD;Calculation finished! You got the results! But can you trust the results?&#xA;The basic widely suggested check is to see whether sum of loads in the model is the same as sum of calculated reactions. To be honest, within past 10 years I have never seen a model where this is not satisfied. However, I have seen lot of models where something has gone wrong.</description>
+    </item>
+    <item>
+      <title>10 Reinforced Concrete</title>
+      <link>https://structures.lv/notes/docs/concrete/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      <guid>https://structures.lv/notes/docs/concrete/</guid>
+      <description>Reinforced Concrete&#xD;#&#xD;The purpose of RC/steel and timber sections is to focus on modelling and design challenges I have experienced relevant to specific material. Inevitably, the content in those sections are more tied to Eurocodes. This section talks about in-situ concrete buildings and does not cover precast concrete or prestressed concrete.&#xA;Considerations in overall model&#xD;#&#xD;Overall model (or multiple models) of the building is usually used to design everything except the horizontal elements &amp;ndash; slabs usually get designed separately.</description>
+    </item>
+    <item>
+      <title>11 Steel</title>
+      <link>https://structures.lv/notes/docs/steel/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      <guid>https://structures.lv/notes/docs/steel/</guid>
+      <description>Material &amp;ndash; steel&#xD;#&#xD;Tension bracing&#xD;#&#xD;I want to start the steel section by showing options for modelling the very basic part of steel structures &amp;ndash; tension bracing. There are multiple ways do to it:&#xA;You can use tension-only members in software. However, remember that without lateral force, such structure will be unstable &amp;ndash; one of braces must be in tension.&#xA;You can manually &amp;ldquo;switch&amp;rdquo; off the compression braces, depending on the load case.</description>
+    </item>
+    <item>
+      <title>About me</title>
+      <link>https://structures.lv/notes/docs/about/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      <guid>https://structures.lv/notes/docs/about/</guid>
+      <description>About me&#xD;#&#xD;I am Marcis Luksevics. I studied BEng and MEng civil engineering in Latvia before moving to the UK and working for 5 years for BuroHappold in their head office in Bath. After achieving a chartership CEng MICE, I moved back to Latvia and helped UPB with their first project in London.&#xA;There is a sad part about these notes - I wrote those at the time when I was about to pivot to the software engineering industry.</description>
+    </item>
+  </channel>
+</rss>

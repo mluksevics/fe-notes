@@ -1,0 +1,475 @@
+<!DOCTYPE html>
+<html lang="en-us" dir="ltr">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="Dealing with instabilities#Now, when the meshing is done and calculation starts to run.. great! You just run the calculations and find out that.. model is unstable! This is a normal step of &ldquo;debugging&rdquo; your model.
+I am intentionally devoting a separate section to this because you will spend a lot of time dealing with this - and there is no easy way out. Or actually there is - after hours spend fixing your models, you will gradually fix most of the problems during modelling stage.">
+<meta name="theme-color" media="(prefers-color-scheme: light)" content="#ffffff">
+<meta name="theme-color" media="(prefers-color-scheme: dark)" content="#343a40">
+<meta name="color-scheme" content="light dark"><meta property="og:title" content="07 Instabilities" />
+<meta property="og:description" content="Dealing with instabilities#Now, when the meshing is done and calculation starts to run.. great! You just run the calculations and find out that.. model is unstable! This is a normal step of &ldquo;debugging&rdquo; your model.
+I am intentionally devoting a separate section to this because you will spend a lot of time dealing with this - and there is no easy way out. Or actually there is - after hours spend fixing your models, you will gradually fix most of the problems during modelling stage." />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://structures.lv/notes/docs/instabilities/" /><meta property="article:section" content="docs" />
+
+
+
+<title>07 Instabilities | Engineer&#39;s notes on design using FEA</title>
+<link rel="manifest" href="/notes/manifest.json">
+<link rel="icon" href="/notes/favicon.png" >
+<link rel="stylesheet" href="/notes/book.min.33a48f5432973b8ff9a82679d9e45d67f2c15d4399bd2829269455cfe390b5e8.css" integrity="sha256-M6SPVDKXO4/5qCZ52eRdZ/LBXUOZvSgpJpRVz&#43;OQteg=" crossorigin="anonymous">
+  <script defer src="/notes/flexsearch.min.js"></script>
+  <script defer src="/notes/en.search.min.91455c75d71f6e311cc359c3b69d34f78d8c70ef4059e70b66a2dc60ceddf6b7.js" integrity="sha256-kUVcddcfbjEcw1nDtp00942McO9AWecLZqLcYM7d9rc=" crossorigin="anonymous"></script>
+
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-7FJT3L107Y"></script>
+<script>
+var doNotTrack = false;
+if (!doNotTrack) {
+	window.dataLayer = window.dataLayer || [];
+	function gtag(){dataLayer.push(arguments);}
+	gtag('js', new Date());
+	gtag('config', 'G-7FJT3L107Y', { 'anonymize_ip': false });
+}
+</script>
+<!--
+Made with Book Theme
+https://github.com/alex-shpak/hugo-book
+-->
+  
+</head>
+<body dir="ltr">
+  <input type="checkbox" class="hidden toggle" id="menu-control" />
+  <input type="checkbox" class="hidden toggle" id="toc-control" />
+  <main class="container flex">
+    <aside class="book-menu">
+      <div class="book-menu-content">
+        
+  <nav>
+<h2 class="book-brand">
+  <a class="flex align-center" href="/notes/"><span>Engineer&#39;s notes on design using FEA</span>
+  </a>
+</h2>
+
+
+<div class="book-search">
+  <input type="text" id="book-search-input" placeholder="Search" aria-label="Search" maxlength="64" data-hotkeys="s/" />
+  <div class="book-search-spinner hidden"></div>
+  <ul id="book-search-results"></ul>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+  
+  <ul>
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/notes/docs/introduction/" class="">Introduction</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/notes/docs/designflow/" class="">01 Design Flow</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/notes/docs/idealworld/" class="">02 The Ideal World</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/notes/docs/modelgeometry/" class="">03 Geometry</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/notes/docs/modelsupports/" class="">04 Supports</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/notes/docs/modelloads/" class="">05 Loads and Combinations</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/notes/docs/meshing/" class="">06 Meshing</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/notes/docs/instabilities/" class="active">07 Instabilities</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/notes/docs/analysis/" class="">08 Analysis</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/notes/docs/results/" class="">09 Results</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/notes/docs/concrete/" class="">10 Reinforced Concrete</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/notes/docs/steel/" class="">11 Steel</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/notes/docs/about/" class="">About me</a>
+  
+
+        </li>
+      
+    
+  </ul>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</nav>
+
+
+
+
+  <script>(function(){var e=document.querySelector("aside .book-menu-content");addEventListener("beforeunload",function(){localStorage.setItem("menu.scrollTop",e.scrollTop)}),e.scrollTop=localStorage.getItem("menu.scrollTop")})()</script>
+
+
+ 
+      </div>
+    </aside>
+
+    <div class="book-page">
+      <header class="book-header">
+        
+  <div class="flex align-center justify-between">
+  <label for="menu-control">
+    <img src="/notes/svg/menu.svg" class="book-icon" alt="Menu" />
+  </label>
+
+  <strong>07 Instabilities</strong>
+
+  <label for="toc-control">
+    
+    <img src="/notes/svg/toc.svg" class="book-icon" alt="Table of Contents" />
+    
+  </label>
+</div>
+
+
+  
+  <aside class="hidden clearfix">
+    
+  
+<nav id="TableOfContents"></nav>
+
+
+
+  </aside>
+  
+ 
+      </header>
+
+      
+      
+  <article class="markdown book-article"><h1 id="dealing-with-instabilities">
+  Dealing with instabilities
+  <a class="anchor" href="#dealing-with-instabilities">#</a>
+</h1>
+<p>Now, when the meshing is done and calculation starts to run.. great! You
+just run the calculations and find out that.. model is unstable! This is a
+normal step of <strong>&ldquo;debugging&rdquo; your model</strong>.</p>
+<p>I am intentionally devoting a separate section to this because you will
+spend a lot of time dealing with this - and <strong>there is no easy way out</strong>.
+Or actually there is - after hours spend fixing your models, you will gradually fix most of the problems during modelling stage.</p>
+<p>If you see where the instability is happening, and the reason is
+understandable &ndash; good! However, often it is completely unclear why/what
+is happening - The location of instability does not make sense;</p>
+<p><strong>&ldquo;Save As&rdquo; your model first</strong> &ndash; experience shows that you may frequently
+want to return to this broken model and re-start applying changes.</p>
+<p><strong>Some strategies/checks for dealing with instabilities:</strong></p>
+<ol>
+<li>
+<p>Are there are multiple <strong>self-sufficient models</strong> (i.e. independently stable and disconnected) in one file, separate them!</p>
+</li>
+<li>
+<p>It is likely that you will be running the calculation multiple times
+until you got things sorted out. Firstly, <strong>make the model stable at
+dead load case</strong>. You may switch off the calculation of other cases
+for quicker process. Or just re-run the deadload case if your
+program has option to run one case a time.</p>
+</li>
+<li>
+<p>If the cause is not obvious, before doing anything else, try
+<strong>switching off non-linear &ldquo;features&rdquo;</strong> of your model.</p>
+<ul>
+<li>Is it actually instability or could it be that model just
+haven&rsquo;t converged within the maximum number of iterations set in
+software?</li>
+<li>Are you using tension bracing, can it be that this causes
+instability if there are no lateral loads and self weight puts both braces in compression?</li>
+<li>Are you using compression-only supports or contact surfaces? Can
+it be that these are being relied upon for stability?</li>
+<li>Are you using non-linear materials?</li>
+</ul>
+</li>
+<li>
+<p>Is the entire model stable respective to all <strong>6 degrees of freedom</strong>?</p>
+<ul>
+<li>Any supports missed?</li>
+<li>Maybe you need to fix the rotation entire structure around vertical (typically &ldquo;Z&rdquo;)
+axis?</li>
+<li>Are you trying to model 2D structure in 3D space and forgot some
+of degrees of freedom? A good example is a truss bottom chord.
+<details open><summary>&ldquo;Spinning&rdquo; bottom chord of a truss</summary>
+  <div class="markdown-inner">
+    <img src="img/rotatingchord.png" alt="Chord Instability" title="Chord instability"/>
+  </div>
+</details>
+</li>
+</ul>
+</li>
+<li>
+<p>Do nodes &ldquo;node-out&rdquo;? Are there two <strong>geometry nodes very very close</strong> to each
+other that are meant to be a single node? Are there two nodes at the
+same coordinates?</p>
+<ul>
+<li>You can switch on node numbers and see visually whether the
+numbers refer to the same place.</li>
+<li>Try &ldquo;regenerating&rdquo; your model. As mentioned above, regeneration has some downsides. But at least you will be confident that the problem is with geometry, not the supports or hinges.</li>
+<li>You can alternatively export coordinates of all nodes to Excel, sort by X
+, Y , Z then compare coordinates of adjacent points &ndash; if all
+three coordinates (or just one, or two) are differing just a
+tiny bit &ndash; this is likely to be a problem location. Use
+&ldquo;conditional formatting&rdquo; to highlight nearby nodes.</li>
+</ul>
+</li>
+<li>
+<p>If it is a rotation causing instability, <strong>remove hinges step-by-step</strong>
+to see there exactly the instability is happening.</p>
+<ul>
+<li>The most common instability is to have both ends of the member
+torsionally released &ndash; this will instantly show instability as
+the member can rotate around its longitudinal axis;</li>
+<li>What about pinned supports? A classic situation in Autodesk
+Robot is to used default &ldquo;pinned&rdquo; support and have all the
+columns rotating about longitudinal axis;</li>
+<li>Is the instability happening in location with multiple members
+connecting an all of these having hinges defined at the node?
+Try removing hinge for one of the members &ndash; to ensure that node is
+not &ldquo;free spinning&rdquo; around itself.</li>
+<li>Some programs may also allow to put hinge at the end of &ldquo;truss&rdquo;
+member. If the member itself has no bending stiffness and a
+hinge is applied at end to release this stiffness &ndash; this causes
+instability.</li>
+</ul>
+</li>
+<li>
+<p>Build your model from <strong>discrete parts that are stable on their own</strong>.
+If you have primary trusses and secondary trusses, make sure that
+each of elements are stable on its own and only then get them
+together in one model.<br>
+I especially encourage doing this if you are taking over work from
+someone else &ndash; this is a good way to gain
+understanding about structural behaviour of structure.</p>
+</li>
+<li>
+<p>For steel/timber structures (with mostly &ldquo;bar&rdquo; elements) &ndash; have a
+think whether the model can be simplified. E.g. do you need to model
+<strong>full truss for design of stability bracing</strong>? Maybe just a member
+representing the stiffness of truss is enough?</p>
+</li>
+</ol>
+</article>
+ 
+      
+
+      <footer class="book-footer">
+        
+  <div class="flex flex-wrap justify-between">
+
+
+
+
+
+</div>
+
+
+
+  <script>(function(){function e(e){const t=window.getSelection(),n=document.createRange();n.selectNodeContents(e),t.removeAllRanges(),t.addRange(n)}document.querySelectorAll("pre code").forEach(t=>{t.addEventListener("click",function(){if(window.getSelection().toString())return;e(t.parentElement),navigator.clipboard&&navigator.clipboard.writeText(t.parentElement.textContent)})})})()</script>
+
+
+ 
+        
+      </footer>
+
+      
+  
+ 
+
+      <label for="menu-control" class="hidden book-menu-overlay"></label>
+    </div>
+
+    
+    <aside class="book-toc">
+      <div class="book-toc-content">
+        
+  
+<nav id="TableOfContents"></nav>
+
+
+ 
+      </div>
+    </aside>
+    
+  </main>
+
+  
+</body>
+</html>
+
+
+
+
+
+
+
+
+
+
+
+

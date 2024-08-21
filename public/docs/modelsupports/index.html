@@ -1,0 +1,589 @@
+<!DOCTYPE html>
+<html lang="en-us" dir="ltr">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="Modelling Supports#Although from pure FE perspective the restraints are added to nodes, from practical standpoint there are three types of supports:
+Nodal Linear Surface Parameters#Basic parameters:
+Translational stiffness Rotational stiffness Rotation (i.e. direction of local axis) Additional non-linearity parameters not available in all software:
+Varying stiffness based on applied force; Compression/tension only supports (e.g. vertical bearings); What do the supports represent?#Are you modelling a part of the structure and supports represent surrounding beams/slabs/columns?">
+<meta name="theme-color" media="(prefers-color-scheme: light)" content="#ffffff">
+<meta name="theme-color" media="(prefers-color-scheme: dark)" content="#343a40">
+<meta name="color-scheme" content="light dark"><meta property="og:title" content="04 Supports" />
+<meta property="og:description" content="Modelling Supports#Although from pure FE perspective the restraints are added to nodes, from practical standpoint there are three types of supports:
+Nodal Linear Surface Parameters#Basic parameters:
+Translational stiffness Rotational stiffness Rotation (i.e. direction of local axis) Additional non-linearity parameters not available in all software:
+Varying stiffness based on applied force; Compression/tension only supports (e.g. vertical bearings); What do the supports represent?#Are you modelling a part of the structure and supports represent surrounding beams/slabs/columns?" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://structures.lv/notes/docs/modelsupports/" /><meta property="article:section" content="docs" />
+
+
+
+<title>04 Supports | Engineer&#39;s notes on design using FEA</title>
+<link rel="manifest" href="/notes/manifest.json">
+<link rel="icon" href="/notes/favicon.png" >
+<link rel="stylesheet" href="/notes/book.min.33a48f5432973b8ff9a82679d9e45d67f2c15d4399bd2829269455cfe390b5e8.css" integrity="sha256-M6SPVDKXO4/5qCZ52eRdZ/LBXUOZvSgpJpRVz&#43;OQteg=" crossorigin="anonymous">
+  <script defer src="/notes/flexsearch.min.js"></script>
+  <script defer src="/notes/en.search.min.91455c75d71f6e311cc359c3b69d34f78d8c70ef4059e70b66a2dc60ceddf6b7.js" integrity="sha256-kUVcddcfbjEcw1nDtp00942McO9AWecLZqLcYM7d9rc=" crossorigin="anonymous"></script>
+
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-7FJT3L107Y"></script>
+<script>
+var doNotTrack = false;
+if (!doNotTrack) {
+	window.dataLayer = window.dataLayer || [];
+	function gtag(){dataLayer.push(arguments);}
+	gtag('js', new Date());
+	gtag('config', 'G-7FJT3L107Y', { 'anonymize_ip': false });
+}
+</script>
+<!--
+Made with Book Theme
+https://github.com/alex-shpak/hugo-book
+-->
+  
+</head>
+<body dir="ltr">
+  <input type="checkbox" class="hidden toggle" id="menu-control" />
+  <input type="checkbox" class="hidden toggle" id="toc-control" />
+  <main class="container flex">
+    <aside class="book-menu">
+      <div class="book-menu-content">
+        
+  <nav>
+<h2 class="book-brand">
+  <a class="flex align-center" href="/notes/"><span>Engineer&#39;s notes on design using FEA</span>
+  </a>
+</h2>
+
+
+<div class="book-search">
+  <input type="text" id="book-search-input" placeholder="Search" aria-label="Search" maxlength="64" data-hotkeys="s/" />
+  <div class="book-search-spinner hidden"></div>
+  <ul id="book-search-results"></ul>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+  
+  <ul>
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/notes/docs/introduction/" class="">Introduction</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/notes/docs/designflow/" class="">01 Design Flow</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/notes/docs/idealworld/" class="">02 The Ideal World</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/notes/docs/modelgeometry/" class="">03 Geometry</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/notes/docs/modelsupports/" class="active">04 Supports</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/notes/docs/modelloads/" class="">05 Loads and Combinations</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/notes/docs/meshing/" class="">06 Meshing</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/notes/docs/instabilities/" class="">07 Instabilities</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/notes/docs/analysis/" class="">08 Analysis</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/notes/docs/results/" class="">09 Results</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/notes/docs/concrete/" class="">10 Reinforced Concrete</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/notes/docs/steel/" class="">11 Steel</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/notes/docs/about/" class="">About me</a>
+  
+
+        </li>
+      
+    
+  </ul>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</nav>
+
+
+
+
+  <script>(function(){var e=document.querySelector("aside .book-menu-content");addEventListener("beforeunload",function(){localStorage.setItem("menu.scrollTop",e.scrollTop)}),e.scrollTop=localStorage.getItem("menu.scrollTop")})()</script>
+
+
+ 
+      </div>
+    </aside>
+
+    <div class="book-page">
+      <header class="book-header">
+        
+  <div class="flex align-center justify-between">
+  <label for="menu-control">
+    <img src="/notes/svg/menu.svg" class="book-icon" alt="Menu" />
+  </label>
+
+  <strong>04 Supports</strong>
+
+  <label for="toc-control">
+    
+    <img src="/notes/svg/toc.svg" class="book-icon" alt="Table of Contents" />
+    
+  </label>
+</div>
+
+
+  
+  <aside class="hidden clearfix">
+    
+  
+<nav id="TableOfContents">
+  <ul>
+    <li>
+      <ul>
+        <li><a href="#parameters">Parameters</a></li>
+        <li><a href="#what-do-the-supports-represent">What do the supports represent?</a></li>
+        <li><a href="#communication-of-forces">Communication of forces</a></li>
+        <li><a href="#friction">Friction</a></li>
+        <li><a href="#imposed-displacement----thermalshrinkage">Imposed displacement &ndash; thermal/shrinkage</a></li>
+        <li><a href="#modelling-foundations">Modelling foundations</a></li>
+        <li><a href="#non-linear-supports">Non-linear supports</a></li>
+      </ul>
+    </li>
+  </ul>
+</nav>
+
+
+
+  </aside>
+  
+ 
+      </header>
+
+      
+      
+  <article class="markdown book-article"><h1 id="modelling-supports">
+  Modelling Supports
+  <a class="anchor" href="#modelling-supports">#</a>
+</h1>
+<p>Although from pure FE perspective the restraints are added to nodes, from practical standpoint there are three types of supports:</p>
+<ul>
+<li>Nodal</li>
+<li>Linear</li>
+<li>Surface</li>
+</ul>
+<h3 id="parameters">
+  Parameters
+  <a class="anchor" href="#parameters">#</a>
+</h3>
+<p>Basic parameters:</p>
+<ul>
+<li>Translational stiffness</li>
+<li>Rotational stiffness</li>
+<li>Rotation (i.e. direction of local axis)</li>
+</ul>
+<p>Additional non-linearity parameters not available in all software:</p>
+<ul>
+<li>Varying stiffness based on applied force;</li>
+<li>Compression/tension only supports (e.g. vertical bearings);</li>
+</ul>
+<h3 id="what-do-the-supports-represent">
+  What do the supports represent?
+  <a class="anchor" href="#what-do-the-supports-represent">#</a>
+</h3>
+<ul>
+<li>Are you modelling a part of the structure and supports represent
+surrounding beams/slabs/columns?</li>
+<li>Are you modelling foundations?</li>
+</ul>
+<h3 id="communication-of-forces">
+  Communication of forces
+  <a class="anchor" href="#communication-of-forces">#</a>
+</h3>
+<p>Often, the support reactions of your model (your output) is an input for
+someone else. Try avoiding linear and surface supports if you need to
+communicate loads to others.</p>
+<ul>
+<li>Communication of finite number of <strong>nodal support</strong> reactions is fairly
+simple.</li>
+<li>Communication of varying <strong>linear support</strong> load can prove to be pretty
+complex.</li>
+</ul>
+<p>One of possible workarounds is the use of rigid links &ndash; link the bottom nodes of walls
+into one support per wall or core. Note that using of such rigid links implies that it is reasonable to assume linear distribution of forces along the walls. Typically, it would be, but there might be exceptions.</p>
+<h3 id="friction">
+  Friction
+  <a class="anchor" href="#friction">#</a>
+</h3>
+<p>In civil engineering it has become almost a standard approach to neglect
+friction. In my opinion the two main parts are:</p>
+<ul>
+<li>It is hard to know the exact coefficient of friction. It may also
+depend on the quality of works. <a href="https://en.wikipedia.org/wiki/Friction#Approximate_coefficients_of_friction">Approximate friction coefficients (Wikipedia)</a>;</li>
+<li>Usually, ignoring friction is a conservative approach;</li>
+</ul>
+<p>When modelling supports, be careful of releasing horizontal movement if
+the vertical loads are large.</p>
+<h3 id="imposed-displacement----thermalshrinkage">
+  Imposed displacement &ndash; thermal/shrinkage
+  <a class="anchor" href="#imposed-displacement----thermalshrinkage">#</a>
+</h3>
+<p>Add an imposed displacement &ndash; thermal and/or shrinkage (for Concrete)
+loads, then add supports with completely fixed translation (i.e. pinned
+supports). And you are almost guaranteed to conclude that your structure
+doesn&rsquo;t work.</p>
+<ul>
+<li>Firstly note, that if your building is fairly typical, structure is not exposed to weather, and you have introduced movement joints, then
+it is completely acceptable <strong>not to design for thermal loads</strong>.</li>
+</ul>
+<details open><summary>Excerpt from EN 1991-1-5 Thermal loads</summary>
+  <div class="markdown-inner">
+    <p><strong>Section 3 - Design situations</strong> <br>
+(1)P Thermal actions shall be determined for each relevant design situation identified
+in accordance with EN 1990.</p>
+<p><strong>NOTE: Structures not exposed to daily and seasonal climatic and operational temperature
+changes may not need to be considered for thermal actions.</strong></p>
+<p>(2)P The elements of loadbearing structures shall be checked to ensure that thermal
+movement will not cause overstressing of the structure, either by the provision of
+movement joints or by including the effects in the design.</p>
+
+  </div>
+</details>
+
+<ul>
+<li>For steel buildings, note that part of thermal movements will be
+accommodated by oversized holes in connections (unless you use HSFG friction bolts).</li>
+<li>Think about the thermal/shrinkage change at supports&rsquo; level. Imposed
+deformation is always &ldquo;relative&rdquo;. For example, it is likely that
+temperature change in basement will be somewhere in-between to the
+one in upper floors and one at foundation level.</li>
+<li>I would insist that for thermal/shrinkage assessment of lower floors
+(or basement) , shear stiffness of foundations must be modelled &ndash;
+otherwise the horizontal loads on foundations may turn out to be
+unreasonably big.</li>
+</ul>
+<h3 id="modelling-foundations">
+  Modelling foundations
+  <a class="anchor" href="#modelling-foundations">#</a>
+</h3>
+<ul>
+<li>
+<p>Think about the vertical level you put your supports on. Horizontal reactions in supports will likely cause additional moment on piles or bearing surface.</p>
+</li>
+<li>
+<p>In most cases it will be enough to use supports without any spring
+stiffness. e.g. Eurocode suggests that a simplified supports can be used if the relative settlement between adjacent supports is L/500 or smaller.</p>
+<details open><summary>EN 1997-1-1 Annex H</summary>
+  <div class="markdown-inner">
+    <p>(2) The maximum acceptable relative rotations for open framed structures, infilled frames and
+load bearing or continuous brick walls are unlikely to be the same but are likely to range from
+about 1/2000 to about 1/300, to prevent the occurrence of a serviceability limit state in the
+structure. A maximum relative rotation of 1/500 is acceptable for many structures. The relative
+rotation likely to cause an ultimate limit state is about 1/150.</p>
+<p>(5) These guidelines concerning limiting settlements apply to normal, routine structures. They
+should not be applied to buildings or structures, which are out of the ordinary or for which the
+loading intensity is markedly non-uniform.</p>
+
+  </div>
+</details>
+
+<details open><summary>EN 1992-1-1 section 2.3.1.3</summary>
+  <div class="markdown-inner">
+    <p>2.3.1.3 Differential settlements/movements</p>
+<p>(2)  The effects of differential settlements should generally be taken into account for the
+verification for serviceability limit states.</p>
+<p>(3)  For ultimate limit states they should be considered only where they are significant (e.g.
+fatigue conditions, in the verification of stability where second order effects are of importance,
+etc). In other cases for ultimate limit states they need not be considered, provided that the
+ductility and rotation capacity of the elements are sufficient.</p>
+
+  </div>
+</details>
+
+<p>The way how I interpret the codes is that settlements within the
+Eurocode 1997-1-1 Annex H limits (L/500) Can be ignored for determination of ULS forces. However, the potential additional effects on the sway of the building should be considered.</p>
+</li>
+<li>
+<p>Is your system statically indeterminate? If you design a &ldquo;typical&rdquo;
+steel building with bracing, then likely that foundation stiffness
+will be irrelevant even if the deflections are larger than L/500.</p>
+</li>
+<li>
+<p>When modelling long foundations, in many cases it will be reasonable
+to simplify stress distribution of linear.</p>
+</li>
+<li>
+<p>When modelling surface foundations, keep in mind that frequently the
+conservative <strong>design for raft</strong> (or concrete slab on the ground) results in less
+conservative design from <strong>geotechnical</strong> standpoint and vice versa. Discuss this with
+engineer who does the foundation design.<br>
+A typical conservative design of raft would be to distribute applied
+load as UDL on the entire raft area.</p>
+</li>
+<li>
+<p>I would not suggest modelling entire floors on the ground &ndash; instead
+I suggest using guidance in <a href="https://www.concretebookshop.com/tr34-4th-edition---concrete-industrial-ground-floors-a-guide-to-design-and-construction---jan2018-4188-p.asp">TR34 Concrete industrial ground floors</a>. It is a proven practice. There is even <a href="https://www.tekla.com/products/tekla-tedds">Tekla Tedds</a> calculation spreadsheet
+for it.</p>
+</li>
+</ul>
+<h3 id="non-linear-supports">
+  Non-linear supports
+  <a class="anchor" href="#non-linear-supports">#</a>
+</h3>
+<ul>
+<li>
+<p>Nodal compression-only supports can be used if you have beam just <strong>vertically bearing</strong>
+on support and it is expected that there might be uplift at this
+beam end.</p>
+<details open><summary>Example of bearing support use</summary>
+  <div class="markdown-inner">
+    <img src="img/bearing.png" alt="Bearing support" title="Bearing support"/>
+  </div>
+</details>
+
+</li>
+<li>
+<p>Surface compression-only or &ldquo;contact&rdquo; supports can be very
+effectively used for design of <strong>steel-to-concrete connections</strong>. There is a good article on modelling &ldquo;contact&rdquo; in one of my favourite blogs <a href="https://enterfea.com/when-to-ignore-contact-in-fea/">EnterFEA</a>.</p>
+</li>
+<li>
+<p>Theoretically, non-linear nodal supports with variable stiffness could be used
+to model more precise <strong>behaviour of piles</strong> &ndash; however, I have not seen
+such examples in my experience so far.</p>
+</li>
+</ul>
+</article>
+ 
+      
+
+      <footer class="book-footer">
+        
+  <div class="flex flex-wrap justify-between">
+
+
+
+
+
+</div>
+
+
+
+  <script>(function(){function e(e){const t=window.getSelection(),n=document.createRange();n.selectNodeContents(e),t.removeAllRanges(),t.addRange(n)}document.querySelectorAll("pre code").forEach(t=>{t.addEventListener("click",function(){if(window.getSelection().toString())return;e(t.parentElement),navigator.clipboard&&navigator.clipboard.writeText(t.parentElement.textContent)})})})()</script>
+
+
+ 
+        
+      </footer>
+
+      
+  
+ 
+
+      <label for="menu-control" class="hidden book-menu-overlay"></label>
+    </div>
+
+    
+    <aside class="book-toc">
+      <div class="book-toc-content">
+        
+  
+<nav id="TableOfContents">
+  <ul>
+    <li>
+      <ul>
+        <li><a href="#parameters">Parameters</a></li>
+        <li><a href="#what-do-the-supports-represent">What do the supports represent?</a></li>
+        <li><a href="#communication-of-forces">Communication of forces</a></li>
+        <li><a href="#friction">Friction</a></li>
+        <li><a href="#imposed-displacement----thermalshrinkage">Imposed displacement &ndash; thermal/shrinkage</a></li>
+        <li><a href="#modelling-foundations">Modelling foundations</a></li>
+        <li><a href="#non-linear-supports">Non-linear supports</a></li>
+      </ul>
+    </li>
+  </ul>
+</nav>
+
+
+ 
+      </div>
+    </aside>
+    
+  </main>
+
+  
+</body>
+</html>
+
+
+
+
+
+
+
+
+
+
+
+

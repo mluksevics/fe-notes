@@ -1,0 +1,729 @@
+<!DOCTYPE html>
+<html lang="en-us" dir="ltr">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="The (non)ideal world#Time vs. Quality vs. Cost#The choice between Time &lt;&gt; Quality &lt;&gt; Cost applies everywhere. Casting this idea on the design of buildings using FEA:
+There is a limited time to create a model. There are number of modelling/analysis limitations that most structural engineering software has. Or it may be that buying new software is not commercially justifiable; Geometry - the real structure will be built imperfectly, there will be deviations from the designed geometry.">
+<meta name="theme-color" media="(prefers-color-scheme: light)" content="#ffffff">
+<meta name="theme-color" media="(prefers-color-scheme: dark)" content="#343a40">
+<meta name="color-scheme" content="light dark"><meta property="og:title" content="02 The Ideal World" />
+<meta property="og:description" content="The (non)ideal world#Time vs. Quality vs. Cost#The choice between Time &lt;&gt; Quality &lt;&gt; Cost applies everywhere. Casting this idea on the design of buildings using FEA:
+There is a limited time to create a model. There are number of modelling/analysis limitations that most structural engineering software has. Or it may be that buying new software is not commercially justifiable; Geometry - the real structure will be built imperfectly, there will be deviations from the designed geometry." />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://structures.lv/notes/docs/idealworld/" /><meta property="article:section" content="docs" />
+
+
+
+<title>02 The Ideal World | Engineer&#39;s notes on design using FEA</title>
+<link rel="manifest" href="/notes/manifest.json">
+<link rel="icon" href="/notes/favicon.png" >
+<link rel="stylesheet" href="/notes/book.min.33a48f5432973b8ff9a82679d9e45d67f2c15d4399bd2829269455cfe390b5e8.css" integrity="sha256-M6SPVDKXO4/5qCZ52eRdZ/LBXUOZvSgpJpRVz&#43;OQteg=" crossorigin="anonymous">
+  <script defer src="/notes/flexsearch.min.js"></script>
+  <script defer src="/notes/en.search.min.91455c75d71f6e311cc359c3b69d34f78d8c70ef4059e70b66a2dc60ceddf6b7.js" integrity="sha256-kUVcddcfbjEcw1nDtp00942McO9AWecLZqLcYM7d9rc=" crossorigin="anonymous"></script>
+
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-7FJT3L107Y"></script>
+<script>
+var doNotTrack = false;
+if (!doNotTrack) {
+	window.dataLayer = window.dataLayer || [];
+	function gtag(){dataLayer.push(arguments);}
+	gtag('js', new Date());
+	gtag('config', 'G-7FJT3L107Y', { 'anonymize_ip': false });
+}
+</script>
+<!--
+Made with Book Theme
+https://github.com/alex-shpak/hugo-book
+-->
+  
+</head>
+<body dir="ltr">
+  <input type="checkbox" class="hidden toggle" id="menu-control" />
+  <input type="checkbox" class="hidden toggle" id="toc-control" />
+  <main class="container flex">
+    <aside class="book-menu">
+      <div class="book-menu-content">
+        
+  <nav>
+<h2 class="book-brand">
+  <a class="flex align-center" href="/notes/"><span>Engineer&#39;s notes on design using FEA</span>
+  </a>
+</h2>
+
+
+<div class="book-search">
+  <input type="text" id="book-search-input" placeholder="Search" aria-label="Search" maxlength="64" data-hotkeys="s/" />
+  <div class="book-search-spinner hidden"></div>
+  <ul id="book-search-results"></ul>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+  
+  <ul>
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/notes/docs/introduction/" class="">Introduction</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/notes/docs/designflow/" class="">01 Design Flow</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/notes/docs/idealworld/" class="active">02 The Ideal World</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/notes/docs/modelgeometry/" class="">03 Geometry</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/notes/docs/modelsupports/" class="">04 Supports</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/notes/docs/modelloads/" class="">05 Loads and Combinations</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/notes/docs/meshing/" class="">06 Meshing</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/notes/docs/instabilities/" class="">07 Instabilities</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/notes/docs/analysis/" class="">08 Analysis</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/notes/docs/results/" class="">09 Results</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/notes/docs/concrete/" class="">10 Reinforced Concrete</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/notes/docs/steel/" class="">11 Steel</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/notes/docs/about/" class="">About me</a>
+  
+
+        </li>
+      
+    
+  </ul>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</nav>
+
+
+
+
+  <script>(function(){var e=document.querySelector("aside .book-menu-content");addEventListener("beforeunload",function(){localStorage.setItem("menu.scrollTop",e.scrollTop)}),e.scrollTop=localStorage.getItem("menu.scrollTop")})()</script>
+
+
+ 
+      </div>
+    </aside>
+
+    <div class="book-page">
+      <header class="book-header">
+        
+  <div class="flex align-center justify-between">
+  <label for="menu-control">
+    <img src="/notes/svg/menu.svg" class="book-icon" alt="Menu" />
+  </label>
+
+  <strong>02 The Ideal World</strong>
+
+  <label for="toc-control">
+    
+    <img src="/notes/svg/toc.svg" class="book-icon" alt="Table of Contents" />
+    
+  </label>
+</div>
+
+
+  
+  <aside class="hidden clearfix">
+    
+  
+<nav id="TableOfContents">
+  <ul>
+    <li><a href="#time-vs-quality-vs-cost">Time vs. Quality vs. Cost</a></li>
+    <li><a href="#simplifications-of-material-behaviour">Simplifications of material behaviour</a></li>
+    <li><a href="#steel-structures">Steel structures</a></li>
+    <li><a href="#reinforced-concrete-structures">Reinforced Concrete Structures</a></li>
+    <li><a href="#timber-structures">Timber structures</a></li>
+    <li><a href="#simplifications-for-connections">Simplifications for connections</a></li>
+    <li><a href="#the-stiffer-load-path-wins">The stiffer load-path wins</a></li>
+  </ul>
+</nav>
+
+
+
+  </aside>
+  
+ 
+      </header>
+
+      
+      
+  <article class="markdown book-article"><h1 id="the-nonideal-world">
+  The (non)ideal world
+  <a class="anchor" href="#the-nonideal-world">#</a>
+</h1>
+<h2 id="time-vs-quality-vs-cost">
+  Time vs. Quality vs. Cost
+  <a class="anchor" href="#time-vs-quality-vs-cost">#</a>
+</h2>
+<p>The choice between <strong>Time &lt;&gt; Quality &lt;&gt; Cost</strong> applies everywhere.
+Casting this idea on the design of buildings using FEA:</p>
+<ul>
+<li>There is a limited time to create a model.</li>
+<li>There are number of modelling/analysis limitations that most
+structural engineering software has. Or it may be that buying new
+software is not commercially justifiable;</li>
+<li>Geometry - the real structure will be built imperfectly, there will
+be deviations from the designed geometry.</li>
+<li>Material properties may be dependent on weather and construction
+methods that you may not know when doing the design.</li>
+<li>In most of cases there won&rsquo;t be an opportunity to test a prototype to
+fine-tune the assumed behaviour of the structure.<br>
+(a major difference from many other engineering disciplines)</li>
+</ul>
+<p>The good news is that there are widely accepted <strong>simplifications</strong> to
+the model of the structure. An agreed way to work around the
+limitations. Some of these are &ldquo;agreed&rdquo; in building codes, but many of
+these depend on the engineer&rsquo;s judgement and/or interpretation of codes.</p>
+<p>The main simplifications are related to:</p>
+<ul>
+<li>Material behaviour;</li>
+<li>Stiffness of connections and supports;</li>
+<li>Discounting members that do not contribute to load path;</li>
+</ul>
+<h2 id="simplifications-of-material-behaviour">
+  Simplifications of material behaviour
+  <a class="anchor" href="#simplifications-of-material-behaviour">#</a>
+</h2>
+<p>None of the construction materials is <strong>linear isotropic elastic</strong>.</p>
+<p>However, for the majority of calculations, we <strong>assume</strong> that steel,
+timber, reinforced concrete, aluminium and glass behave as linear
+isotropic elastic materials.</p>
+<p>This lets us:</p>
+<ul>
+<li>Simplicity = Speed. Speed up the modelling process and analysis;</li>
+<li>Sum results from multiple load cases together to estimate behaviour
+under load combination;</li>
+<li>Use approaches of design proven/tested on many other buildings &ndash;
+omit prototype design if we are operating within the &ldquo;boundaries&rdquo;
+that are covered by building codes.</li>
+<li>Improve the quality assurance (read: checking) process of our
+models.</li>
+</ul>
+<p>In Eurocodes it is explicitly stated that you can use linear elastic
+analysis for the design of concrete, timber and steel:</p>
+
+
+
+
+<div class="book-tabs"><input type="radio" class="toggle" name="tabs-uniqueid" id="tabs-uniqueid-0" checked="checked" />
+  <label for="tabs-uniqueid-0">EN 1992-1-1 (Concrete)</label>
+  <div class="book-tabs-content markdown-inner"><p><strong>5.4 Linear elastic analysis</strong> <br>
+(1) Linear analysis of element based on the theory of elasticity may be used for both the serviceabiliy and ultimate limit states.<br>
+(2) For the determination of the action effects, linear analysis may be carried out assuming:</p>
+<ul>
+<li>uncracked cross sections,</li>
+<li>linear stress-strain relationships and</li>
+<li>mean value of the modulus of elasticity</li>
+</ul></div><input type="radio" class="toggle" name="tabs-uniqueid" id="tabs-uniqueid-1"  />
+  <label for="tabs-uniqueid-1">EN 1993-1-1 (Steel)</label>
+  <div class="book-tabs-content markdown-inner"><p><strong>5.4 Methods of analysis considering material non-linearities</strong> <br>
+(1) The internal forces and moments may be determined using either:</p>
+<ul>
+<li>elastic global analysis</li>
+<li>plastic global analysis.</li>
+</ul>
+<p>[My note:] For finite element models analysis the reference is made to EN 1993-1-5 which contains Annex C with more detailed information, but also allows use of elastic analysis.</p>
+<p>(2) Elastic global analysis may be used in all cases</p>
+</div><input type="radio" class="toggle" name="tabs-uniqueid" id="tabs-uniqueid-2"  />
+  <label for="tabs-uniqueid-2">EN 1995-1-1 (Timber)</label>
+  <div class="book-tabs-content markdown-inner"><strong>5.1 Basis of Structural Analysis - Generalt</strong> <br>
+(2) The global structural behavior should be assessed by calculating the action effects with a linear material model (elastic behaviour).</div></div>
+
+<p>It should be noted that non-linear behaviour is often considered during
+design checks according to code. i.e. forces from linear elastic FE
+analysis are used and non-linear or orthotropic behaviour of material is
+considered when checking stresses in members or buckling capacity.</p>
+<p>There are several cases where you would want to depart from these
+assumptions. For example:</p>
+<ul>
+<li>Calculating exact deflections for concrete structure;</li>
+<li>Efficient design of steel connections and portal frames;</li>
+</ul>
+<h2 id="steel-structures">
+  Steel structures
+  <a class="anchor" href="#steel-structures">#</a>
+</h2>
+<ul>
+<li>By its nature steel is isotropic &ndash; plastic material;</li>
+<li>Until steel stresses reach yield strength &ndash; the material is linear, isotropic, and elastic;</li>
+<li>After reaching yield strength, the stresses will re-distribute due
+to plastic behaviour.</li>
+</ul>
+<p>Design codes allow the use of the plastic behaviour of steel, in fact,
+it is the described way for checking the capacity of beams in bending in
+Eurocodes.</p>
+<p><strong>Key points to keep in mind when modelling steel structures using FEA tools:</strong></p>
+<ul>
+<li>Linear elastic = safe, conservative design.<br>
+If you don&rsquo;t let the steel to reach yield stress in your model, your
+design will still be safe.</li>
+<li>1D elements = Beams/Columns
+<ul>
+<li>Sticking to elastic material for 1D element modelling is a
+long-proven practice.</li>
+<li>It is preferred to consider plastic behaviour during the element
+design stage</li>
+</ul>
+</li>
+<li>2D elements = surfaces. In most cases, surfaces will be used for
+modelling details/connections. Using linear elastic material, you
+will often notice high-stress peaks. Most often in:
+<ul>
+<li>Locations of nodal supports or bolts;</li>
+<li>Location of sharp corners;</li>
+</ul>
+</li>
+</ul>
+<p><strong>Ways of dealing with stress peaks:</strong></p>
+<ul>
+<li>Doing additional modelling work - representing supports with their
+actual area, adding rigid links to represent thickness etc.</li>
+<li>Using isotropic-plastic material and running non-linear analysis;</li>
+<li>Changing the actual geometry of the structure - e.g. considering
+rounding corners.</li>
+<li>Exercising engineering judgement on how the plastic behaviour will
+affect linear analysis results. I do not suggest doing this if you
+are just starting to do structural design. But the more design you
+will do, the more confident you will become.</li>
+</ul>
+<h2 id="reinforced-concrete-structures">
+  Reinforced Concrete Structures
+  <a class="anchor" href="#reinforced-concrete-structures">#</a>
+</h2>
+<p>Reinfoced concrete is the most un-linear un-elastic un-isotropic material of all
+practically used construction materials:</p>
+<ul>
+<li>RC is <strong>composite</strong> &ndash; reinforcement steel typically taking the tension
+and concrete taking compression;</li>
+<li>Concrete is <strong>non-linear</strong> &ndash; creep and shrinkage lead to concrete
+deformation without stress increase in section.</li>
+<li>RC elements are likely to be <strong>orthotropic</strong> &ndash; depending on the
+direction of reinforcement, there will be enhanced tensile capacity
+in one/two or all three directions.</li>
+<li>RC elements are <strong>plastic</strong> &ndash; after the concrete is cracked, it stays
+cracked.</li>
+</ul>
+<p>Yet, the design of elements using linear elastic analysis is the most
+popular way of calculating internal forces in members.</p>
+<ul>
+<li><strong>Composite</strong> action is accounted for when designing elements
+(beams/columns etc.) to code;</li>
+<li><strong>Cracking and creep</strong> are either:
+<ul>
+<li>Neglected for some simple calculations, considering that the effect
+on internal forces distribution may be small;</li>
+<li>Accounted by stiffness reduction factors applied to bending/axial
+stiffness;</li>
+<li>Considered implicitly and non-linear calculation is done;</li>
+</ul>
+</li>
+<li>The <strong>orthotropic</strong> nature of reinforced concrete is neglected at the
+static analysis stage &ndash; the reinforcement is added only in planes
+where it is necessary.<br>
+However, choosing the rotation of local axis for 2D elements will be important for desing of slabs.</li>
+</ul>
+<p><strong>Key points to keep in mind when modelling RC structures using FEA</strong></p>
+<p>It is a <strong>&ldquo;game of stiffness&rdquo;</strong> between beams/columns/slabs:</p>
+<ul>
+<li>In-situ concrete frames will be statically indeterminate structures,
+with moment transferred through connections; Forces in members are
+highly dependent on <strong>relative stiffness</strong> between elements.</li>
+<li>By default, the software will model your elements using <strong>uncracked</strong>
+concrete stiffness. Appreciate that due to <strong>cracking and creep</strong>,
+almost any member will be less stiff than uncracked concrete.</li>
+<li>Acknowledge that it is <strong>impossible to model the exact stiffness</strong> of
+elements. Creep will be time-dependent. Cracking is often governed
+by overload at the construction stage (and you may not know the
+construction programme at the time of the design).</li>
+<li>As soon as your building gets taller than ~10 storeys, the <strong>axial
+shortening</strong> of columns starts to play the role;</li>
+</ul>
+<p>Play the &ldquo;game&rdquo; <strong>safely</strong>:</p>
+<ul>
+<li>Consider <strong>upper and lower bounds</strong> for stiffness of elements and
+connections e.g.;
+<ul>
+<li>If you intend to design the stability system it is safe to release
+rotations (add hinges) at column ends in the FE model;</li>
+<li>If you intend to design the columns, keep the rotations at column
+ends fixed.</li>
+</ul>
+</li>
+<li>Consider cracking and creep when <strong>calculating deflections</strong>.</li>
+<li>Manual calcs allow for <strong>&ldquo;redistribution&rdquo; of bending moments</strong> &ndash;
+transfer of some part of hogging moments above the column to
+midspan. It won&rsquo;t be possible to do this using typical FE analysis, however:
+<ul>
+<li>Always <strong>stay safe with bottom reinforcement</strong>. Be generous, if
+possible;</li>
+<li>And the other way around &ndash; there is no need for design for that
+very peak value of the hogging moment.</li>
+</ul>
+</li>
+<li>It is a common practice to <strong>design RC slabs using separate models</strong> &ndash;
+thus, ignoring the effect of axial shortening on slab design.</li>
+</ul>
+<h2 id="timber-structures">
+  Timber structures
+  <a class="anchor" href="#timber-structures">#</a>
+</h2>
+<p>Timber as a material is:</p>
+<ul>
+<li><strong>Orthotropic</strong>. Properties along the grain are significantly better
+than perpendicular to the grain.</li>
+<li><strong>Linear. kind-of.</strong> If the instant load is applied, the timber behaves linearly. However, sustained loading causes creep &ndash; with time the deflection increases
+without stress increase in elements.</li>
+</ul>
+<p>The orthotropic nature in most cases is considered at the element
+design check &ndash; after static forces have been calculated by linear
+elastic static analysis.</p>
+<p>Similarly, creep is considered for deflections by applying factors
+to sustained loading. (If you are using Eurovodes, see section 2.2.3 of EN 1995-1-1)</p>
+<p>However, the main thing to remember when modelling and designing
+timber structures is: <strong>Connections govern the design capacity</strong>. Often, connections also
+govern the member sizes.</p>
+<p>Many of programs have embedded code-checking modules that will allow
+you to run analysis, obtain internal forces, run
+bending/shear/compression/deflection checks according to code, and
+give you a confident utilisation under 100%...
+And if <strong>at least preliminary design of connections</strong> have not been done when choosing element sizes &ndash; there may be unpleasant surprises.</p>
+<h2 id="simplifications-for-connections">
+  Simplifications for connections
+  <a class="anchor" href="#simplifications-for-connections">#</a>
+</h2>
+<p>I do remember when I first started modelling structures. One of my first
+questions was &ndash; <strong>where should I add hinges</strong> = where should the rotations
+at member ends be released?</p>
+<p>Yes, in the &ldquo;ideal world&rdquo; each connection has stiffness. But in most
+cases, you can model the connection as either fixed=continuous, or
+pinned=not restraining any rotation.</p>
+<p>The <strong>very simplified recipe</strong> would be:</p>
+<ul>
+<li>Release all the steel connections but do account for eccentricities
+(e.g. using rigid links) at column/beam connections.</li>
+<li>Treat precast concrete connections similarly to steel ones &ndash; but do
+model eccentricities that are caused by corbels. Keep
+column-to-column connections fixed.</li>
+<li>Keep in-situ concrete elements with fixed ends.</li>
+<li>Release all the timber connections and timber-to-steel connections.
+Unless you are intending to specifically design a moment frame.</li>
+</ul>
+<p>Many engineers at this point will shout: &ldquo;<strong>Not true!</strong> steel structures
+have plenty of moment connections!&rdquo; Well.. true.. but one must start
+somewhere. There are typical pinned and moment connections shown in the <a href="/docs/steel">Steel section of notes</a></p>
+<p>The <strong>area where you must be very careful</strong> regarding connections &ndash;
+pinned or sliding connections with a large force in one direction,
+but a &ldquo;free movement&rdquo; is assumed in any other:</p>
+<ul>
+<li>It is common to discount friction in calculations. However, you
+can&rsquo;t expect the beam support to have a <strong>completely sliding support</strong>
+if there are large vertical support reactions. (Teflon bearings are not cheap either)</li>
+<li>For a steel connection with large axial force, many bolts and/or
+thick plates may be required. An assessment should be made as to
+whether you can still consider this <strong>connection as pinned</strong>.</li>
+</ul>
+<h2 id="the-stiffer-load-path-wins">
+  The stiffer load-path wins
+  <a class="anchor" href="#the-stiffer-load-path-wins">#</a>
+</h2>
+<p>In cases where there are multiple load paths, the <strong>load will &ldquo;choose&rdquo; the
+stiffer one</strong>.</p>
+<p>This statement can also be flipped the other way around. The considered
+load path will be redundant if there is another load path that is
+significantly stiffer.</p>
+<p>Examples of this statement are:</p>
+<ul>
+<li>
+<p><strong>Tension bracing.</strong> Traditional bracing in frame buildings (steel,
+precast concrete, timber). One of the braces will be in tension,
+another in compression. The tension one will be relatively stiff and
+carry all the force and ensure stability. The compression one will
+have a tiny capacity because of buckling effects. It will be
+redundant.</p>
+</li>
+<li>
+<p><strong>Rigid links</strong> (or &ldquo;rigid members&rdquo; or &ldquo;coupling&rdquo; in some software)
+ensure that the defined link is the stiffest element around and the
+load gets directly transferred to the linked node.\</p>
+<p>Two most popular ways of using rigid links:</p>
+<ul>
+<li>To represent parts of the <strong>structure you want to avoid modelling</strong> but
+will deal by some other means. A popular example is modelling
+eccentricities at connections.</li>
+<li>To use a single node to represent a support that is actually an area
+support:
+<ul>
+<li>Representing <strong>bolts or support areas</strong> when modelling 2D surfaces &ndash; by
+using rigid links you can avoid huge stress peaks appearing in
+results;</li>
+<li>Representing <strong>support of core walls</strong> &ndash; thus calculating an axial force
+and moments for the core wall overall, rather than dealing with
+multiple linear supports.</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>
+<p><strong>In-situ concrete structures.</strong> Cracking can significantly reduce
+stiffness. The smaller and heavier loaded elements will crack more than larger and lightly loaded. This will &ldquo;attract&rdquo; more loads towards lightly loaded elements.</p>
+<p>An example below is a ribbed deck with a concentrated load on top of one
+of the beams.</p>
+<ul>
+<li>The first linear calculation shows that about 35% of the load is
+transferred to adjacent beams, max bending moment in middle beam = 219kNm.</li>
+<li>However, note that the thin slab in the transverse direction is
+likely to be cracked.</li>
+<li>If the slab has lost roughly half of the stiffness because of
+cracking, then it only transfers 28% to adjacent beams and the bending moment 261kNm in the beam under the load is <strong>20% more</strong>!</li>
+<li>..and yes, the beam will also have some reduction of stiffness due
+to cracking.. but do remember to play the &ldquo;stiffness game&rdquo; safely!
+Note that before the widespread use of FE calculations, it is likely
+that the beam under the load would have been designed to carry the
+entire load (the approach I support myself, see <a href="%22/docs/concrete/%22">Concrete design section</a>) and the beam would have been designed for 400kNm bending moment.</li>
+</ul>
+<details open><summary>Example of &ldquo;stiffness game&rdquo; between beams and slabs</summary>
+  <div class="markdown-inner">
+    <img src="img/ribbed.png" alt="Stiffness game" title="Stiffness game"/>
+  </div>
+</details>
+
+</li>
+</ul>
+</article>
+ 
+      
+
+      <footer class="book-footer">
+        
+  <div class="flex flex-wrap justify-between">
+
+
+
+
+
+</div>
+
+
+
+  <script>(function(){function e(e){const t=window.getSelection(),n=document.createRange();n.selectNodeContents(e),t.removeAllRanges(),t.addRange(n)}document.querySelectorAll("pre code").forEach(t=>{t.addEventListener("click",function(){if(window.getSelection().toString())return;e(t.parentElement),navigator.clipboard&&navigator.clipboard.writeText(t.parentElement.textContent)})})})()</script>
+
+
+ 
+        
+      </footer>
+
+      
+  
+ 
+
+      <label for="menu-control" class="hidden book-menu-overlay"></label>
+    </div>
+
+    
+    <aside class="book-toc">
+      <div class="book-toc-content">
+        
+  
+<nav id="TableOfContents">
+  <ul>
+    <li><a href="#time-vs-quality-vs-cost">Time vs. Quality vs. Cost</a></li>
+    <li><a href="#simplifications-of-material-behaviour">Simplifications of material behaviour</a></li>
+    <li><a href="#steel-structures">Steel structures</a></li>
+    <li><a href="#reinforced-concrete-structures">Reinforced Concrete Structures</a></li>
+    <li><a href="#timber-structures">Timber structures</a></li>
+    <li><a href="#simplifications-for-connections">Simplifications for connections</a></li>
+    <li><a href="#the-stiffer-load-path-wins">The stiffer load-path wins</a></li>
+  </ul>
+</nav>
+
+
+ 
+      </div>
+    </aside>
+    
+  </main>
+
+  
+</body>
+</html>
+
+
+
+
+
+
+
+
+
+
+
+

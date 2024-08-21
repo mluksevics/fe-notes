@@ -1,0 +1,542 @@
+<!DOCTYPE html>
+<html lang="en-us" dir="ltr">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="Design flow#Overview of design flow#There is an idea that has stuck in my mind since I heard it from a technical director during my first months at Buro Happold: &ldquo;Calculation write-up is a key deliverable&rdquo;.
+Your model should tell a &ldquo;story&rdquo;. Thinking of your design as a &ldquo;story&rdquo;, helps to systemize your actions and thinking.
+The sections of every good &ldquo;story&rdquo;#Geometry: Location of the considered element; Is this an entire building?">
+<meta name="theme-color" media="(prefers-color-scheme: light)" content="#ffffff">
+<meta name="theme-color" media="(prefers-color-scheme: dark)" content="#343a40">
+<meta name="color-scheme" content="light dark"><meta property="og:title" content="01 Design Flow" />
+<meta property="og:description" content="Design flow#Overview of design flow#There is an idea that has stuck in my mind since I heard it from a technical director during my first months at Buro Happold: &ldquo;Calculation write-up is a key deliverable&rdquo;.
+Your model should tell a &ldquo;story&rdquo;. Thinking of your design as a &ldquo;story&rdquo;, helps to systemize your actions and thinking.
+The sections of every good &ldquo;story&rdquo;#Geometry: Location of the considered element; Is this an entire building?" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://structures.lv/notes/docs/designflow/" /><meta property="article:section" content="docs" />
+
+
+
+<title>01 Design Flow | Engineer&#39;s notes on design using FEA</title>
+<link rel="manifest" href="/notes/manifest.json">
+<link rel="icon" href="/notes/favicon.png" >
+<link rel="stylesheet" href="/notes/book.min.33a48f5432973b8ff9a82679d9e45d67f2c15d4399bd2829269455cfe390b5e8.css" integrity="sha256-M6SPVDKXO4/5qCZ52eRdZ/LBXUOZvSgpJpRVz&#43;OQteg=" crossorigin="anonymous">
+  <script defer src="/notes/flexsearch.min.js"></script>
+  <script defer src="/notes/en.search.min.91455c75d71f6e311cc359c3b69d34f78d8c70ef4059e70b66a2dc60ceddf6b7.js" integrity="sha256-kUVcddcfbjEcw1nDtp00942McO9AWecLZqLcYM7d9rc=" crossorigin="anonymous"></script>
+
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-7FJT3L107Y"></script>
+<script>
+var doNotTrack = false;
+if (!doNotTrack) {
+	window.dataLayer = window.dataLayer || [];
+	function gtag(){dataLayer.push(arguments);}
+	gtag('js', new Date());
+	gtag('config', 'G-7FJT3L107Y', { 'anonymize_ip': false });
+}
+</script>
+<!--
+Made with Book Theme
+https://github.com/alex-shpak/hugo-book
+-->
+  
+</head>
+<body dir="ltr">
+  <input type="checkbox" class="hidden toggle" id="menu-control" />
+  <input type="checkbox" class="hidden toggle" id="toc-control" />
+  <main class="container flex">
+    <aside class="book-menu">
+      <div class="book-menu-content">
+        
+  <nav>
+<h2 class="book-brand">
+  <a class="flex align-center" href="/notes/"><span>Engineer&#39;s notes on design using FEA</span>
+  </a>
+</h2>
+
+
+<div class="book-search">
+  <input type="text" id="book-search-input" placeholder="Search" aria-label="Search" maxlength="64" data-hotkeys="s/" />
+  <div class="book-search-spinner hidden"></div>
+  <ul id="book-search-results"></ul>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+  
+  <ul>
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/notes/docs/introduction/" class="">Introduction</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/notes/docs/designflow/" class="active">01 Design Flow</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/notes/docs/idealworld/" class="">02 The Ideal World</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/notes/docs/modelgeometry/" class="">03 Geometry</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/notes/docs/modelsupports/" class="">04 Supports</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/notes/docs/modelloads/" class="">05 Loads and Combinations</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/notes/docs/meshing/" class="">06 Meshing</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/notes/docs/instabilities/" class="">07 Instabilities</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/notes/docs/analysis/" class="">08 Analysis</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/notes/docs/results/" class="">09 Results</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/notes/docs/concrete/" class="">10 Reinforced Concrete</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/notes/docs/steel/" class="">11 Steel</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/notes/docs/about/" class="">About me</a>
+  
+
+        </li>
+      
+    
+  </ul>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</nav>
+
+
+
+
+  <script>(function(){var e=document.querySelector("aside .book-menu-content");addEventListener("beforeunload",function(){localStorage.setItem("menu.scrollTop",e.scrollTop)}),e.scrollTop=localStorage.getItem("menu.scrollTop")})()</script>
+
+
+ 
+      </div>
+    </aside>
+
+    <div class="book-page">
+      <header class="book-header">
+        
+  <div class="flex align-center justify-between">
+  <label for="menu-control">
+    <img src="/notes/svg/menu.svg" class="book-icon" alt="Menu" />
+  </label>
+
+  <strong>01 Design Flow</strong>
+
+  <label for="toc-control">
+    
+    <img src="/notes/svg/toc.svg" class="book-icon" alt="Table of Contents" />
+    
+  </label>
+</div>
+
+
+  
+  <aside class="hidden clearfix">
+    
+  
+<nav id="TableOfContents">
+  <ul>
+    <li><a href="#overview-of-design-flow">Overview of design flow</a>
+      <ul>
+        <li><a href="#the-sections-of-every-good-story">The sections of every good &ldquo;story&rdquo;</a></li>
+      </ul>
+    </li>
+    <li><a href="#what-will-your-model-do">What will your model do?</a>
+      <ul>
+        <li><a href="#before-you-start-modelling-ask-yourself">Before you start modelling, ask yourself:</a></li>
+        <li><a href="#some-examples-of-model-types">Some examples of model types:</a></li>
+        <li><a href="#more-questions-about-overall-building-model">More questions about overall building model</a></li>
+      </ul>
+    </li>
+    <li><a href="#dark-age-of-technology">Dark age of technology</a></li>
+    <li><a href="#safety-first">Safety first!</a></li>
+  </ul>
+</nav>
+
+
+
+  </aside>
+  
+ 
+      </header>
+
+      
+      
+  <article class="markdown book-article"><h1 id="design-flow">
+  Design flow
+  <a class="anchor" href="#design-flow">#</a>
+</h1>
+<h2 id="overview-of-design-flow">
+  Overview of design flow
+  <a class="anchor" href="#overview-of-design-flow">#</a>
+</h2>
+<p>There is an idea that has stuck in my mind since I heard it from a
+technical director during my first months at Buro Happold: &ldquo;Calculation
+write-up is a key deliverable&rdquo;.</p>
+<p>Your model should tell a &ldquo;story&rdquo;. Thinking of your design as a &ldquo;story&rdquo;,
+helps to systemize your actions and thinking.</p>
+<h3 id="the-sections-of-every-good-story">
+  The sections of every good &ldquo;story&rdquo;
+  <a class="anchor" href="#the-sections-of-every-good-story">#</a>
+</h3>
+<ul>
+<li>Geometry:
+<ul>
+<li>Location of the considered element;
+<ul>
+<li>Is this an entire building?</li>
+<li>Or one single detail?</li>
+</ul>
+</li>
+<li>Overall geometry;
+<ul>
+<li>What has been modelled?</li>
+<li>Where does it come from?</li>
+</ul>
+</li>
+<li>Section sizes;</li>
+</ul>
+</li>
+<li>Materials:
+<ul>
+<li>Steel / Timber / RC / Composite&hellip; combination?</li>
+<li>Linear/non-linear?</li>
+<li>What are the simplifications you are making and caused limitations?</li>
+</ul>
+</li>
+<li>Design assumptions - supports, hinges, stiffness modifications</li>
+<li>Applied loads, load cases and combinations;</li>
+<li>Type of analysis done, mesh properties;</li>
+<li>Internal forces in elements;</li>
+<li>Design of elements - checks according to code;</li>
+</ul>
+<p>It is important to understand that this &ldquo;story&rdquo; is not dependent on
+the software you use. In fact, I haven&rsquo;t come across a building
+design where these sections wouldn&rsquo;t apply.</p>
+<h2 id="what-will-your-model-do">
+  What will your model do?
+  <a class="anchor" href="#what-will-your-model-do">#</a>
+</h2>
+<h3 id="before-you-start-modelling-ask-yourself">
+  Before you start modelling, ask yourself:
+  <a class="anchor" href="#before-you-start-modelling-ask-yourself">#</a>
+</h3>
+<ul>
+<li><strong>What will your model do?</strong> What will it be used for?</li>
+<li>What is the goal you will achieve by getting the results?</li>
+<li>What is the scope of the model?
+<ul>
+<li>Is this a local model capturing a connection or floor slab?</li>
+<li>Is this an overall building model?</li>
+</ul>
+</li>
+</ul>
+<h3 id="some-examples-of-model-types">
+  Some examples of model types:
+  <a class="anchor" href="#some-examples-of-model-types">#</a>
+</h3>
+<ul>
+<li>Overall model for stability system design;</li>
+<li>Overall model to design columns;</li>
+<li>Local model to design roof truss;</li>
+<li>Local model to design a steel connection;</li>
+<li>Local model to design an RC slab;</li>
+</ul>
+<h3 id="more-questions-about-overall-building-model">
+  More questions about overall building model
+  <a class="anchor" href="#more-questions-about-overall-building-model">#</a>
+</h3>
+<ul>
+<li>
+<p><strong>Which elements should be safely designed by using this model?</strong><br>
+Columns? Stability system? Slabs? Transfer beams? <br>
+This is closely linked to the overall structural scheme assumptions of the building.
+Nevertheless, without this appreciation and strategy, you are set to
+waste a lot of time to create a model that does &ldquo;everything&rdquo; and
+&ldquo;doesn&rsquo;t do anything well&rdquo;.</p>
+</li>
+<li>
+<p><strong>What level of detail/precision you are supposed to deliver?</strong><br>
+Do you need to rapidly explore multiple options in the concept
+state?<br>
+Or do you need to minimize the section sizes as part of the redesign
+done by the contractor?<br>
+Remember that also the model (FE solver) running time will be longer
+for more complex models and this will restrict the assessment of
+many iterations of design.</p>
+</li>
+</ul>
+<h2 id="dark-age-of-technology">
+  Dark age of technology
+  <a class="anchor" href="#dark-age-of-technology">#</a>
+</h2>
+<p>Technology develops quickly. The versions of programs we used 5
+years ago are no longer used.</p>
+<p>It is very likely that in some time of the future someone will want
+to modify/refurbish the building you are designing.</p>
+<p>Once, I had to open and make minor adjustments to a model of a
+well-known tensile structure in London - the model was some 15+
+years old. If there wouldn&rsquo;t be knowledge within the company and
+software installation saved, then it is likely that would have
+needed to remodel the entire structure and spend weeks on the simple
+task.</p>
+<ul>
+<li>Always note the version of the program used for analysis and/or
+design;</li>
+<li>Save the installation files of used software along the project;</li>
+<li>Export data and result reports in formats that have proven to
+survive over the past ~25 years: .pdf, .doc and .xls.</li>
+</ul>
+<h2 id="safety-first">
+  Safety first!
+  <a class="anchor" href="#safety-first">#</a>
+</h2>
+<p>With the new possibilities of the software (non-linear materials,
+contact behaviour etc.) you will be tempted to model the structure in
+more and more detail. However, remember, that your main goal is to
+design a safe structure.</p>
+<ul>
+<li>Don&rsquo;t worry about modelling the exact behaviour or structure;</li>
+<li><strong>Do worry</strong> about the safety of the structure &ndash; always make
+modelling/design assumptions on the safe side!</li>
+</ul>
+<p>This leads us to the next section about simplifications used in design using FEA.</p>
+</article>
+ 
+      
+
+      <footer class="book-footer">
+        
+  <div class="flex flex-wrap justify-between">
+
+
+
+
+
+</div>
+
+
+
+  <script>(function(){function e(e){const t=window.getSelection(),n=document.createRange();n.selectNodeContents(e),t.removeAllRanges(),t.addRange(n)}document.querySelectorAll("pre code").forEach(t=>{t.addEventListener("click",function(){if(window.getSelection().toString())return;e(t.parentElement),navigator.clipboard&&navigator.clipboard.writeText(t.parentElement.textContent)})})})()</script>
+
+
+ 
+        
+      </footer>
+
+      
+  
+ 
+
+      <label for="menu-control" class="hidden book-menu-overlay"></label>
+    </div>
+
+    
+    <aside class="book-toc">
+      <div class="book-toc-content">
+        
+  
+<nav id="TableOfContents">
+  <ul>
+    <li><a href="#overview-of-design-flow">Overview of design flow</a>
+      <ul>
+        <li><a href="#the-sections-of-every-good-story">The sections of every good &ldquo;story&rdquo;</a></li>
+      </ul>
+    </li>
+    <li><a href="#what-will-your-model-do">What will your model do?</a>
+      <ul>
+        <li><a href="#before-you-start-modelling-ask-yourself">Before you start modelling, ask yourself:</a></li>
+        <li><a href="#some-examples-of-model-types">Some examples of model types:</a></li>
+        <li><a href="#more-questions-about-overall-building-model">More questions about overall building model</a></li>
+      </ul>
+    </li>
+    <li><a href="#dark-age-of-technology">Dark age of technology</a></li>
+    <li><a href="#safety-first">Safety first!</a></li>
+  </ul>
+</nav>
+
+
+ 
+      </div>
+    </aside>
+    
+  </main>
+
+  
+</body>
+</html>
+
+
+
+
+
+
+
+
+
+
+
+

@@ -1,0 +1,442 @@
+<!DOCTYPE html>
+<html lang="en-us" dir="ltr">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="Static Analysis#This may be the most sophisticated part from theoretical standpoint, however, from user&rsquo;s=engineer&rsquo;s perspective there is relatively small number of choices &ndash; there is not a lot you can do wrong here.
+Firstly &ndash; understand whether your model requires non-linear analysis. It could be that program automatically switches to non-linear solver as soon as you introduce any model features that require non-linear analysis (both Autodesk Robot and Dlubal RFEM will do this).">
+<meta name="theme-color" media="(prefers-color-scheme: light)" content="#ffffff">
+<meta name="theme-color" media="(prefers-color-scheme: dark)" content="#343a40">
+<meta name="color-scheme" content="light dark"><meta property="og:title" content="08 Analysis" />
+<meta property="og:description" content="Static Analysis#This may be the most sophisticated part from theoretical standpoint, however, from user&rsquo;s=engineer&rsquo;s perspective there is relatively small number of choices &ndash; there is not a lot you can do wrong here.
+Firstly &ndash; understand whether your model requires non-linear analysis. It could be that program automatically switches to non-linear solver as soon as you introduce any model features that require non-linear analysis (both Autodesk Robot and Dlubal RFEM will do this)." />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://structures.lv/notes/docs/analysis/" /><meta property="article:section" content="docs" />
+
+
+
+<title>08 Analysis | Engineer&#39;s notes on design using FEA</title>
+<link rel="manifest" href="/notes/manifest.json">
+<link rel="icon" href="/notes/favicon.png" >
+<link rel="stylesheet" href="/notes/book.min.33a48f5432973b8ff9a82679d9e45d67f2c15d4399bd2829269455cfe390b5e8.css" integrity="sha256-M6SPVDKXO4/5qCZ52eRdZ/LBXUOZvSgpJpRVz&#43;OQteg=" crossorigin="anonymous">
+  <script defer src="/notes/flexsearch.min.js"></script>
+  <script defer src="/notes/en.search.min.91455c75d71f6e311cc359c3b69d34f78d8c70ef4059e70b66a2dc60ceddf6b7.js" integrity="sha256-kUVcddcfbjEcw1nDtp00942McO9AWecLZqLcYM7d9rc=" crossorigin="anonymous"></script>
+
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-7FJT3L107Y"></script>
+<script>
+var doNotTrack = false;
+if (!doNotTrack) {
+	window.dataLayer = window.dataLayer || [];
+	function gtag(){dataLayer.push(arguments);}
+	gtag('js', new Date());
+	gtag('config', 'G-7FJT3L107Y', { 'anonymize_ip': false });
+}
+</script>
+<!--
+Made with Book Theme
+https://github.com/alex-shpak/hugo-book
+-->
+  
+</head>
+<body dir="ltr">
+  <input type="checkbox" class="hidden toggle" id="menu-control" />
+  <input type="checkbox" class="hidden toggle" id="toc-control" />
+  <main class="container flex">
+    <aside class="book-menu">
+      <div class="book-menu-content">
+        
+  <nav>
+<h2 class="book-brand">
+  <a class="flex align-center" href="/notes/"><span>Engineer&#39;s notes on design using FEA</span>
+  </a>
+</h2>
+
+
+<div class="book-search">
+  <input type="text" id="book-search-input" placeholder="Search" aria-label="Search" maxlength="64" data-hotkeys="s/" />
+  <div class="book-search-spinner hidden"></div>
+  <ul id="book-search-results"></ul>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+  
+  <ul>
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/notes/docs/introduction/" class="">Introduction</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/notes/docs/designflow/" class="">01 Design Flow</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/notes/docs/idealworld/" class="">02 The Ideal World</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/notes/docs/modelgeometry/" class="">03 Geometry</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/notes/docs/modelsupports/" class="">04 Supports</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/notes/docs/modelloads/" class="">05 Loads and Combinations</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/notes/docs/meshing/" class="">06 Meshing</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/notes/docs/instabilities/" class="">07 Instabilities</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/notes/docs/analysis/" class="active">08 Analysis</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/notes/docs/results/" class="">09 Results</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/notes/docs/concrete/" class="">10 Reinforced Concrete</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/notes/docs/steel/" class="">11 Steel</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/notes/docs/about/" class="">About me</a>
+  
+
+        </li>
+      
+    
+  </ul>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</nav>
+
+
+
+
+  <script>(function(){var e=document.querySelector("aside .book-menu-content");addEventListener("beforeunload",function(){localStorage.setItem("menu.scrollTop",e.scrollTop)}),e.scrollTop=localStorage.getItem("menu.scrollTop")})()</script>
+
+
+ 
+      </div>
+    </aside>
+
+    <div class="book-page">
+      <header class="book-header">
+        
+  <div class="flex align-center justify-between">
+  <label for="menu-control">
+    <img src="/notes/svg/menu.svg" class="book-icon" alt="Menu" />
+  </label>
+
+  <strong>08 Analysis</strong>
+
+  <label for="toc-control">
+    
+    <img src="/notes/svg/toc.svg" class="book-icon" alt="Table of Contents" />
+    
+  </label>
+</div>
+
+
+  
+  <aside class="hidden clearfix">
+    
+  
+<nav id="TableOfContents"></nav>
+
+
+
+  </aside>
+  
+ 
+      </header>
+
+      
+      
+  <article class="markdown book-article"><h1 id="static-analysis">
+  Static Analysis
+  <a class="anchor" href="#static-analysis">#</a>
+</h1>
+<p>This may be the most sophisticated part from theoretical standpoint,
+however, from user&rsquo;s=engineer&rsquo;s perspective there is relatively small
+number of choices &ndash; there is not a lot you can do wrong here.</p>
+<p>Firstly &ndash; understand whether your model requires non-linear analysis.
+It could be that program automatically switches to non-linear solver as
+soon as you introduce any model features that require non-linear
+analysis (both Autodesk Robot and Dlubal RFEM will do this).</p>
+<p>Regarding <strong>linear analysis.</strong> Linear analysis assume that deformations
+are very small, and geometry of deformed structure does not affect
+internal forces in elements. It also assumes, that stress increase in
+elements (both bars and surfaces) have no effect on stiffness of these
+elements.</p>
+<p><strong>Non-linear analysis</strong> will mean that there will be
+multiple iterations of your calculation. There are two
+causes that &ldquo;trigger&rdquo; use of non-linear analysis.</p>
+<ul>
+<li><strong>Geometry</strong>. Consideration of deflected shape in calculations.
+<ul>
+<li>Tension-only or Compression-only elements;</li>
+<li>Contact supports, or any restraint that can work in one-direction
+only (it may be rotation allowed in one direction as well);</li>
+<li>Although this will not be automatically identified by software, you
+should always use non-linear analysis if you have elements that have
+<strong>large forces in both axial and transverse</strong> (i.e. shear) directions.</li>
+<li>&ldquo;Large deformation&rdquo; analysis should be also be used for <strong>thin surfaces</strong>
+with relatively large permissible deformations. One example would be
+design of glass panes where panes might be as thin as 3mm and a typical
+deflection limit would be L/100.</li>
+</ul>
+</li>
+<li><strong>Material</strong>. Consideration that material does not have linear
+stress-strain curve. E.g. consideration of plastic deformations.
+<ul>
+<li>if you want to consider plastic behaviour of steel or cracking
+and/or creep of concrete, you must use non-linear material and
+therefore non-linear analysis.</li>
+<li>You should be able to select which stress is used to trigger the
+modification of stiffness. The reasonable typical choice is &ldquo;von
+Mises&rdquo; stress as this will account for normal stress in both
+directions and shear stress.</li>
+</ul>
+</li>
+</ul>
+<p>The following are the <strong>basic steps done in non-linear analysis</strong>:</p>
+<ol>
+<li>Calculate single linear analysis run;</li>
+<li>Update calculation model with deformed structure from previous run;</li>
+<li>Update calculation model with new material properties (e.g., if
+yield stress has been reached);</li>
+<li>Re-calculate single linear analysis run using updated geometry and
+stiffness;</li>
+<li>Compare last two runs. If the difference is small enough, the
+analysis has &ldquo;converged&rdquo;. If not &ndash; keep cycling &ndash; go to step one.</li>
+<li>Sometimes steps 1 to 5 gets repeated for multiple load increments,
+allowing a better convergence. Say applying one third of the load ,
+repeating steps 1 to 5 until convergence and then adding second
+third.. then remaining third of the load.</li>
+</ol>
+<p><strong>Further reading on analysis</strong> types. I believe these are relevant even if you use another analysis software:</p>
+<ul>
+<li><a href="https://www.dlubal.com/en/support-and-learning/support/knowledge-base/001504">Dlubal RFEM knowledge base</a></li>
+<li><a href="https://knowledge.autodesk.com/support/robot-structural-analysis-products/learn-explore/caas/CloudHelp/cloudhelp/2017/ENU/RSAPRO-UsersGuide/files/GUID-FB3C86D3-0E30-43A6-82D6-6C50F429FA0D-htm.html">Autodesk Robot user guide</a></li>
+</ul>
+<p>There may be options to choose between <strong>32bit and 64bit</strong> solvers. And
+single thread vs. <strong>multithreaded</strong>. These won&rsquo;t (at least &ndash; shouldn&rsquo;t)
+have any effect on analysis results. Of course, 64bit multithreaded
+solver theoretically should be the fastest.</p>
+<p>Analysis requires computer to <strong>read/write a lot of data</strong>.
+Although generally I strongly support that all data is kept on server,
+for analysis this can significantly slow down process. Therefore, if the
+model is large, I suggest you copy the model on your machine, run calculations on you local hard (SSD) drive and then copy back on the server.</p>
+</article>
+ 
+      
+
+      <footer class="book-footer">
+        
+  <div class="flex flex-wrap justify-between">
+
+
+
+
+
+</div>
+
+
+
+  <script>(function(){function e(e){const t=window.getSelection(),n=document.createRange();n.selectNodeContents(e),t.removeAllRanges(),t.addRange(n)}document.querySelectorAll("pre code").forEach(t=>{t.addEventListener("click",function(){if(window.getSelection().toString())return;e(t.parentElement),navigator.clipboard&&navigator.clipboard.writeText(t.parentElement.textContent)})})})()</script>
+
+
+ 
+        
+      </footer>
+
+      
+  
+ 
+
+      <label for="menu-control" class="hidden book-menu-overlay"></label>
+    </div>
+
+    
+    <aside class="book-toc">
+      <div class="book-toc-content">
+        
+  
+<nav id="TableOfContents"></nav>
+
+
+ 
+      </div>
+    </aside>
+    
+  </main>
+
+  
+</body>
+</html>
+
+
+
+
+
+
+
+
+
+
+
+

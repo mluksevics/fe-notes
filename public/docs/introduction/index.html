@@ -1,0 +1,446 @@
+<!DOCTYPE html>
+<html lang="en-us" dir="ltr">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="Introduction#This is a set of notes, tips and tricks about the design of buildings using finite element analysis. These are notes about the questions I had on a path from a being a fresh graduate to a senior engineer. Notes are written in the summer of 2020.
+Topics covered at a glance#What are the simplifications of material behaviour commonly used in FE models of built structures; What toolbox do you have for creating a model and how to choose the parameters of model components; How to apply loads and systematically create load combinations; How to prepare/check model for analysis and how to choose mesh size; Options for analysis types of your structure; How to systematically look for and &ldquo;catch&rdquo; instabilities that appear during calculation; Ways and workarounds to tackle challenges specific to RC and steel modelling and design; These should give guidance to answer questions such as:">
+<meta name="theme-color" media="(prefers-color-scheme: light)" content="#ffffff">
+<meta name="theme-color" media="(prefers-color-scheme: dark)" content="#343a40">
+<meta name="color-scheme" content="light dark"><meta property="og:title" content="Introduction" />
+<meta property="og:description" content="Introduction#This is a set of notes, tips and tricks about the design of buildings using finite element analysis. These are notes about the questions I had on a path from a being a fresh graduate to a senior engineer. Notes are written in the summer of 2020.
+Topics covered at a glance#What are the simplifications of material behaviour commonly used in FE models of built structures; What toolbox do you have for creating a model and how to choose the parameters of model components; How to apply loads and systematically create load combinations; How to prepare/check model for analysis and how to choose mesh size; Options for analysis types of your structure; How to systematically look for and &ldquo;catch&rdquo; instabilities that appear during calculation; Ways and workarounds to tackle challenges specific to RC and steel modelling and design; These should give guidance to answer questions such as:" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://structures.lv/notes/docs/introduction/" /><meta property="article:section" content="docs" />
+
+
+
+<title>Introduction | Engineer&#39;s notes on design using FEA</title>
+<link rel="manifest" href="/notes/manifest.json">
+<link rel="icon" href="/notes/favicon.png" >
+<link rel="stylesheet" href="/notes/book.min.33a48f5432973b8ff9a82679d9e45d67f2c15d4399bd2829269455cfe390b5e8.css" integrity="sha256-M6SPVDKXO4/5qCZ52eRdZ/LBXUOZvSgpJpRVz&#43;OQteg=" crossorigin="anonymous">
+  <script defer src="/notes/flexsearch.min.js"></script>
+  <script defer src="/notes/en.search.min.91455c75d71f6e311cc359c3b69d34f78d8c70ef4059e70b66a2dc60ceddf6b7.js" integrity="sha256-kUVcddcfbjEcw1nDtp00942McO9AWecLZqLcYM7d9rc=" crossorigin="anonymous"></script>
+
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-7FJT3L107Y"></script>
+<script>
+var doNotTrack = false;
+if (!doNotTrack) {
+	window.dataLayer = window.dataLayer || [];
+	function gtag(){dataLayer.push(arguments);}
+	gtag('js', new Date());
+	gtag('config', 'G-7FJT3L107Y', { 'anonymize_ip': false });
+}
+</script>
+<!--
+Made with Book Theme
+https://github.com/alex-shpak/hugo-book
+-->
+  
+</head>
+<body dir="ltr">
+  <input type="checkbox" class="hidden toggle" id="menu-control" />
+  <input type="checkbox" class="hidden toggle" id="toc-control" />
+  <main class="container flex">
+    <aside class="book-menu">
+      <div class="book-menu-content">
+        
+  <nav>
+<h2 class="book-brand">
+  <a class="flex align-center" href="/notes/"><span>Engineer&#39;s notes on design using FEA</span>
+  </a>
+</h2>
+
+
+<div class="book-search">
+  <input type="text" id="book-search-input" placeholder="Search" aria-label="Search" maxlength="64" data-hotkeys="s/" />
+  <div class="book-search-spinner hidden"></div>
+  <ul id="book-search-results"></ul>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+  
+  <ul>
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/notes/docs/introduction/" class="active">Introduction</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/notes/docs/designflow/" class="">01 Design Flow</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/notes/docs/idealworld/" class="">02 The Ideal World</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/notes/docs/modelgeometry/" class="">03 Geometry</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/notes/docs/modelsupports/" class="">04 Supports</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/notes/docs/modelloads/" class="">05 Loads and Combinations</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/notes/docs/meshing/" class="">06 Meshing</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/notes/docs/instabilities/" class="">07 Instabilities</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/notes/docs/analysis/" class="">08 Analysis</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/notes/docs/results/" class="">09 Results</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/notes/docs/concrete/" class="">10 Reinforced Concrete</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/notes/docs/steel/" class="">11 Steel</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/notes/docs/about/" class="">About me</a>
+  
+
+        </li>
+      
+    
+  </ul>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</nav>
+
+
+
+
+  <script>(function(){var e=document.querySelector("aside .book-menu-content");addEventListener("beforeunload",function(){localStorage.setItem("menu.scrollTop",e.scrollTop)}),e.scrollTop=localStorage.getItem("menu.scrollTop")})()</script>
+
+
+ 
+      </div>
+    </aside>
+
+    <div class="book-page">
+      <header class="book-header">
+        
+  <div class="flex align-center justify-between">
+  <label for="menu-control">
+    <img src="/notes/svg/menu.svg" class="book-icon" alt="Menu" />
+  </label>
+
+  <strong>Introduction</strong>
+
+  <label for="toc-control">
+    
+    <img src="/notes/svg/toc.svg" class="book-icon" alt="Table of Contents" />
+    
+  </label>
+</div>
+
+
+  
+  <aside class="hidden clearfix">
+    
+  
+<nav id="TableOfContents">
+  <ul>
+    <li><a href="#topics-covered-at-a-glance">Topics covered at a glance</a></li>
+    <li><a href="#focus-on-the-design">Focus on the design</a></li>
+    <li><a href="#target-audience">Target audience</a></li>
+  </ul>
+</nav>
+
+
+
+  </aside>
+  
+ 
+      </header>
+
+      
+      
+  <article class="markdown book-article"><h1 id="introduction">
+  Introduction
+  <a class="anchor" href="#introduction">#</a>
+</h1>
+<p>This is a set of notes, tips and tricks about the <strong>design</strong> of
+buildings using finite element analysis. These are notes about the
+questions I had on a path from a being a fresh graduate to a
+senior engineer. Notes are written in the summer of 2020.</p>
+<h2 id="topics-covered-at-a-glance">
+  Topics covered at a glance
+  <a class="anchor" href="#topics-covered-at-a-glance">#</a>
+</h2>
+<ul>
+<li>What are the simplifications of material behaviour commonly used in
+FE models of built structures;</li>
+<li>What toolbox do you have for creating a model and how to choose the
+parameters of model components;</li>
+<li>How to apply loads and systematically create load combinations;</li>
+<li>How to prepare/check model for analysis and how to choose mesh size;</li>
+<li>Options for analysis types of your structure;</li>
+<li>How to systematically look for and &ldquo;catch&rdquo; instabilities that appear
+during calculation;</li>
+<li>Ways and workarounds to tackle challenges specific to RC and steel modelling and design;</li>
+</ul>
+<p>These should give guidance to answer questions such as:</p>
+<ul>
+<li>Should I model a pinned or fixed connection there?</li>
+<li>How can I account for cracking and creep in concrete?</li>
+<li>Software is telling me that the model is unstable.. where should
+start looking for a problem?</li>
+<li>My slab model shows very high reinforcement above columns? Is there
+an error in my model?</li>
+<li>What mesh size should I choose?</li>
+</ul>
+<h2 id="focus-on-the-design">
+  Focus on the design
+  <a class="anchor" href="#focus-on-the-design">#</a>
+</h2>
+<p>These notes are not about &ldquo;How to use software X or software Y&rdquo;.
+Although I have mostly used Autodesk Robot Structural Analysis or Dlubal
+RFEM (examples are created using this software) and designed according to Eurocodes, I believe that <strong>many approaches
+explained here apply to any FEA software and design code</strong>.</p>
+<p>There is a gap in the available literature between &quot;knowing FE
+software&quot;, &quot;knowing FE fundamentals (maths)&quot; and &ldquo;understanding
+structural behaviour&rdquo;. And these are my notes trying to fill that &quot;gap&quot;.</p>
+<p>I have focused on <strong>concrete, steel and timber</strong> structures and left out
+advanced topics and areas that I am not familiar with. Seismic design, dynamics or calculations of 3D solid FE elements are outside of the scope of these notes.</p>
+<h2 id="target-audience">
+  Target audience
+  <a class="anchor" href="#target-audience">#</a>
+</h2>
+<p>The target audience for these notes are <strong>students and graduate
+engineers</strong> progressing towards chartership/certification.<br>
+You should familiar with the basics of structural analysis -
+what does &ldquo;hinge&rdquo; or &ldquo;support&rdquo; mean, and how do statically
+determinate/indeterminate systems differ. Experience with any FE
+software would is helpful, but not a necessity. I believe that
+anyone can pick up a new software in a matter of few weeks if only the
+person knows exactly what she wants to model, what assumptions to use,
+what are limitations and what results to calculate.</p>
+<p>In many cases, the answer to a question is &ldquo;it depends&rdquo; and there might not be one
+single &ldquo;correct&rdquo; way of doing things. I&rsquo;ll make the most of the freedom
+this format gives - I won&rsquo;t suppress my <strong>engineering judgment</strong>. You
+or your line manager might disagree with my advice. However, even if you
+go through the thought process to explain your disagreement, I will have
+achieved the goal - you will have taken into account the modelling
+consideration in question.</p>
+</article>
+ 
+      
+
+      <footer class="book-footer">
+        
+  <div class="flex flex-wrap justify-between">
+
+
+
+
+
+</div>
+
+
+
+  <script>(function(){function e(e){const t=window.getSelection(),n=document.createRange();n.selectNodeContents(e),t.removeAllRanges(),t.addRange(n)}document.querySelectorAll("pre code").forEach(t=>{t.addEventListener("click",function(){if(window.getSelection().toString())return;e(t.parentElement),navigator.clipboard&&navigator.clipboard.writeText(t.parentElement.textContent)})})})()</script>
+
+
+ 
+        
+      </footer>
+
+      
+  
+ 
+
+      <label for="menu-control" class="hidden book-menu-overlay"></label>
+    </div>
+
+    
+    <aside class="book-toc">
+      <div class="book-toc-content">
+        
+  
+<nav id="TableOfContents">
+  <ul>
+    <li><a href="#topics-covered-at-a-glance">Topics covered at a glance</a></li>
+    <li><a href="#focus-on-the-design">Focus on the design</a></li>
+    <li><a href="#target-audience">Target audience</a></li>
+  </ul>
+</nav>
+
+
+ 
+      </div>
+    </aside>
+    
+  </main>
+
+  
+</body>
+</html>
+
+
+
+
+
+
+
+
+
+
+
+

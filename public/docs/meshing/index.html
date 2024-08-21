@@ -1,0 +1,620 @@
+<!DOCTYPE html>
+<html lang="en-us" dir="ltr">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="Meshing#Mesh settings and quality of mesh#When the geometry and loads are defined, the next step is meshing &ndash; creating actual FE elements and nodes from elements and surfaces.
+This entire section assumes that you will be using a meshing engine provided in FEA software. There are cases when mesh is created manually, but if you feel comfortable to do that, then you might already know everything mentioned in these notes.">
+<meta name="theme-color" media="(prefers-color-scheme: light)" content="#ffffff">
+<meta name="theme-color" media="(prefers-color-scheme: dark)" content="#343a40">
+<meta name="color-scheme" content="light dark"><meta property="og:title" content="06 Meshing" />
+<meta property="og:description" content="Meshing#Mesh settings and quality of mesh#When the geometry and loads are defined, the next step is meshing &ndash; creating actual FE elements and nodes from elements and surfaces.
+This entire section assumes that you will be using a meshing engine provided in FEA software. There are cases when mesh is created manually, but if you feel comfortable to do that, then you might already know everything mentioned in these notes." />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://structures.lv/notes/docs/meshing/" /><meta property="article:section" content="docs" />
+
+
+
+<title>06 Meshing | Engineer&#39;s notes on design using FEA</title>
+<link rel="manifest" href="/notes/manifest.json">
+<link rel="icon" href="/notes/favicon.png" >
+<link rel="stylesheet" href="/notes/book.min.33a48f5432973b8ff9a82679d9e45d67f2c15d4399bd2829269455cfe390b5e8.css" integrity="sha256-M6SPVDKXO4/5qCZ52eRdZ/LBXUOZvSgpJpRVz&#43;OQteg=" crossorigin="anonymous">
+  <script defer src="/notes/flexsearch.min.js"></script>
+  <script defer src="/notes/en.search.min.91455c75d71f6e311cc359c3b69d34f78d8c70ef4059e70b66a2dc60ceddf6b7.js" integrity="sha256-kUVcddcfbjEcw1nDtp00942McO9AWecLZqLcYM7d9rc=" crossorigin="anonymous"></script>
+
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-7FJT3L107Y"></script>
+<script>
+var doNotTrack = false;
+if (!doNotTrack) {
+	window.dataLayer = window.dataLayer || [];
+	function gtag(){dataLayer.push(arguments);}
+	gtag('js', new Date());
+	gtag('config', 'G-7FJT3L107Y', { 'anonymize_ip': false });
+}
+</script>
+<!--
+Made with Book Theme
+https://github.com/alex-shpak/hugo-book
+-->
+  
+</head>
+<body dir="ltr">
+  <input type="checkbox" class="hidden toggle" id="menu-control" />
+  <input type="checkbox" class="hidden toggle" id="toc-control" />
+  <main class="container flex">
+    <aside class="book-menu">
+      <div class="book-menu-content">
+        
+  <nav>
+<h2 class="book-brand">
+  <a class="flex align-center" href="/notes/"><span>Engineer&#39;s notes on design using FEA</span>
+  </a>
+</h2>
+
+
+<div class="book-search">
+  <input type="text" id="book-search-input" placeholder="Search" aria-label="Search" maxlength="64" data-hotkeys="s/" />
+  <div class="book-search-spinner hidden"></div>
+  <ul id="book-search-results"></ul>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+  
+  <ul>
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/notes/docs/introduction/" class="">Introduction</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/notes/docs/designflow/" class="">01 Design Flow</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/notes/docs/idealworld/" class="">02 The Ideal World</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/notes/docs/modelgeometry/" class="">03 Geometry</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/notes/docs/modelsupports/" class="">04 Supports</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/notes/docs/modelloads/" class="">05 Loads and Combinations</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/notes/docs/meshing/" class="active">06 Meshing</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/notes/docs/instabilities/" class="">07 Instabilities</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/notes/docs/analysis/" class="">08 Analysis</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/notes/docs/results/" class="">09 Results</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/notes/docs/concrete/" class="">10 Reinforced Concrete</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/notes/docs/steel/" class="">11 Steel</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/notes/docs/about/" class="">About me</a>
+  
+
+        </li>
+      
+    
+  </ul>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</nav>
+
+
+
+
+  <script>(function(){var e=document.querySelector("aside .book-menu-content");addEventListener("beforeunload",function(){localStorage.setItem("menu.scrollTop",e.scrollTop)}),e.scrollTop=localStorage.getItem("menu.scrollTop")})()</script>
+
+
+ 
+      </div>
+    </aside>
+
+    <div class="book-page">
+      <header class="book-header">
+        
+  <div class="flex align-center justify-between">
+  <label for="menu-control">
+    <img src="/notes/svg/menu.svg" class="book-icon" alt="Menu" />
+  </label>
+
+  <strong>06 Meshing</strong>
+
+  <label for="toc-control">
+    
+    <img src="/notes/svg/toc.svg" class="book-icon" alt="Table of Contents" />
+    
+  </label>
+</div>
+
+
+  
+  <aside class="hidden clearfix">
+    
+  
+<nav id="TableOfContents">
+  <ul>
+    <li><a href="#mesh-settings-and-quality-of-mesh">Mesh settings and quality of mesh</a>
+      <ul>
+        <li><a href="#quality-of-mesh">Quality of mesh</a></li>
+      </ul>
+    </li>
+    <li><a href="#automesh-challenges">Automesh challenges</a></li>
+  </ul>
+</nav>
+
+
+
+  </aside>
+  
+ 
+      </header>
+
+      
+      
+  <article class="markdown book-article"><h1 id="meshing">
+  Meshing
+  <a class="anchor" href="#meshing">#</a>
+</h1>
+<h2 id="mesh-settings-and-quality-of-mesh">
+  Mesh settings and quality of mesh
+  <a class="anchor" href="#mesh-settings-and-quality-of-mesh">#</a>
+</h2>
+<p>When the geometry and loads are defined, the next step is meshing &ndash;
+creating actual FE elements and nodes from elements and surfaces.</p>
+<p>This entire section assumes that you will be using a meshing engine provided
+in FEA software. There are cases when mesh is created manually, but
+if you feel comfortable to do that, then you might already know everything
+mentioned in these notes.</p>
+<p>Again, this section might be worth another course/book. However, in my
+experience, a good automesh engine will do most of the work for you, if
+you prepare model well and choose a sensible element size.</p>
+<p>The finite element model will be created, based on geometry nodes,
+members and surfaces. The model will consist of much more nodes that the
+ones defining geometry.</p>
+<p>There are <strong>no &ldquo;hard&rdquo; rules</strong> for mesh settings. I did start calculations
+some 10 years ago by following the rules advised in <a href="https://www.concretecentre.com/Resources/Publications/How-to-design-reinforced-concrete-flat-slabs-using.aspx">How to design reinfroced concrete flat slabs using
+finite element analysis</a>. <br>
+Which basically says - choose size to be <strong>1/10 of span
+size</strong>. And this has worked for me well so far.</p>
+<p>Some programs may have options to define mesh divisions as number of
+<strong>divisions per surface</strong>. I strongly suggest using absolute &ldquo;target&rdquo; size in
+meters/feet &ndash; this will help in generating coherent mesh at joints of
+surfaces.</p>
+<p>The settings I suggest paying attention:</p>
+<ul>
+<li>
+<p><strong>Mesh size for surfaces</strong> Have a look at your smaller span. Take 1/10 of this
+distance as a starting point. Note that there are cases where more
+refined mesh will be required, for example exact calculations of
+long term deflections in floor slabs. <a href="/docs/concrete/">See concrete design section</a>.</p>
+</li>
+<li>
+<p>Settings for <strong>linear members</strong>. Again - choose at least 10 divisions if
+you can set this setting;<br>
+Although, I have never experienced problems for 1D or &ldquo;bar&rdquo; elements
+in static analysis, this is very important for critical <strong>buckling
+load calculation</strong>.</p>
+</li>
+<li>
+<p><strong>Element shapes</strong> &ndash; use of both Triangular and Quadrangular elements.
+Triangular elements will come in very handy around arcs/circles and
+in transition of mesh sizes;</p>
+</li>
+<li>
+<p>Although <strong>solids</strong> are outside of scope of this document, remember that
+the &ldquo;depth&rdquo; of member should be adequately meshed when using solid
+elements. For example. For solid representing beam in bending, you
+should be <strong>dividing member depth</strong> in about 10 divisions.</p>
+</li>
+</ul>
+<p>Below are settings that are a good starting point for Autodesk Robot
+and Dlubal RFEM. Of course, adjust element size according to yor geometry.</p>
+<p><details open><summary>Mesh settings for Dlubal RFEM</summary>
+  <div class="markdown-inner">
+    <img src="img/rfem_mesh_settings.png" alt="RFEM mesh" title="Mesh settings for Dlubal RFEM"/>
+  </div>
+</details>
+
+<details open><summary>Mesh settings for Autodesk Robot</summary>
+  <div class="markdown-inner">
+    Image from Autodesk support article (<a href="https://www.autodesk.com/support/technical/article/caas/sfdcarticles/sfdcarticles/Object-meshing-error-recommended-meshing-options-for-panels.html">source</a>)
+<img src="img/robot_mesh_settings.jpg" alt="Robot mesh" title="Mesh settings for Autodesk Robot"/>
+  </div>
+</details>
+</p>
+<h3 id="quality-of-mesh">
+  Quality of mesh
+  <a class="anchor" href="#quality-of-mesh">#</a>
+</h3>
+<p>The very short advice is - elements with equal sides are the best.
+I have very little to add to this topic myself, therefore I rather give you some good references:</p>
+<details open><summary>Shape guidelines</summary>
+  <div class="markdown-inner">
+    Image from <a href="https://www.concretecentre.com/Resources/Publications/How-to-design-reinforced-concrete-flat-slabs-using.aspx">How to design reinfroced concrete flat slabs using
+finite element analysis</a>)
+<img src="img/shape_guidelines.png" alt="FE shape guidelines" title="FE Shape guidelines"/>
+  </div>
+</details>
+
+<ul>
+<li><a href="https://www.engmorph.com/mesh-quality-parameters">https://www.engmorph.com/mesh-quality-parameters</a></li>
+</ul>
+<h2 id="automesh-challenges">
+  Automesh challenges
+  <a class="anchor" href="#automesh-challenges">#</a>
+</h2>
+<p>Using modern programs, the biggest challenge is to prepare the model for
+auto mesh engine. Garbage in =&gt; garbage out. Most of this section
+focuses on RC buildings as these tend to be the difficult ones. However,
+the general advice is applicable to all types of structures.</p>
+<p>For software to be able to generate good mesh, following conditions
+regarding geometry should be satisfied:</p>
+<ul>
+<li>The edges of connected surfaces must be <strong>aligned within tolerance</strong> set in meshing engine settings;
+<ul>
+<li>Overlap is bad;</li>
+<li>Not touching is also bad.</li>
+</ul>
+</li>
+<li>Unless you use some special features, all surfaces should be <strong>planar</strong>.</li>
+<li>The nodes that are to be embedded in mesh of surface, should be <strong>on
+the plane of surface</strong>;</li>
+<li>The lines that are to be embedded in mesh of surface, should be on
+the plane of surface;</li>
+<li>Mesh size along <strong>arcs and circles</strong> should be small enough to avoid
+heavily distorted elements;</li>
+<li>Automesh should be able to deal with <strong>openings and small &ldquo;steps&rdquo;</strong> in
+edges of surfaces without generating heavily distorted finite
+elements.</li>
+<li>Although this is might not cause an error, be cautious of
+<strong>overlapping members</strong> that eventually increase the stiffness.</li>
+</ul>
+<p>To satisfy these conditions, you should understand, <strong>how is geometry
+of surface defined</strong>:</p>
+<ul>
+<li>In Autodesk Robot, the surface is defined by &ldquo;characteristic points&rdquo;
+of contours that are not &ldquo;attached&rdquo; to any geometry nodes or lines.
+Of course, when defining these points, it is possible to snap
+nodes/members;</li>
+<li>In Dlubal RFEM the surface is defined by lines, that can either have
+members or just be &ldquo;null&rdquo; lines without any stiffness;</li>
+</ul>
+<p>Then understand the tools that can be used to adjust geometry and
+mesh refinements:</p>
+<ul>
+<li>Align tools</li>
+<li>How can you snap lines to plane or gridline?;</li>
+<li>General &ldquo;Regenerate model&rdquo;;</li>
+<li>Can you move any of auto-generated mesh nodes manually?
+<ul>
+<li>You can do this in Autodesk Robot, but can not in Dlubal RFEM.</li>
+</ul>
+</li>
+<li>Mesh refinements.
+<ul>
+<li>Around nodes;</li>
+<li>More fine/coarse mesh for entire surface;</li>
+</ul>
+</li>
+</ul>
+<p>Before you mesh, do a general simplification of model.</p>
+<ul>
+<li>
+<p>There is no need to model <strong>small overhangs</strong> of slab;</p>
+</li>
+<li>
+<p>No need to model <strong>openings</strong> with size smaller than 300mm unless you feel that
+they may change the transfer of moment into columns;</p>
+</li>
+<li>
+<p><strong>Split walls</strong> at each floor. This creates nice edges at each floor
+level for surfaces to have a clean joint.;</p>
+</li>
+<li>
+<p><strong>Arched edges</strong>. It is preferred that these are simplified to lengths
+that are comparable to length of finite elements.</p>
+<ul>
+<li>I spent a couple of years working on a building
+designed by Frank Gehry (read &ndash; a lot of splines/arches) and I
+never did simplification of the the slab edge. This resulted in heavier model and
+distorted FE elements along the edge. If I had to do the design
+again, I would try to simplify geometry using parametric tools (such as <a href="https://en.wikipedia.org/wiki/Grasshopper_3D">Grasshopper</a> ).</li>
+</ul>
+</li>
+<li>
+<p>As mentioned in the <a href="/docs/modelgeometry/">Geometry section</a> &ndash; small strips (especially with width:breadth 1:4 or less) are easier to model as members.</p>
+</li>
+</ul>
+<p>Then mesh the model for first time and see locations <strong>where a lot of
+nodes are placed very close</strong> to each other (likely to be a geometry
+discrepancy). Also, look for program warnings (e.g. &ldquo;kinematic
+restraints&rdquo; in Autodek Robot).</p>
+<p>When adjusting geometry, please look at <strong>full precision of nodes</strong>, <a href="/docs/modelgeometry/">See geometry section</a>.</p>
+<p>I generally suggest tackling meshing issues starting with as local
+updates as possible:</p>
+<ol>
+<li>
+<p><strong>Geometry node</strong> adjustments. See whether the adjustment of geometry
+points in problem locations will be enough. Maybe there is an extra
+node that is not needed?</p>
+</li>
+<li>
+<p><strong>Manual FE nodes</strong> adjustments. Can you adjust the mesh in specific
+location manually to correct the error? This will be efficient if
+there is one or two such problem locations. This may not be possible
+in all programs.</p>
+</li>
+<li>
+<p>Surface <strong>adjustment to plane</strong>:</p>
+<ul>
+<li>Can you snap the points of adjacent surfaces to the same
+vertical/horizontal plane. For Autodesk Robot there is a special
+&ldquo;detailed correct&rdquo; command. For Dlubal RFEM you can select multiple nodes
+and edit their coordinates all at once.</li>
+<li>Check whether the surface itself is not <strong>warped</strong> &ndash; i.e. that all
+definition points lie on the same plane.</li>
+</ul>
+</li>
+<li>
+<p><strong>Regeneration</strong> of entire model:</p>
+<ul>
+<li>Be very careful with this as it may create new problems by uniting
+the nearby nodes into one. For example, if you have one node
+slightly above the slab level and another defining slab at slab
+level, it may be that both nodes are replaced with one in the middle
+&ndash; thus making the slab to no longer be planar;</li>
+<li>Note that numbering of Nodes and elements will likely be
+changed, and this may have an effect if you import loads or export
+support reactions.</li>
+<li>In addition to model generation, you might also try to round the
+node coordinates to, say 1mm. Again, do this more as a last resort
+because this may cause new issues and will not solve issues that are
+larger than threshold of rounding. This may also prove to be a
+time-consuming process (for import/export of node coordinates).</li>
+</ul>
+</li>
+</ol>
+<p>As much as I would like to give a universal advice there, a lot at
+meshing stage is dependent on <strong>capabilities and specifics of software</strong>.</p>
+<p>For Autodesk Robot, I suggest that you watch the seminars below to
+understand the parameters influencing the mesh and corrections
+available:<br>
+<a href="https://www.youtube.com/watch?v=xYMxOfl7N1c">https://www.youtube.com/watch?v=xYMxOfl7N1c</a><br>
+<a href="https://www.youtube.com/watch?v=YpgOJtzjK7E">https://www.youtube.com/watch?v=YpgOJtzjK7E</a></p>
+<p>For Dlubal RFEM the downside is that you have no chance of manual
+adjustment of mesh after it has been generated. So, it all depends on
+auto-mesh parameters being carefully selected. Saying that, I strongly suggest using Dlubal
+RFEM specifically for models with a lot of surfaces i.e. RC buildings or
+Steel connection design.</p>
+</article>
+ 
+      
+
+      <footer class="book-footer">
+        
+  <div class="flex flex-wrap justify-between">
+
+
+
+
+
+</div>
+
+
+
+  <script>(function(){function e(e){const t=window.getSelection(),n=document.createRange();n.selectNodeContents(e),t.removeAllRanges(),t.addRange(n)}document.querySelectorAll("pre code").forEach(t=>{t.addEventListener("click",function(){if(window.getSelection().toString())return;e(t.parentElement),navigator.clipboard&&navigator.clipboard.writeText(t.parentElement.textContent)})})})()</script>
+
+
+ 
+        
+      </footer>
+
+      
+  
+ 
+
+      <label for="menu-control" class="hidden book-menu-overlay"></label>
+    </div>
+
+    
+    <aside class="book-toc">
+      <div class="book-toc-content">
+        
+  
+<nav id="TableOfContents">
+  <ul>
+    <li><a href="#mesh-settings-and-quality-of-mesh">Mesh settings and quality of mesh</a>
+      <ul>
+        <li><a href="#quality-of-mesh">Quality of mesh</a></li>
+      </ul>
+    </li>
+    <li><a href="#automesh-challenges">Automesh challenges</a></li>
+  </ul>
+</nav>
+
+
+ 
+      </div>
+    </aside>
+    
+  </main>
+
+  
+</body>
+</html>
+
+
+
+
+
+
+
+
+
+
+
+

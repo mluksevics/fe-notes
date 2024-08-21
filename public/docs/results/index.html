@@ -1,0 +1,548 @@
+<!DOCTYPE html>
+<html lang="en-us" dir="ltr">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="Results#Results verification#Calculation finished! You got the results! But can you trust the results?
+The basic widely suggested check is to see whether sum of loads in the model is the same as sum of calculated reactions. To be honest, within past 10 years I have never seen a model where this is not satisfied. However, I have seen lot of models where something has gone wrong.">
+<meta name="theme-color" media="(prefers-color-scheme: light)" content="#ffffff">
+<meta name="theme-color" media="(prefers-color-scheme: dark)" content="#343a40">
+<meta name="color-scheme" content="light dark"><meta property="og:title" content="09 Results" />
+<meta property="og:description" content="Results#Results verification#Calculation finished! You got the results! But can you trust the results?
+The basic widely suggested check is to see whether sum of loads in the model is the same as sum of calculated reactions. To be honest, within past 10 years I have never seen a model where this is not satisfied. However, I have seen lot of models where something has gone wrong." />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://structures.lv/notes/docs/results/" /><meta property="article:section" content="docs" />
+
+
+
+<title>09 Results | Engineer&#39;s notes on design using FEA</title>
+<link rel="manifest" href="/notes/manifest.json">
+<link rel="icon" href="/notes/favicon.png" >
+<link rel="stylesheet" href="/notes/book.min.33a48f5432973b8ff9a82679d9e45d67f2c15d4399bd2829269455cfe390b5e8.css" integrity="sha256-M6SPVDKXO4/5qCZ52eRdZ/LBXUOZvSgpJpRVz&#43;OQteg=" crossorigin="anonymous">
+  <script defer src="/notes/flexsearch.min.js"></script>
+  <script defer src="/notes/en.search.min.91455c75d71f6e311cc359c3b69d34f78d8c70ef4059e70b66a2dc60ceddf6b7.js" integrity="sha256-kUVcddcfbjEcw1nDtp00942McO9AWecLZqLcYM7d9rc=" crossorigin="anonymous"></script>
+
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-7FJT3L107Y"></script>
+<script>
+var doNotTrack = false;
+if (!doNotTrack) {
+	window.dataLayer = window.dataLayer || [];
+	function gtag(){dataLayer.push(arguments);}
+	gtag('js', new Date());
+	gtag('config', 'G-7FJT3L107Y', { 'anonymize_ip': false });
+}
+</script>
+<!--
+Made with Book Theme
+https://github.com/alex-shpak/hugo-book
+-->
+  
+</head>
+<body dir="ltr">
+  <input type="checkbox" class="hidden toggle" id="menu-control" />
+  <input type="checkbox" class="hidden toggle" id="toc-control" />
+  <main class="container flex">
+    <aside class="book-menu">
+      <div class="book-menu-content">
+        
+  <nav>
+<h2 class="book-brand">
+  <a class="flex align-center" href="/notes/"><span>Engineer&#39;s notes on design using FEA</span>
+  </a>
+</h2>
+
+
+<div class="book-search">
+  <input type="text" id="book-search-input" placeholder="Search" aria-label="Search" maxlength="64" data-hotkeys="s/" />
+  <div class="book-search-spinner hidden"></div>
+  <ul id="book-search-results"></ul>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+  
+  <ul>
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/notes/docs/introduction/" class="">Introduction</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/notes/docs/designflow/" class="">01 Design Flow</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/notes/docs/idealworld/" class="">02 The Ideal World</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/notes/docs/modelgeometry/" class="">03 Geometry</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/notes/docs/modelsupports/" class="">04 Supports</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/notes/docs/modelloads/" class="">05 Loads and Combinations</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/notes/docs/meshing/" class="">06 Meshing</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/notes/docs/instabilities/" class="">07 Instabilities</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/notes/docs/analysis/" class="">08 Analysis</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/notes/docs/results/" class="active">09 Results</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/notes/docs/concrete/" class="">10 Reinforced Concrete</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/notes/docs/steel/" class="">11 Steel</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/notes/docs/about/" class="">About me</a>
+  
+
+        </li>
+      
+    
+  </ul>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</nav>
+
+
+
+
+  <script>(function(){var e=document.querySelector("aside .book-menu-content");addEventListener("beforeunload",function(){localStorage.setItem("menu.scrollTop",e.scrollTop)}),e.scrollTop=localStorage.getItem("menu.scrollTop")})()</script>
+
+
+ 
+      </div>
+    </aside>
+
+    <div class="book-page">
+      <header class="book-header">
+        
+  <div class="flex align-center justify-between">
+  <label for="menu-control">
+    <img src="/notes/svg/menu.svg" class="book-icon" alt="Menu" />
+  </label>
+
+  <strong>09 Results</strong>
+
+  <label for="toc-control">
+    
+    <img src="/notes/svg/toc.svg" class="book-icon" alt="Table of Contents" />
+    
+  </label>
+</div>
+
+
+  
+  <aside class="hidden clearfix">
+    
+  
+<nav id="TableOfContents">
+  <ul>
+    <li><a href="#results-verification">Results verification</a></li>
+    <li><a href="#stresses-in-surfaces">Stresses in surfaces</a></li>
+    <li><a href="#result-beamssections">Result beams/sections</a></li>
+  </ul>
+</nav>
+
+
+
+  </aside>
+  
+ 
+      </header>
+
+      
+      
+  <article class="markdown book-article"><h1 id="results">
+  Results
+  <a class="anchor" href="#results">#</a>
+</h1>
+<h2 id="results-verification">
+  Results verification
+  <a class="anchor" href="#results-verification">#</a>
+</h2>
+<p>Calculation finished! You got the results! <strong>But can you trust the results?</strong></p>
+<p>The basic <strong>widely suggested check</strong> is to see whether sum of loads in the
+model is the same as sum of calculated reactions. To be honest, within past 10 years
+I have never seen a model where this is not satisfied. However, I have
+seen lot of models where something has gone wrong. Such a primitive check
+tells you very little about the model behaviour.</p>
+<p>Steps I suggest for gaining confidence about model results:</p>
+<ol>
+<li>
+<p>Start with <strong>deflection checks at self-weight</strong> cause. Does it deflect
+as expected? If not &ndash; there is no point of doing any other checks.</p>
+<ul>
+<li>Re-check boundary conditions if needed.</li>
+<li>Re-check hinges at bar ends.</li>
+<li>Re-check whether there might be duplicate nodes.</li>
+<li>Go back to <a href="/docs/instabilities/">&ldquo;Dealing with instabilities&rdquo;</a> section;</li>
+</ul>
+</li>
+<li>
+<p>Then check <strong>deflection for other load cases</strong>. Have a look at maximum
+deflection. Also, look at rotations. Are there areas where
+displacements/rotations are significantly larger than elsewhere?
+What does cause those? Sometimes such locations arise when model is
+theoretically stable, but relies on member <strong>torsional stiffness</strong> &ndash; something
+that you would rarely want to rely in a real structure;</p>
+</li>
+<li>
+<p>If there is a load case with relatively <strong>uniform load applied</strong> on
+horizontal members (e.g. SDL on floor), check whether the
+deflections are also relatively uniform (assuming the floor
+stiffness does not vary significantly).</p>
+</li>
+<li>
+<p><strong>Support reactions</strong>:</p>
+<ul>
+<li>Check if there are any <strong>&ldquo;torsion&rdquo; bending moments</strong> delivered to
+supports. Did you intend to have those?</li>
+<li>Are there significant <strong>reactions acting opposite each other</strong>? i.e.
+is the sum of absolute values of reactions significantly different than
+sum of reactions considering signs of numbers? Sometimes there
+are unwanted moment frame effects.</li>
+</ul>
+</li>
+<li>
+<p><strong>Members</strong>:</p>
+<ul>
+<li>Bending moment about main axis &ndash; is there any location where
+<strong>unwanted continuity effects</strong> arise?</li>
+<li><strong>Torsion in members</strong> &ndash; in most steel/timber structures you would
+want the torsion to effectively be zero or close to zero.</li>
+</ul>
+</li>
+<li>
+<p>For overall building models, <strong>manual load takedown</strong> is always a good
+idea. The sum of reactions should correspond to loads calculated in
+manual load takedown.</p>
+<ul>
+<li>Remember that if you have continuous floors, then manual load
+takedown will be only useful to check sums of reactions.</li>
+<li>Another good check is to see sum of <strong>Equivalent horizontal forces</strong>
+and check whether they correspond to the set portion (e.g. 1/400)
+of sum of vertical loads?</li>
+<li>What about <strong>wind loads</strong>? Does sum of wind load reactions in
+particular direction is the same as manually calculated using
+pressure + suction?</li>
+</ul>
+</li>
+<li>
+<p>If your model has any <strong>non-linear features</strong>, check if these are
+working as expected:</p>
+<ul>
+<li>Check whether <strong>tension bracing</strong> gets engaged in the load cases
+with wind in respective directions;</li>
+<li>Check whether <strong>compression only supports</strong> allow movement when
+tension is introduced. For surface bearing supports check the
+stress at support. It may be that stress is unreasonably high,
+meaning that spring stiffness could be too stiff there.</li>
+<li>If non-linear material is used, check the <strong>extent of area that
+acts non-linearly</strong>.</li>
+</ul>
+</li>
+</ol>
+<h2 id="stresses-in-surfaces">
+  Stresses in surfaces
+  <a class="anchor" href="#stresses-in-surfaces">#</a>
+</h2>
+<p>The purpose of this section is not to reiterate about forces/stresses
+available for every shell element. There are good references in documentation of software:</p>
+<ul>
+<li><a href="https://www.dlubal.com/en/downloads-and-information/documents/online-manuals/rfem-5/08/15">Dlubal RFEM</a></li>
+<li><a href="https://knowledge.autodesk.com/support/robot-structural-analysis-products/learn-explore/caas/CloudHelp/cloudhelp/2021/ENU/RSAPRO-UsersGuide/files/GUID-E73EA3A2-AEC8-40EA-8AC3-E7EDCA7644C2-htm.html">Autodesk Robot</a></li>
+<li><a href="https://wiki.csiamerica.com/display/kb/Shell">SAP2000</a></li>
+</ul>
+<p>My intention is to focus on points that are easy to miss or are
+frequently used in design:</p>
+<ul>
+<li>Note that in Autodesk Robot and Dlubal RFEM there is difference between notation of results axis for bar (1D) and shell (2d) elements.
+<ul>
+<li>For bar (1D), <strong>My</strong> is moment <em>about</em> y axis.</li>
+<li>For shell (2D), <strong>my</strong> is moment <em>in</em> y axis direction (about x axis)</li>
+</ul>
+</li>
+<li>When looking at stresses of surfaces, remember that there are at
+least <strong>three layers</strong> to view the results &ndash; top layer, middle and
+bottom layer.<br>
+For example, Autodesk Robot &ldquo;by default&rdquo; shows stresses in middle
+layer &ndash; stresses caused by bending won&rsquo;t be there.</li>
+<li>For checking whether the behaviour of surface elements is as
+expected, additional to bending moments, a <strong>direction of principal
+shear forces</strong> can be viewed.
+<details open><summary>Assessing load paths using principal shear force directions</summary>
+  <div class="markdown-inner">
+    <img src="img/principalshear.png" alt="Principal shear" title="Principal shear"/>
+<img src="img/principalshear1.png" alt="Principal shear" title="Principal shear"/>
+  </div>
+</details>
+</li>
+<li>Remember that the static analysis results do not account for any
+<strong>buckling effects</strong>. If you see a considerable compression stress, it
+is up to you do judge whether buckling may be an issue within parts
+that are in compression.</li>
+</ul>
+<p><strong>For design of concrete slabs or walls</strong>, it is required to account for
+<strong>twisting moments and in-plane shear</strong>. <a href="https://help.autodesk.com/view/RSAPRO/2015/ENU/?guid=GUID-80FE7814-C14D-4A89-A6DF-68EB9E7E4815">Wood &amp; Armer method</a> is the most
+popular way to do it.<br>
+If you wish to design reinforcement based on FE results, you must use
+these &ldquo;adjusted&rdquo; internal forces. In Dlubal RFEM these are called &ldquo;design
+forces&rdquo;, in Autodesk Robot you can view these in &ldquo;Maps &gt;&gt; Complex&rdquo;.<br>
+The general idea is very simple &ndash; the absolute value of &ldquo;design force&rdquo;
+is sum of absolute value of n.<!-- raw HTML omitted -->x<!-- raw HTML omitted --> or n.<!-- raw HTML omitted -->y<!-- raw HTML omitted --> plus absolute value of shear
+force n.<!-- raw HTML omitted -->xy<!-- raw HTML omitted -->. The same process/idea is applied to moments m.<!-- raw HTML omitted -->x<!-- raw HTML omitted --> and m.<!-- raw HTML omitted -->y<!-- raw HTML omitted -->
+and twisting moment m.<!-- raw HTML omitted -->xy<!-- raw HTML omitted -->.</p>
+<p><strong>For design of steel plates</strong>, A simple approach is to use <a href="https://www.dlubal.com/en/downloads-and-information/documents/online-manuals/rfem-5/08/22">Von Mises
+equivalent stress</a> that accounts for normal and shear stress in all
+directions. Compare this stress with yield stress. Note that Von Mises
+stress criteria is also typically used (one of the options) for calculations with
+non-linear material and assessing whether the stress are above yield
+stress and material properties should be updated.</p>
+<h2 id="result-beamssections">
+  Result beams/sections
+  <a class="anchor" href="#result-beamssections">#</a>
+</h2>
+<p>In Dlubal RFEM these are called &ldquo;result beams&rdquo;, in Autodesk Robot these are called &ldquo;Panel cuts&rdquo;.
+In ETABS these are called &ldquo;Piers&rdquo; or &ldquo;Spandrels&rdquo;. However, the idea of all these features are the
+same &ndash; to <strong>integrate results of surfaces and output these as results of
+linear beam</strong>.</p>
+<p>These are very helpful features for designing concrete walls
+(theoretically, these work on any surface, including steel). They are
+also very helpful to assessing buckling effects in surfaces via
+equations in building codes &ndash; because those equations are written for
+assessment of columns, not continuous surfaces.</p>
+<p>Result beams are also useful if you need to communicate forces that are
+transferred via walls &ndash; set of member forces are much easier to
+communicate than varying linear loads.</p>
+<details open><summary>Example of using Dlubal RFEM &ldquo;Result beam&rdquo; for shear wall assessment</summary>
+  <div class="markdown-inner">
+    <img src="img/resultbeam2.png" alt="Robot mesh" title="Mesh settings for Dlubal RFEM"/>
+<img src="img/resultbeam1.png" alt="Robot mesh" title="Mesh settings for Dlubal RFEM"/>
+  </div>
+</details>
+
+</article>
+ 
+      
+
+      <footer class="book-footer">
+        
+  <div class="flex flex-wrap justify-between">
+
+
+
+
+
+</div>
+
+
+
+  <script>(function(){function e(e){const t=window.getSelection(),n=document.createRange();n.selectNodeContents(e),t.removeAllRanges(),t.addRange(n)}document.querySelectorAll("pre code").forEach(t=>{t.addEventListener("click",function(){if(window.getSelection().toString())return;e(t.parentElement),navigator.clipboard&&navigator.clipboard.writeText(t.parentElement.textContent)})})})()</script>
+
+
+ 
+        
+      </footer>
+
+      
+  
+ 
+
+      <label for="menu-control" class="hidden book-menu-overlay"></label>
+    </div>
+
+    
+    <aside class="book-toc">
+      <div class="book-toc-content">
+        
+  
+<nav id="TableOfContents">
+  <ul>
+    <li><a href="#results-verification">Results verification</a></li>
+    <li><a href="#stresses-in-surfaces">Stresses in surfaces</a></li>
+    <li><a href="#result-beamssections">Result beams/sections</a></li>
+  </ul>
+</nav>
+
+
+ 
+      </div>
+    </aside>
+    
+  </main>
+
+  
+</body>
+</html>
+
+
+
+
+
+
+
+
+
+
+
+

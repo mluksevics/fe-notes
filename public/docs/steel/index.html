@@ -1,0 +1,747 @@
+<!DOCTYPE html>
+<html lang="en-us" dir="ltr">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="Material &ndash; steel#Tension bracing#I want to start the steel section by showing options for modelling the very basic part of steel structures &ndash; tension bracing. There are multiple ways do to it:
+You can use tension-only members in software. However, remember that without lateral force, such structure will be unstable &ndash; one of braces must be in tension.
+You can manually &ldquo;switch&rdquo; off the compression braces, depending on the load case.">
+<meta name="theme-color" media="(prefers-color-scheme: light)" content="#ffffff">
+<meta name="theme-color" media="(prefers-color-scheme: dark)" content="#343a40">
+<meta name="color-scheme" content="light dark"><meta property="og:title" content="11 Steel" />
+<meta property="og:description" content="Material &ndash; steel#Tension bracing#I want to start the steel section by showing options for modelling the very basic part of steel structures &ndash; tension bracing. There are multiple ways do to it:
+You can use tension-only members in software. However, remember that without lateral force, such structure will be unstable &ndash; one of braces must be in tension.
+You can manually &ldquo;switch&rdquo; off the compression braces, depending on the load case." />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://structures.lv/notes/docs/steel/" /><meta property="article:section" content="docs" />
+
+
+
+<title>11 Steel | Engineer&#39;s notes on design using FEA</title>
+<link rel="manifest" href="/notes/manifest.json">
+<link rel="icon" href="/notes/favicon.png" >
+<link rel="stylesheet" href="/notes/book.min.33a48f5432973b8ff9a82679d9e45d67f2c15d4399bd2829269455cfe390b5e8.css" integrity="sha256-M6SPVDKXO4/5qCZ52eRdZ/LBXUOZvSgpJpRVz&#43;OQteg=" crossorigin="anonymous">
+  <script defer src="/notes/flexsearch.min.js"></script>
+  <script defer src="/notes/en.search.min.91455c75d71f6e311cc359c3b69d34f78d8c70ef4059e70b66a2dc60ceddf6b7.js" integrity="sha256-kUVcddcfbjEcw1nDtp00942McO9AWecLZqLcYM7d9rc=" crossorigin="anonymous"></script>
+
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-7FJT3L107Y"></script>
+<script>
+var doNotTrack = false;
+if (!doNotTrack) {
+	window.dataLayer = window.dataLayer || [];
+	function gtag(){dataLayer.push(arguments);}
+	gtag('js', new Date());
+	gtag('config', 'G-7FJT3L107Y', { 'anonymize_ip': false });
+}
+</script>
+<!--
+Made with Book Theme
+https://github.com/alex-shpak/hugo-book
+-->
+  
+</head>
+<body dir="ltr">
+  <input type="checkbox" class="hidden toggle" id="menu-control" />
+  <input type="checkbox" class="hidden toggle" id="toc-control" />
+  <main class="container flex">
+    <aside class="book-menu">
+      <div class="book-menu-content">
+        
+  <nav>
+<h2 class="book-brand">
+  <a class="flex align-center" href="/notes/"><span>Engineer&#39;s notes on design using FEA</span>
+  </a>
+</h2>
+
+
+<div class="book-search">
+  <input type="text" id="book-search-input" placeholder="Search" aria-label="Search" maxlength="64" data-hotkeys="s/" />
+  <div class="book-search-spinner hidden"></div>
+  <ul id="book-search-results"></ul>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+  
+  <ul>
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/notes/docs/introduction/" class="">Introduction</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/notes/docs/designflow/" class="">01 Design Flow</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/notes/docs/idealworld/" class="">02 The Ideal World</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/notes/docs/modelgeometry/" class="">03 Geometry</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/notes/docs/modelsupports/" class="">04 Supports</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/notes/docs/modelloads/" class="">05 Loads and Combinations</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/notes/docs/meshing/" class="">06 Meshing</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/notes/docs/instabilities/" class="">07 Instabilities</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/notes/docs/analysis/" class="">08 Analysis</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/notes/docs/results/" class="">09 Results</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/notes/docs/concrete/" class="">10 Reinforced Concrete</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/notes/docs/steel/" class="active">11 Steel</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/notes/docs/about/" class="">About me</a>
+  
+
+        </li>
+      
+    
+  </ul>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</nav>
+
+
+
+
+  <script>(function(){var e=document.querySelector("aside .book-menu-content");addEventListener("beforeunload",function(){localStorage.setItem("menu.scrollTop",e.scrollTop)}),e.scrollTop=localStorage.getItem("menu.scrollTop")})()</script>
+
+
+ 
+      </div>
+    </aside>
+
+    <div class="book-page">
+      <header class="book-header">
+        
+  <div class="flex align-center justify-between">
+  <label for="menu-control">
+    <img src="/notes/svg/menu.svg" class="book-icon" alt="Menu" />
+  </label>
+
+  <strong>11 Steel</strong>
+
+  <label for="toc-control">
+    
+    <img src="/notes/svg/toc.svg" class="book-icon" alt="Table of Contents" />
+    
+  </label>
+</div>
+
+
+  
+  <aside class="hidden clearfix">
+    
+  
+<nav id="TableOfContents">
+  <ul>
+    <li><a href="#tension-bracing">Tension bracing</a></li>
+    <li><a href="#buckling">Buckling</a></li>
+    <li><a href="#steel-connections----modelling-in-overall-model">Steel connections &ndash; modelling in overall model</a>
+      <ul>
+        <li><a href="#pinned-or-fixed">Pinned or Fixed</a></li>
+        <li><a href="#account-for-joint-eccentricities">Account for joint eccentricities</a></li>
+        <li><a href="#think-where-the-pin-is">Think where the pin is?</a></li>
+        <li><a href="#slippage-of-bolts-in-shear">Slippage of bolts in shear</a></li>
+      </ul>
+    </li>
+    <li><a href="#steel-connections---design-of-details">Steel connections - design of details</a>
+      <ul>
+        <li><a href="#challenges">Challenges</a></li>
+        <li><a href="#there-are-tools-available">There are tools available</a></li>
+        <li><a href="#modelling-of-bolts-in-steel-connections---my-approach">Modelling of bolts in steel connections - my approach</a></li>
+        <li><a href="#representation-of-welds">Representation of welds</a></li>
+        <li><a href="#contact">Contact</a></li>
+      </ul>
+    </li>
+  </ul>
+</nav>
+
+
+
+  </aside>
+  
+ 
+      </header>
+
+      
+      
+  <article class="markdown book-article"><h1 id="material----steel">
+  Material &ndash; steel
+  <a class="anchor" href="#material----steel">#</a>
+</h1>
+<h2 id="tension-bracing">
+  Tension bracing
+  <a class="anchor" href="#tension-bracing">#</a>
+</h2>
+<p>I want to start the steel section by showing options for modelling the
+very basic part of steel structures &ndash; tension bracing. There are
+multiple ways do to it:</p>
+<ul>
+<li>
+<p>You can use tension-only members in software. However, remember that
+without lateral force, such structure will be unstable &ndash; one of
+braces must be in tension.</p>
+</li>
+<li>
+<p>You can manually &ldquo;switch&rdquo; off the compression braces, depending on
+the load case. Not all software has such features. You can also
+create a model that has some of the braces removed;</p>
+</li>
+<li>
+<p>If the braces are the same size, you can model both braces, reduce
+axial stiffness by 0.5 and at the design stage manually account;</p>
+</li>
+</ul>
+<details open><summary>Options for modeling tension bracing</summary>
+  <div class="markdown-inner">
+    <img src="img/bracing.png" alt="Steel bracing" title="Steel bracing"/>
+  </div>
+</details>
+
+<h2 id="buckling">
+  Buckling
+  <a class="anchor" href="#buckling">#</a>
+</h2>
+<p>Design is easy while all the elements are in tension. just check the
+stress.. and done! The actual challenge is assessment of buckling.</p>
+<p>After I wrote this section, I realized that actually the content I have created is very similar, but less detailed that Lukasz Skotny has done on this blog EnterFEA.
+Therefore, I rather provide you with links to the better explanation:</p>
+<ul>
+<li>General principles about buckling analysis: <a href="https://enterfea.com/what-is-buckling-analysis/">https://enterfea.com/what-is-buckling-analysis/</a>;</li>
+<li>Example of a buckling calculation for column with a variable cross section: <a href="https://enterfea.com/buckling-length-of-a-column-with-a-variable-cross-section/">https://enterfea.com/buckling-length-of-a-column-with-a-variable-cross-section/</a></li>
+<li>Example of a lateral-torsional buckling calculation for a beam: <a href="https://enterfea.com/how-to-calculate-critical-moment-with-numerical-analysis-in-rfem/">https://enterfea.com/how-to-calculate-critical-moment-with-numerical-analysis-in-rfem/</a></li>
+</ul>
+<p>The short summary from perspective of Eurocodes:</p>
+<ul>
+<li>
+<p>First determine Euler&rsquo;s critical buckling load. This is relatively easy to do using FE analysis. This approach is applicable to both column buckling checks and beam LTB
+(lateral torsional buckling) checks.</p>
+</li>
+<li>
+<p>Then reduce this &ldquo;critical buckling load&rdquo; to account for
+imperfections of member. Any column or beam is never completely
+straight and additional bending is imposed due to compression
+member. This can be done using Equations in Eurocodes.</p>
+</li>
+</ul>
+<h2 id="steel-connections----modelling-in-overall-model">
+  Steel connections &ndash; modelling in overall model
+  <a class="anchor" href="#steel-connections----modelling-in-overall-model">#</a>
+</h2>
+<p>For every steel connection you want to understand two main
+characteristics:</p>
+<h3 id="pinned-or-fixed">
+  Pinned or Fixed
+  <a class="anchor" href="#pinned-or-fixed">#</a>
+</h3>
+<p>Rotational stiffness (EN 1993-1-8 Clause 5.2) clasification:</p>
+<ul>
+<li>
+<p><strong>Nominally pinned</strong>, does not transfer bending moments. Most of typical
+joints can be considered as such;</p>
+</li>
+<li>
+<p>Rigid/<strong>fixed</strong>/continuous, ensures complete moment transfer;</p>
+</li>
+<li>
+<p><strong>Semi-rigid</strong> joints &ndash; acts as rotational springs. I will not cover
+these in my notes. But the general approach would be to calculate joint detail, determine the rotational stiffness and then use this in the overall model.</p>
+</li>
+</ul>
+<p>Eurocode has an approach do classify every joint. You can do this by
+stiffness or strength. A rigorous calculation approach is given in
+section 6.3 of 1993-1-8.<br>
+However, it is important to understand the types of joints that are
+typically pinned and ones that are typically fixed. In my opinion,
+you should be doing the rigorous calculation according to Eurocode
+only in exceptional bespoke cases.</p>
+<p><a href="https://steel-sci.com/">Steel construction institute</a> documents covers typical types of
+connection and describes necessary checks for the joints themselves:</p>
+<ul>
+<li>See <a href="https://www.steelconstruction.info/File:SCI_P358.pdf">P358 &ldquo;Simple joints to Eurocode 3&rdquo;</a> for nominally pinned
+connections;</li>
+<li>See <a href="https://www.steelconstruction.info/File:SCI_P398.pdf">P398 &ldquo;Moment-resisting joints to Eurocode 3&rdquo;</a> for fixed connections;</li>
+</ul>
+<p>If in doubt &ndash; use pinned connection in overall model as this is
+likely to produce more onerous internal forces and larger
+deformations.</p>
+<p>For trusses composed of hollow sections, you should (almost) always
+treat connections as pinned, see Eurocode 1993-1-8 clause 5.1.5.</p>
+<details open><summary>Typical steel connections - pinned</summary>
+  <div class="markdown-inner">
+    <img src="img/pinned.png" alt="Examples of pinned connections" title="Examples of pinned connections"/>
+  </div>
+</details>
+
+<details open><summary>Typical steel connections - fixed</summary>
+  <div class="markdown-inner">
+    <img src="img/fixed1.png" alt="Examples of fixed connections" title="Examples of fixed connections"/>
+<img src="img/fixed2.png" alt="Examples of fixed connections" title="Examples of fixed connections"/>
+  </div>
+</details>
+
+<h3 id="account-for-joint-eccentricities">
+  Account for joint eccentricities
+  <a class="anchor" href="#account-for-joint-eccentricities">#</a>
+</h3>
+<p>Use rigid links to account for eccentricities in joints.</p>
+<p>For <strong>&ldquo;pinned&rdquo; column/beam joints</strong>, note that the design
+of column should be conservative and account that there might be
+partial moment transfer, even if the connection is assumed to be
+pinned. IStructE manual for Steel design to Eurocode 3 suggests
+using offset that is equal to half of column dimension + 100mm.</p>
+<p>If the overall design of building is done by consultant and connection
+design by steelwork contractor, it makes sense to agree on these added
+100mm (or more, if the beams are big), then this additional eccentricity
+can be accounted for at overall model by consultant and connection
+design by contractor.</p>
+<details open><summary>Eccentricities - assumed offset from column face</summary>
+  <div class="markdown-inner">
+    <img src="img/columnbeam.png" alt="Steel bracing" title="Steel bracing"/>
+  </div>
+</details>
+
+<p>For the <strong>design of trusses composed of hollow sections</strong>,
+Eurocode 1993-1-8 clause 5.1.5 gives limits of eccentricities that can
+be ignored. If eccentricities are larger, these should be considered in
+design.</p>
+<details open><summary>Eccentricities - trusses composed of hollow sections</summary>
+  <div class="markdown-inner">
+    <img src="img/eccentricity.png" alt="Truss eccentricity" title="Truss eccentricity"/>
+  </div>
+</details>
+
+<p>As the additional of eccentricities is a straight-forward process, I
+suggest that you always model these in, even if the codified rules allow
+you not to.</p>
+<h3 id="think-where-the-pin-is">
+  Think where the pin is?
+  <a class="anchor" href="#think-where-the-pin-is">#</a>
+</h3>
+<p>This tip is devoted to my experience in one particular project. The
+connection looked like this:</p>
+<details open><summary>Primary-secondary beam connection</summary>
+  <div class="markdown-inner">
+    <img src="img/primarysecondary.png" alt="Where is the pin?" title="Where is the pin?"/>
+  </div>
+</details>
+
+<p>And the connection was designed to resist shear only, i.e. bolts have
+been designed to take vertical shear only.</p>
+<p>The primary beam was not designed to resist any torsion. So &ndash; <strong>where is
+the pin</strong>?</p>
+<ul>
+<li>Is it at the location of bolts?</li>
+<li>Or is it at the centroid of torsionally unrestrained main beam?</li>
+</ul>
+<p>..you are likely to have guessed this already &ndash; both of these
+locations are acting as &ldquo;pins&rdquo; creating structural system that is
+not stable. In my opinion, a correct design would be to design
+the bolted connection to resist moment = eccentricity * vertical shear force.</p>
+<h3 id="slippage-of-bolts-in-shear">
+  Slippage of bolts in shear
+  <a class="anchor" href="#slippage-of-bolts-in-shear">#</a>
+</h3>
+<p>Slippage of bolts in shear connections can significantly impact your
+results. Unfortunately, I learned it in the &ldquo;hard way&rdquo; &ndash; there was
+a bit of lack of supervision at early stage of my career and I
+designed a truss like this:</p>
+<details open><summary>Truss - bottom chord connection</summary>
+  <div class="markdown-inner">
+    <img src="img/trussgeo.png" alt="Truss geometry" title="Truss geometry"/>
+  </div>
+</details>
+
+<p>Then they erected the truss.. and noticed that there are
+<strong>unexpectedly large deflections</strong> from dead load. Concerns were raised
+whether the trusses have been seriously under-designed.. The actual
+reason was bolt slippage.</p>
+<p>Bottom chord connection in the middle of the truss was designed
+using ordinary bolts in shear. Below is a comparison of deflections
+for truss without slippage taken into account and truss with 2mm
+(M16 bolts in ordinary d=18mm holes). Slippage allowed. I am showing
+an example truss (not the real project), assuming trusses are placed
+at 6m centres and there are 1kN/m2 load at SLS.</p>
+<details open><summary>Truss - deflections considering the bolt slippage</summary>
+  <div class="markdown-inner">
+    Maximum deflection without slip = 12.6mm
+<img src="img/trussnoslip.png" alt="Truss geometry" title="Truss geometry"/>
+Maximum deflection considering bolt slip = 17.5mm
+<img src="img/trussslip.png" alt="Truss geometry" title="Truss geometry"/>
+  </div>
+</details>
+
+<p>At my real project it turned out not to be &ldquo;critical&rdquo; as for simple
+truss this had a nominal effect on forces and the deflections were
+still acceptable. However, it might had turned out much worse if this would be
+statically indeterminate system and design of other members would be affected by
+bending stiffness of these trusses.</p>
+<p>The simple advice here would be &ndash; either account for potential
+extra displacement or use HSFB (friction bolts). If your structure
+will be statically indeterminate or spanning in two directions &ndash; I
+would strongly suggest using friction bolts only.</p>
+<h2 id="steel-connections---design-of-details">
+  Steel connections - design of details
+  <a class="anchor" href="#steel-connections---design-of-details">#</a>
+</h2>
+<h3 id="challenges">
+  Challenges
+  <a class="anchor" href="#challenges">#</a>
+</h3>
+<p>When modelling steel connections, there are following challenges:</p>
+<ul>
+<li>Representation of bolts;</li>
+<li>Representation of welds;</li>
+<li>Representation of contact between surfaces &ndash; compression forces
+transferred only;</li>
+<li>Local buckling of connection plates;</li>
+</ul>
+<h3 id="there-are-tools-available">
+  There are tools available
+  <a class="anchor" href="#there-are-tools-available">#</a>
+</h3>
+<p>Steel connection design is an area where software is progressing quickly.
+&ldquo;Next generation&rdquo; software such as <a href="https://www.ideastatica.com/">Idea Statica</a> and <a href="https://www.dlubal.com/en/products/rfem-fea-software/what-is-rfem">Dlubal RFEM 6</a> are offering
+modelling using &ldquo;components&rdquo;. And these components are e.g. bolts or welds. These components
+consists of carefully selected sets of FEA elements such as springs, hinges, and rigid links (and other FEA elements) to correctly represent the behaviour or &ldquo;component&rdquo;.</p>
+<p>The notes below are ways how I have manually tried to represent these &ldquo;components&rdquo; before these tools were available.</p>
+<h3 id="modelling-of-bolts-in-steel-connections---my-approach">
+  Modelling of bolts in steel connections - my approach
+  <a class="anchor" href="#modelling-of-bolts-in-steel-connections---my-approach">#</a>
+</h3>
+<ul>
+<li>
+<p>It is important to model the <strong>bolt area</strong>, not just represent it with a
+nodal support or 1D bar element. The best way of doing this using
+rigid links and create a &ldquo;spider&rdquo;.\</p>
+</li>
+<li>
+<p>If it is important to capture the correct shear distribution in
+adjacent plate &ndash; the good option for accounting for <strong>bolt bearing</strong> on
+to surrounding plate is to use nonlinear translational releases that
+release movement in one direction only. Note that as soon as you do
+this, you must run geometrically non-linear analysis.<br>
+Note that this is &ldquo;optional&rdquo; to model this and this additional
+complexity &ldquo;pays off&rdquo; only if stresses around the bolt govern the
+plate design.</p>
+</li>
+</ul>
+<details open><summary>Bolts - modelling behaviour in steel details</summary>
+  <div class="markdown-inner">
+    <p>Rigid elements representing bolt:<br>
+<img src="img/boltspider.png" alt="Truss geometry" title="Truss geometry"/></p>
+<p>Hinges at end of rigid links to represent bearing:<br>
+<img src="img/bolthinges.png" alt="Truss geometry" title="Truss geometry"/></p>
+<p>Forces in rigid elements:<br>
+<img src="img/boltforces.png" alt="Truss geometry" title="Truss geometry"/></p>
+
+  </div>
+</details>
+
+<ul>
+<li>Another thing that you might want to account for &ndash; is <strong>slippage of
+the bolt</strong>. Typically opening size is 1-3mm larger than bolt (EN 1090
+sets the rules). This is done to accommodate any imperfections that
+will occur during fabrication/erection of steel structure. Note that
+this slippage per bolt could either be 0 or 2mm or 3mm and you will
+not know this before the structure is built.<br>
+I personally would only advise to account for slippage in some
+special cases and in cases where the maximum displacement in the
+connection is important.</li>
+</ul>
+<h3 id="representation-of-welds">
+  Representation of welds
+  <a class="anchor" href="#representation-of-welds">#</a>
+</h3>
+<p>If you are using a &ldquo;general purpose&rdquo; software like Autodesk Robot, I
+suggest that you model the welded plates together as continuous. And
+do manual checks for welds.</p>
+<p>..I know that this is not quite that answer that a keen FE software
+user wants to hear. But that is my honest opinion.</p>
+<p>For the design, you may choose to:</p>
+<ul>
+<li>If the stresses are high, use full penetration butt welds. This is
+the simplest option for designed, but the hardest (and most
+expensive) to fabricate.</li>
+<li>If the stresses are lower, you may also look at the weld capacity
+and back-calculate the maximum allowable stresses in there.</li>
+</ul>
+<h3 id="contact">
+  Contact
+  <a class="anchor" href="#contact">#</a>
+</h3>
+<p>In my opinion, reasons to model &ldquo;contact&rdquo; are:</p>
+<ul>
+<li>To accurately account for <strong>prying</strong> effects;</li>
+<li>To design connection where moment can work in both directions or/and
+about both axis (i.e. different parts of contact in compression,
+depending on loading);</li>
+<li>To more accurately account for <strong>compression stiffness</strong> of the element
+that is being contacted.</li>
+</ul>
+<p>There are generally two options for modelling the contact.</p>
+<ul>
+<li>Use surface support that supports forces one-direction-only.</li>
+<li>Use &ldquo;solid&rdquo; that transfers only compression, but no tension.</li>
+</ul>
+<p>Note that from modelling perspective, you could also create a grid
+of short rigid links that are able to transfer forces in one
+direction only.</p>
+<p>Firstly, do a judgement whether you really need to model contact
+behaviour &ndash; sometimes the location of compression force transfer is
+always in one place &ndash; then you can &ldquo;get away&rdquo; with a linear
+support.<br>
+Note that most of the buildings around have been designed without
+use of such advanced FE features, but using throughout understanding
+the behaviour of joint and doing a simple support assumption
+accordingly.</p>
+<p>I also suggest that you evaluate whether you want to model <strong>both
+sides of contact</strong> as plates. Modelling task will get significantly
+easier if you do decide to model one part and represent other with a
+<strong>&ldquo;surface support&rdquo;</strong>.</p>
+</article>
+ 
+      
+
+      <footer class="book-footer">
+        
+  <div class="flex flex-wrap justify-between">
+
+
+
+
+
+</div>
+
+
+
+  <script>(function(){function e(e){const t=window.getSelection(),n=document.createRange();n.selectNodeContents(e),t.removeAllRanges(),t.addRange(n)}document.querySelectorAll("pre code").forEach(t=>{t.addEventListener("click",function(){if(window.getSelection().toString())return;e(t.parentElement),navigator.clipboard&&navigator.clipboard.writeText(t.parentElement.textContent)})})})()</script>
+
+
+ 
+        
+      </footer>
+
+      
+  
+ 
+
+      <label for="menu-control" class="hidden book-menu-overlay"></label>
+    </div>
+
+    
+    <aside class="book-toc">
+      <div class="book-toc-content">
+        
+  
+<nav id="TableOfContents">
+  <ul>
+    <li><a href="#tension-bracing">Tension bracing</a></li>
+    <li><a href="#buckling">Buckling</a></li>
+    <li><a href="#steel-connections----modelling-in-overall-model">Steel connections &ndash; modelling in overall model</a>
+      <ul>
+        <li><a href="#pinned-or-fixed">Pinned or Fixed</a></li>
+        <li><a href="#account-for-joint-eccentricities">Account for joint eccentricities</a></li>
+        <li><a href="#think-where-the-pin-is">Think where the pin is?</a></li>
+        <li><a href="#slippage-of-bolts-in-shear">Slippage of bolts in shear</a></li>
+      </ul>
+    </li>
+    <li><a href="#steel-connections---design-of-details">Steel connections - design of details</a>
+      <ul>
+        <li><a href="#challenges">Challenges</a></li>
+        <li><a href="#there-are-tools-available">There are tools available</a></li>
+        <li><a href="#modelling-of-bolts-in-steel-connections---my-approach">Modelling of bolts in steel connections - my approach</a></li>
+        <li><a href="#representation-of-welds">Representation of welds</a></li>
+        <li><a href="#contact">Contact</a></li>
+      </ul>
+    </li>
+  </ul>
+</nav>
+
+
+ 
+      </div>
+    </aside>
+    
+  </main>
+
+  
+</body>
+</html>
+
+
+
+
+
+
+
+
+
+
+
+

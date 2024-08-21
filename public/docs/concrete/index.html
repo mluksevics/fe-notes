@@ -1,0 +1,1074 @@
+<!DOCTYPE html>
+<html lang="en-us" dir="ltr">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="Reinforced Concrete#The purpose of RC/steel and timber sections is to focus on modelling and design challenges I have experienced relevant to specific material. Inevitably, the content in those sections are more tied to Eurocodes. This section talks about in-situ concrete buildings and does not cover precast concrete or prestressed concrete.
+Considerations in overall model#Overall model (or multiple models) of the building is usually used to design everything except the horizontal elements &ndash; slabs usually get designed separately.">
+<meta name="theme-color" media="(prefers-color-scheme: light)" content="#ffffff">
+<meta name="theme-color" media="(prefers-color-scheme: dark)" content="#343a40">
+<meta name="color-scheme" content="light dark"><meta property="og:title" content="10 Reinforced Concrete" />
+<meta property="og:description" content="Reinforced Concrete#The purpose of RC/steel and timber sections is to focus on modelling and design challenges I have experienced relevant to specific material. Inevitably, the content in those sections are more tied to Eurocodes. This section talks about in-situ concrete buildings and does not cover precast concrete or prestressed concrete.
+Considerations in overall model#Overall model (or multiple models) of the building is usually used to design everything except the horizontal elements &ndash; slabs usually get designed separately." />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://structures.lv/notes/docs/concrete/" /><meta property="article:section" content="docs" />
+
+
+
+<title>10 Reinforced Concrete | Engineer&#39;s notes on design using FEA</title>
+<link rel="manifest" href="/notes/manifest.json">
+<link rel="icon" href="/notes/favicon.png" >
+<link rel="stylesheet" href="/notes/book.min.33a48f5432973b8ff9a82679d9e45d67f2c15d4399bd2829269455cfe390b5e8.css" integrity="sha256-M6SPVDKXO4/5qCZ52eRdZ/LBXUOZvSgpJpRVz&#43;OQteg=" crossorigin="anonymous">
+  <script defer src="/notes/flexsearch.min.js"></script>
+  <script defer src="/notes/en.search.min.91455c75d71f6e311cc359c3b69d34f78d8c70ef4059e70b66a2dc60ceddf6b7.js" integrity="sha256-kUVcddcfbjEcw1nDtp00942McO9AWecLZqLcYM7d9rc=" crossorigin="anonymous"></script>
+
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-7FJT3L107Y"></script>
+<script>
+var doNotTrack = false;
+if (!doNotTrack) {
+	window.dataLayer = window.dataLayer || [];
+	function gtag(){dataLayer.push(arguments);}
+	gtag('js', new Date());
+	gtag('config', 'G-7FJT3L107Y', { 'anonymize_ip': false });
+}
+</script>
+<!--
+Made with Book Theme
+https://github.com/alex-shpak/hugo-book
+-->
+  
+</head>
+<body dir="ltr">
+  <input type="checkbox" class="hidden toggle" id="menu-control" />
+  <input type="checkbox" class="hidden toggle" id="toc-control" />
+  <main class="container flex">
+    <aside class="book-menu">
+      <div class="book-menu-content">
+        
+  <nav>
+<h2 class="book-brand">
+  <a class="flex align-center" href="/notes/"><span>Engineer&#39;s notes on design using FEA</span>
+  </a>
+</h2>
+
+
+<div class="book-search">
+  <input type="text" id="book-search-input" placeholder="Search" aria-label="Search" maxlength="64" data-hotkeys="s/" />
+  <div class="book-search-spinner hidden"></div>
+  <ul id="book-search-results"></ul>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+  
+  <ul>
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/notes/docs/introduction/" class="">Introduction</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/notes/docs/designflow/" class="">01 Design Flow</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/notes/docs/idealworld/" class="">02 The Ideal World</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/notes/docs/modelgeometry/" class="">03 Geometry</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/notes/docs/modelsupports/" class="">04 Supports</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/notes/docs/modelloads/" class="">05 Loads and Combinations</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/notes/docs/meshing/" class="">06 Meshing</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/notes/docs/instabilities/" class="">07 Instabilities</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/notes/docs/analysis/" class="">08 Analysis</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/notes/docs/results/" class="">09 Results</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/notes/docs/concrete/" class="active">10 Reinforced Concrete</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/notes/docs/steel/" class="">11 Steel</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/notes/docs/about/" class="">About me</a>
+  
+
+        </li>
+      
+    
+  </ul>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</nav>
+
+
+
+
+  <script>(function(){var e=document.querySelector("aside .book-menu-content");addEventListener("beforeunload",function(){localStorage.setItem("menu.scrollTop",e.scrollTop)}),e.scrollTop=localStorage.getItem("menu.scrollTop")})()</script>
+
+
+ 
+      </div>
+    </aside>
+
+    <div class="book-page">
+      <header class="book-header">
+        
+  <div class="flex align-center justify-between">
+  <label for="menu-control">
+    <img src="/notes/svg/menu.svg" class="book-icon" alt="Menu" />
+  </label>
+
+  <strong>10 Reinforced Concrete</strong>
+
+  <label for="toc-control">
+    
+    <img src="/notes/svg/toc.svg" class="book-icon" alt="Table of Contents" />
+    
+  </label>
+</div>
+
+
+  
+  <aside class="hidden clearfix">
+    
+  
+<nav id="TableOfContents">
+  <ul>
+    <li><a href="#considerations-in-overall-model">Considerations in overall model</a></li>
+    <li><a href="#stability-design----keeping-it-simple">Stability design &ndash; keeping it simple</a></li>
+    <li><a href="#stability-design----stiffness-reduction-due-to-cracking-and-creep">Stability design &ndash; stiffness reduction due to cracking and creep</a>
+      <ul>
+        <li><a href="#second-order-effects-caused-by-cracking-and-creep">Second-order effects caused by cracking and creep</a></li>
+        <li><a href="#about-sls---building-sway">About SLS - building sway</a></li>
+        <li><a href="#about-uls-design-of-core-walls">About ULS design of core walls</a></li>
+      </ul>
+    </li>
+    <li><a href="#stability-design----axial-shortening">Stability design &ndash; axial shortening</a></li>
+    <li><a href="#design-of-flat-slabs">Design of flat slabs</a>
+      <ul>
+        <li><a href="#helpful-literature">Helpful literature</a></li>
+        <li><a href="#uls-design">ULS design</a></li>
+        <li><a href="#hogging-moments">Hogging moments</a></li>
+        <li><a href="#fe-local-axis">FE local axis</a></li>
+        <li><a href="#wood-and-armer-moments">Wood and Armer moments</a></li>
+        <li><a href="#connections-with-shearcore-walls">Connections with shear/core walls</a></li>
+        <li><a href="#height-of-the-columns">Height of the columns</a></li>
+        <li><a href="#thermal-breaks">Thermal breaks</a></li>
+        <li><a href="#deflections-of-flat-slabs">Deflections of flat slabs</a></li>
+        <li><a href="#punching-shear">Punching shear</a></li>
+      </ul>
+    </li>
+    <li><a href="#design-of-beams">Design of beams</a>
+      <ul>
+        <li><a href="#torsion-in-beams">Torsion in beams</a></li>
+        <li><a href="#stiffness-of-downstand-beams">Stiffness of downstand beams</a></li>
+      </ul>
+    </li>
+  </ul>
+</nav>
+
+
+
+  </aside>
+  
+ 
+      </header>
+
+      
+      
+  <article class="markdown book-article"><h1 id="reinforced-concrete">
+  Reinforced Concrete
+  <a class="anchor" href="#reinforced-concrete">#</a>
+</h1>
+<p>The purpose of RC/steel and timber sections is to focus on modelling and design
+challenges I have experienced relevant to specific material.
+Inevitably, the content in those sections are more tied to Eurocodes.
+This section talks about <strong>in-situ concrete buildings</strong> and does not cover precast concrete or prestressed concrete.</p>
+<h2 id="considerations-in-overall-model">
+  Considerations in overall model
+  <a class="anchor" href="#considerations-in-overall-model">#</a>
+</h2>
+<p>Overall model (or multiple models) of the
+building is usually used to design everything except the horizontal
+elements &ndash; slabs usually get designed separately.</p>
+<p>The main considerations when doing static analysis to get internal
+forces in columns and concrete core walls:</p>
+<ul>
+<li>Will global second-order effects due to cracking and creep be
+relevant?</li>
+<li>Should the foundation stiffness be accounted for?</li>
+<li>Is axial shortening relevant?</li>
+<li>Are there transfer beams or other elements affected by construction sequence?</li>
+</ul>
+<p>For each of these effects, <strong>you have three choices</strong>:</p>
+<ol>
+<li>Justify that the impact on internal forces is negligible and ignore
+the effect;</li>
+<li>Do calculations with upper/lower bound stiffness for
+members/foundations/beams and use most onerous results of the two;</li>
+<li>Explicitly account for the effect &ndash; detailed calculations.</li>
+</ol>
+<p>I suggest that you think about <strong>what is &ldquo;special&rdquo; about your
+building</strong>?</p>
+<p><strong>First choice - ignoring effects</strong>. If your RC building has up to 5-8
+floors, traditional pad/pile footing, stability core and slab + beam
+floors, and vertical columns/walls (i.e. no permanent horizontal forces)
+then don&rsquo;t overcomplicate it:</p>
+<ul>
+<li>
+<p>Just use one linear static model with uncracked properties for
+stability/column design;</p>
+<details open><summary>EN 1992-1-1 section 5.4</summary>
+  <div class="markdown-inner">
+    (1) Linear analysis of element based on the theory of elasticity may be user for both the serviceability and ultimate limit states.<br>
+(2) For the determination of the action effects, linear analysis may be carried out assuming:
+i) uncracked cross sections,<br>
+ii) linear stress-strain relationships and<br>
+iii) mean value of the modulus of elasticity
+  </div>
+</details>
+
+</li>
+<li>
+<p>Separate models for slab &amp; beam design &ndash; one model per floor. The
+separate model allows for refined mesh size and neglect of axial
+shortening effects.</p>
+</li>
+<li>
+<p>Check stability system calculations with manual calculation checks
+&ndash; If your core is driven by size of stairs, it is likely to be
+lightly loaded.</p>
+</li>
+<li>
+<p>Use supports without springs. <a href="/docs/modelsupports/#modelling-foundations">See Support modelling section</a></p>
+</li>
+</ul>
+<p><strong>Second choice - upper and lower bound stiffness</strong> I believe this is a reasonable way to
+go for complex buildings.</p>
+<p>If you choose the option of considering upper/lower bound of
+stiffnesses, multiple models may be required (unless some special
+built-in features of FE software is used).<br>
+So you likely need to find a way to find envelope forces of multiple
+models.</p>
+<p><strong>What are the typical upper/lower boundaries?</strong></p>
+<ul>
+<li>Stiffness decrease due to cracking and creep:
+<ul>
+<li>Upper bound &ndash; uncracked mean elastic modulus of concrete;</li>
+<li>Lower bound &ndash; accounting for cracking and creep by reducing
+stiffness 2-4 times.</li>
+</ul>
+</li>
+<li>Foundation stiffness:
+<ul>
+<li>Upper bound - Translationally fixed supports;</li>
+<li>Lower bound &ndash; Spring stiffness calculated using settlements of
+foundations;</li>
+</ul>
+</li>
+<li>Axial shortening:
+<ul>
+<li>Upper bound - Assuming the columns are axially completely stiff.
+These results should compare well to the sum of reactions at
+separate models created for slab design;</li>
+<li>Lower bound - Modelling full model with assumption that all loads
+are applied at the same time.</li>
+</ul>
+</li>
+<li>Transfer beams:
+<ul>
+<li>Upper bound &ndash; assuming flexurally stiff beam. This can
+alternatively be done by placing supports at locations where beam
+supports columns above. And placing reactions of this support as a
+load on the beam.;</li>
+<li>Lower bound &ndash; assuming stiffness reduced by cracking and creep. I
+personally would argue that only cracking should be considered,
+because creep happens in long term and only influences
+strains=deflections, not stresses in the beam.</li>
+</ul>
+</li>
+</ul>
+<p><strong>Third choice &ndash; detailed analysis</strong>. In my opinion, for
+reinforced concrete, each of the considerations includes <strong>variables that
+are hard to estimate</strong> at the start of the design (including construction programme and weather). Therefore, I have not
+tried to explicitly capture all these considerations in a single
+&ldquo;precise&rdquo; model. Saying that from a modelling/analysis perspective you
+can still try to do that:</p>
+<ul>
+<li>Use software, that modifies stiffness of stability system for creep
+and cracking. Alternatively, you can do multiple &ldquo;iterations&rdquo;
+yourself.</li>
+<li>Calculate stiffness of foundations and use spring supports. You must
+trust these are neither too stiff or to floppy...;</li>
+<li>Do a staged analysis to explicitly calculate axial shortening
+effects and construction sequence. The most popular option might be
+&ldquo;staged construction load case&rdquo; in ETABS program.</li>
+</ul>
+<h2 id="stability-design----keeping-it-simple">
+  Stability design &ndash; keeping it simple
+  <a class="anchor" href="#stability-design----keeping-it-simple">#</a>
+</h2>
+<p>In this short section, I just wanted highlight, that stability core is the
+most important part of the building.</p>
+<ul>
+<li>I strongly suggest you read <a href="https://www.istructe.org/resources/guidance/stability-of-buildings-3-volume-package/">IStructE guides on &ldquo;Stability of buildings&rdquo;</a> before modelling and
+design work. These have a good advice on simplified assessment to ensure a robust solution.</li>
+<li><strong>Make sure the design is conservative.</strong>
+<ul>
+<li>I strongly suggest that for design of stability core you assume
+hinges at the column ends and rely on core-only to ensure stability.</li>
+<li>I also suggest that you use a linear hinge at slab/core
+intersection, thus not relying on frame action at this connection.</li>
+<li>If you do find yourself &ldquo;fighting&rdquo; to get the core to get from those
+105% or 110% utilisation to just below 100%, <strong>then there is something
+wrong</strong> with your structural scheme or sizing. Can adding outrigger
+columns help?</li>
+</ul>
+</li>
+<li>Use result beams (see <a href="/docs/results/">section on results</a>) to calculate overall results in
+building core, compare those with simple hand-calc using wind loads.</li>
+<li>For modelling the supports of core walls, it is simpler to create
+single fixed support at the base. This allows to easy communicate
+loads.
+<details open><summary>Using rigid links and single support for stability core</summary>
+  <div class="markdown-inner">
+    <img src="img/coresupport.png" alt="Core wall support" title="Core wall support"/>
+  </div>
+</details>
+</li>
+</ul>
+<h2 id="stability-design----stiffness-reduction-due-to-cracking-and-creep">
+  Stability design &ndash; stiffness reduction due to cracking and creep
+  <a class="anchor" href="#stability-design----stiffness-reduction-due-to-cracking-and-creep">#</a>
+</h2>
+<h3 id="second-order-effects-caused-by-cracking-and-creep">
+  Second-order effects caused by cracking and creep
+  <a class="anchor" href="#second-order-effects-caused-by-cracking-and-creep">#</a>
+</h3>
+<p>This is a topic where a lot depends on engineering judgement. You may
+disagree on the approach I am describing here. However, you must think
+about and consider cracking, creep and second order effects.</p>
+<p>In an overall model, second-order effects will be relevant for the
+design of the stability system. And in simple terms, it will mean:</p>
+<ul>
+<li>
+<p>At <strong>SLS</strong>, the deflections will be larger, because:</p>
+<ul>
+<li>Some of the parts of the core wall might be in tension &ndash; therefore
+have cracked and less stiff;</li>
+<li>If there are permanent lateral loads due to eccentric of building
+(or prestress), there will be creep effects.</li>
+<li>P-delta effect: as the core walls deflect from lateral actions,
+there is additional eccentricity created for vertical loads. P-delta
+effects are increased due to cracking and creep.</li>
+</ul>
+</li>
+<li>
+<p>At <strong>ULS</strong>, the forces will be larger, because of this P-delta effect.</p>
+</li>
+</ul>
+<h3 id="about-sls---building-sway">
+  About SLS - building sway
+  <a class="anchor" href="#about-sls---building-sway">#</a>
+</h3>
+<p>I suggest that you calculate the sway using elastic properties and
+then:</p>
+<ul>
+<li>For sway caused by wind - multiply the deflection by 2.0 to account
+for cracking</li>
+<li>For sway caused by sustained lateral load (i.e. self-weight and SDL
+of eccentric building), multiply effects by (1 + creep).</li>
+</ul>
+<h4 id="deflection-caused-by-wind----accounting-for-cracked-section">
+  Deflection caused by wind &ndash; accounting for cracked section
+  <a class="anchor" href="#deflection-caused-by-wind----accounting-for-cracked-section">#</a>
+</h4>
+<p>Eurocode does not give a straight-forward advice regarding the
+stiffness modification for cracked sections and creep:</p>
+<ul>
+<li>EN 1992-1-1 Section 5.8.3.3 gives a simplified advice when can the second-order effects
+be ignored.</li>
+<li>EN 1992-1-1 Section 5.8.7.2 provides general guidance.
+Note that in my experience using 5.8.7.2(3) advice for stiffness modification leads
+to similar stiffness reduction at ULS as ACI 318 would suggest
+(factor 0.3 to account for cracking compared to 0.35 in ACI318).</li>
+<li>EN 1992-1-1 Annex H gives more information specifically on core walls;</li>
+</ul>
+<p>American ACI318 gives a good simplified advice in sections 10.10.4.1
+and 8.8.1. If you can depart from Eurocode for a bit, I suggest
+using this advice.</p>
+<p>ACI 10.10.4.1 provides reduced flexural stiffness properties at
+&ldquo;factored loads&rdquo; (or ULS) state. And section 8.8.1 mentions that for
+sway (SLS) checks these stiffness values can be multiplied by 1.4.
+So &ndash; for cracked walls, the modifier is 0.35 x 1.4 = 0.5. Or &ndash; the
+sway is twice larger than for uncracked stiffness.</p>
+<details open><summary>ACI318 guidance of concrete stiffness modification</summary>
+  <div class="markdown-inner">
+    Excerpt from <a href="https://www.concrete.org/tools/318buildingcodeportal.aspx.aspx">ACI318</a><br>
+<img src="img/aci_modifiers.png" alt="ACI318" title="ACI318 guidance of concrete stiffness modification"/>
+  </div>
+</details>
+
+<h4 id="sustained-lateral-loads-causing-sway---accounting-for-creep">
+  Sustained lateral loads causing sway - accounting for creep
+  <a class="anchor" href="#sustained-lateral-loads-causing-sway---accounting-for-creep">#</a>
+</h4>
+<p>Eurocode gives a good advice there. I won&rsquo;t delve into the
+calculation of creep factors (enjoy the maze of code yourself), but
+I expect the creep.ef to be around 1.5-2.0, and thus the overall
+increase factor to be 2.5 to 3.0.</p>
+<p>Note that this assumes that sustained lateral loads does not impose permanent tension of stability structures.
+If you have such structure, I believe that you are qualified enough to stop reading my notes :)</p>
+<details open><summary>EN 1992-1-1 section 5.8.6(4) accounting for creep</summary>
+  <div class="markdown-inner">
+    (4)  In the absence of more refined models, creep may be taken into account by multiplying all
+strain values in the concrete stress-strain diagram according to 5.8.6 (3) with a factor (1 + Mef),
+where Mef is the effective creep ratio according to 5.8.4.
+  </div>
+</details>
+
+<p>My personal engineering judgement is that this combination of codes is acceptable.</p>
+<h4 id="regarding-the-p-delta-effects">
+  Regarding the P-Delta effects
+  <a class="anchor" href="#regarding-the-p-delta-effects">#</a>
+</h4>
+<p>So now you have calculated a <strong>conservative value of lateral sway</strong>. The
+simplest way to account for second order effects is to calculate
+percentage of additional forces that second-order effects create.</p>
+<p>Compare total moment at the base of the wall:</p>
+<ul>
+<li>From lateral loads:</li>
+<li>From Vertical load multiplied by max displacement calculated in previous
+steps, <br>
+Note that this is very conservative way as more precise would be to
+calculate sway at each floor and the increase of vertical loads
+there.</li>
+</ul>
+<p>By knowing ratio between these two moments, you will also know the
+approximate increase of deflections.</p>
+<p>The further actions depend on your engineering judgement. If the
+increase is relatively small, I&rsquo;d stop there. If the increase is
+large, then you may decide to run multiple iterations or run
+geometrically non-linear analysis in your software.</p>
+<p>Note that above SLS assessment <strong>suggests using unmodified section
+properties</strong> for core walls in FE model and then performing hand calculations. If you modify in-plane
+stiffness of surfaces representing core walls (resulting in
+reduction of I for core wall as whole) , they are likely to &ldquo;sink&rdquo;
+relatively to columns and you won&rsquo;t be able to calculate reliable
+vertical loads in the same model.</p>
+<h3 id="about-uls-design-of-core-walls">
+  About ULS design of core walls
+  <a class="anchor" href="#about-uls-design-of-core-walls">#</a>
+</h3>
+<p>Not a lot more to tell here. You can calculate the overall sway
+similarly than for SLS, just using ACI318 suggested stiffness modifiers for ULS to account for cracked sections.</p>
+<p>In my experience I have accounted for P-delta effects by increasing
+forces at the RC design stage, not increasing loads in FE model.
+However, you are free to do whichever way feels more convenient for you.</p>
+<h2 id="stability-design----axial-shortening">
+  Stability design &ndash; axial shortening
+  <a class="anchor" href="#stability-design----axial-shortening">#</a>
+</h2>
+<p>Note that regarding axial shortening effects, the importance is the
+<strong>relative movement</strong> between vertical members. The most extreme these
+effects are likely to be in <strong>areas next to core walls</strong> &ndash; because under
+vertical loads cores tend to shorten significantly less than columns.</p>
+<p>I have not come across any &ldquo;hard&rdquo; rules regarding axial shortening
+effects. It depends on storey count, span width, column size and loads.
+In my experience, for <strong>building with 7 floors they were not relevant, but for building with 18 floors they were significant</strong>.</p>
+<p>To assess whether the shortening effects may be significant, I suggest
+you run lower/upper bound cases with ULS load combination with largest
+loads:</p>
+<ul>
+<li>One model without any modifications &ndash; columns having elastic axial
+stiffness;</li>
+<li>Another model with both column axial stiffness increased, say 1000
+times;</li>
+<li>Alternatively, if building shape does not vary, you can also
+calculate single floor and multiply this result by number of floors.</li>
+</ul>
+<p>If the difference is not significant, then you can neglect axial
+shortening effects. If it significant then it is likely that you want to
+use envelope forces of these two models.</p>
+<p>There are tools to calculate axial shortening explicitly &ndash;
+<a href="https://www.concretecentre.com/Resources/Design-tools-and-software/RC-Spreadsheets-V4D/RC-Spreadsheets-V4D5-contents.aspx">Reinforced Concrete Centre Spreadsheet TCC55</a>
+does this. In CSI ETABS there is an option
+to consider staged construction and account for creep effects in axial
+shortening as well (&ldquo;Nonlinear staged construction&rdquo;).</p>
+<h2 id="design-of-flat-slabs">
+  Design of flat slabs
+  <a class="anchor" href="#design-of-flat-slabs">#</a>
+</h2>
+<p>Reinforced concrete flat slabs are the most popular type of concrete
+floors. I have spent about 2 years focusing almost solely on design of
+flat slabs with a complex shape, therefore this topic is covered
+proportionally &ldquo;larger&rdquo; than other topics.</p>
+<p>In it is typical geometry, it is just one horizontal plate with columns
+and beams supporting the slab. However, the modelling assumptions are
+very important here.</p>
+<h3 id="helpful-literature">
+  Helpful literature
+  <a class="anchor" href="#helpful-literature">#</a>
+</h3>
+<p>If you are about to design flat slab according to Eurocodes, then I suggest you also read these references:</p>
+<ul>
+<li>
+<p><a href="https://www.concretecentre.com/Resources/Publications/How-to-design-reinforced-concrete-flat-slabs-using.aspx">Brooker, O. How to design reinforced concrete flat slabs using
+finite element analysis. Camberley : Concrete Centre, 2006.</a></p>
+</li>
+<li>
+<p><a href="https://www.concretebookshop.com/tr64-guide-to-the-design--construction-of-reinforced-concrete-flat-slabs-1851-p.asp">Report of a Concrete Society Working Group. Technical Report No. 64.
+Guide to the Design and Construction of Reinforced Concrete Flat
+Slabs. Camberley : The Concrete Society, 2007.</a></p>
+</li>
+<li>
+<p><a href="https://www.concretebookshop.com/tr58-deflections-in-concrete-slabs-and-beams-1835-p.asp">British Cement Association, The Concrete Society, The Concrete
+Centre. Technical report 57. Deflections in concrete slabs and
+beams. Camberley : Concrete Society, 2005.</a></p>
+</li>
+</ul>
+<h3 id="uls-design">
+  ULS design
+  <a class="anchor" href="#uls-design">#</a>
+</h3>
+<p>For slab design at ULS (strength design), a model with linear static
+calculations and isotropic material representing uncracked concrete
+stiffness, is sufficient. EN 1992-1-1, section I.1.2 suggests
+using full stiffness for vertical loading in equivalent frame
+method.</p>
+<p>As there is no specific guidance on FEA in Eurocode 2, this suggests
+applying the same rules for FEA.</p>
+<p>A good <strong>starting point for mesh size is 1/10 of span slab</strong>.</p>
+<h3 id="hogging-moments">
+  Hogging moments
+  <a class="anchor" href="#hogging-moments">#</a>
+</h3>
+<p>When you first run the analysis and see results, the typical surprise is huge hogging moments above the columns. Three principles to follow:</p>
+<ol>
+<li>Model column/wall areas;</li>
+<li>Average hogging moments over reasonable area;</li>
+<li>Remember that FE software does not do any &ldquo;moment redistribution&rdquo;
+for you &ndash; always stay safe on the bottom reinforcement</li>
+</ol>
+<h4 id="modelling-columnwall-areas">
+  Modelling column/wall areas
+  <a class="anchor" href="#modelling-columnwall-areas">#</a>
+</h4>
+<p>This is important to:</p>
+<ul>
+<li>Reduce effect of local hogging moment peaks above the columns</li>
+<li>Achieve &ldquo;closer to reality&rdquo; moment transfer between columns and
+slab;</li>
+<li>This is also important for deflection checks, as the slab does not
+deflect over the top of the column.</li>
+</ul>
+<p>There are tools built-in in software to model this:</p>
+<ul>
+<li>CSI Safe generates those areas automatically;</li>
+<li>Autodesk Robot does not do it by default, but this process can be
+automated, for example using this helper program:
+<a href="https://spider.structuraldesign.pro/">https://spider.structuraldesign.pro/</a></li>
+<li>Dlubal RFEM takes different approach by allowing to model surface
+supports that account for both column area and rotational stiffness.
+To be honest, I prefer to model rigid &ldquo;areas&rdquo; and columns, but that
+is just my personal preference.</li>
+</ul>
+<h4 id="averaging-hogging-moments-over-reasonable-area">
+  Averaging hogging moments over reasonable area:
+  <a class="anchor" href="#averaging-hogging-moments-over-reasonable-area">#</a>
+</h4>
+<p>The guidance in <a href="https://www.concretecentre.com/Resources/Publications/How-to-design-reinforced-concrete-flat-slabs-using.aspx">Reinforced concrete centre document</a> effectively suggest that widths
+of traditional &ldquo;strips&rdquo; can be used for averaging of hogging
+moments. &ldquo;inner column strips&rdquo;, &ldquo;outer column strips&rdquo; and &ldquo;middle
+strips&rdquo;.</p>
+<p>My judgement for irregular slabs, where use of &ldquo;strips&rdquo; is hard to
+apply, has been to use moment averaging over column area + 2d<!-- raw HTML omitted -->eff<!-- raw HTML omitted -->
+(effective depth is distance from bottom face to centroid of top
+reinforcement). This generally leads to conservative design.
+<details open><summary>Option for averaging area over top of column</summary>
+  <div class="markdown-inner">
+    <img src="img/column_hogging.png" alt="Averaging Hogging moment" title="Averaging Hogging moment"/>
+  </div>
+</details>
+</p>
+<p>Tools for averaging moments varies for different programs:</p>
+<ul>
+<li>CSI SAFE uses design strips, that sums up the moment along the width
+of the strip;</li>
+<li>Autodesk Robot does not have a specific tool for this, but averaging
+can be done using &ldquo;section cuts&rdquo;.</li>
+<li>Dlubal RFEM has &ldquo;average region&rdquo; feature that does exactly that &ndash;
+sums up the moments and then divides by width of region.</li>
+</ul>
+<h3 id="fe-local-axis">
+  FE local axis
+  <a class="anchor" href="#fe-local-axis">#</a>
+</h3>
+<p>It is important to check whether the local axis of slab represents
+direction of reinforcement. This becomes even more importatnt for buildings with &ldquo;cranks&rdquo; in
+shape. Moments for design of calculated rebar will be aligned with
+the local axis of FE elements.</p>
+<h3 id="wood-and-armer-moments">
+  Wood and Armer moments
+  <a class="anchor" href="#wood-and-armer-moments">#</a>
+</h3>
+<p>Refer to <a href="/docs/results/">Results section</a>. In short &ndash; do not use m.<!-- raw HTML omitted -->y<!-- raw HTML omitted -->
+and m­.<!-- raw HTML omitted -->x<!-- raw HTML omitted -->­ for design of reinforcement. Do account for &ldquo;twisting&rdquo;
+m.<!-- raw HTML omitted -->xy<!-- raw HTML omitted --> moments.</p>
+<p>In Dlubal RFEM these are called &ldquo;design forces&rdquo;, in Robot you can view
+these in &ldquo;Maps &gt;&gt; Complex&rdquo;.</p>
+<h3 id="connections-with-shearcore-walls">
+  Connections with shear/core walls
+  <a class="anchor" href="#connections-with-shearcore-walls">#</a>
+</h3>
+<p>In a very typical building, there will be T-type junction between
+flat slab and core wall. Depending on construction sequence and contractor preferences, this
+junction can be done:</p>
+<ul>
+<li>By casting Halfen Kwikastrip or similar product that has bent-out
+bars;</li>
+<li>By casting in reinforcement couplers;</li>
+<li>By casting core wall floor-by-floor along the slab, providing
+temporary stability and casting bent bars connecting slab/core wall.</li>
+</ul>
+<p><strong>I suggest that these connections are modelled as
+hinges.</strong> This is also a consistent approach as to what
+you would need to be doing for stability design &ndash; not relying on
+these connections.</p>
+<h3 id="height-of-the-columns">
+  Height of the columns
+  <a class="anchor" href="#height-of-the-columns">#</a>
+</h3>
+<p>All models representing flat slabs will be statically indeterminate
+systems. Thus, moment distribution between columns/slab will be
+dependent on their stiffness. This distribution is also influenced by
+column support assumptions.
+<details open><summary>Options for modelling column heights in flat slab models</summary>
+  <div class="markdown-inner">
+    <img src="img/column_height.png" alt="Modelling column height" title="Modelling column height"/>
+  </div>
+</details>
+</p>
+<p>In my experience, the most frequently used option is the one with full column height and pinned supports at top and bottom.
+In my opinion, the right-most option with modelling half-of-height is the closest to &ldquo;reality&rdquo;.
+However, <strong>modelling the full height of columns</strong> leads to smaller hogging moments for edge/corner columns, thus larger sagging and deflection in first span, and thus to conservative design for bottom reinforcement.</p>
+<h3 id="thermal-breaks">
+  Thermal breaks
+  <a class="anchor" href="#thermal-breaks">#</a>
+</h3>
+<p>Thermal breaks are inserts with some &ldquo;breaking&rdquo; compression element at
+the bottom and rebar threading through at the top.</p>
+<details open><summary>Thermal break</summary>
+  <div class="markdown-inner">
+    <img src="img/thermal_break.jpg" alt="Thermal break" title="Thermal break"/>
+  </div>
+</details>
+
+<p>I suggest modelling these as linear hinges with some stiffness. This is important
+because:</p>
+<ul>
+<li>Thermal breaks will add additional deflection to slabs;</li>
+<li>Thermal breaks are only able to transfer moment/shear in one
+direction;</li>
+</ul>
+<p>So far, the most useful guidance I have found is from <a href="https://www.schoeck.com/en-gb/thermal-insulation">manufacturer
+Shoeck</a>. Of course, you should follow the guidance of whichever
+product you use.</p>
+<h3 id="deflections-of-flat-slabs">
+  Deflections of flat slabs
+  <a class="anchor" href="#deflections-of-flat-slabs">#</a>
+</h3>
+<p>There are three ways to check <strong>deflections of a flat slab</strong>:</p>
+<ul>
+<li>Use span/depth ratios from Eurocode 1992 (or other code), don&rsquo;t
+ado SLS design using FEA;</li>
+<li>Calculate deflection for the same model you use for ULS checks &ndash;
+using uncracked concrete stiffness, linear static calculation.
+Multiply the deflections by a factor to account for cracking and
+creep.</li>
+<li>Do a non-linear calculation explicitly account for cracking and
+creep.</li>
+</ul>
+<p><strong>If you can use span/depth ratios &ndash; do it!</strong> It is likely to be the
+fastest way, easily demonstrating compliance to codes.</p>
+<p>For a simple cases with no special requirements, I suggest using
+model with uncracked stiffness any <strong>multiplying deflections by a
+factor of 5</strong>:</p>
+<ul>
+<li>Within my experience so far, factors of 3 to 5 have been used (e.g.
+elastic deflection multiplied by 5 to obtain the approximate
+long-term deflection);</li>
+<li><a href="https://www.concretecentre.com/Resources/Publications/How-to-design-reinforced-concrete-flat-slabs-using.aspx">Concrete centre guidance</a>
+suggests using multiplier 4 for office and
+residential loads, 6 for storage loads.</li>
+<li>A very conservative approach is to multiply deflections by a
+factor= 2 x (1+φ.creep), where 2 accounts for cracking effects and
+creep factor accounts for creep effects. This effectively assumes
+entire slab as fully cracked and results in factors 6 and higher.</li>
+</ul>
+<p>Full guidance on calculating deflections is not covered in these notes.
+My intention here is to highlight main points:</p>
+<ul>
+<li><strong>Mesh size is important.</strong> For calculating precise deflection,
+the rule about mesh size of L/10 will no longer apply.
+In my experience, for 6x6m concrete slab,using mesh size 600mm provided 10-15% smaller deflections than mesh size 200mm (L/30);</li>
+<li>Using tensile strength and creep factors at <strong>28-days concrete age (tabulated in codes)
+will NOT be conservative</strong>.
+<ul>
+<li><a href="https://www.concretecentre.com/Resources/Design-tools-and-software/RC-Spreadsheets-V4D/RC-Spreadsheets-V4D5-contents.aspx">Reinforced concrete centre spreadsheet &ldquo;TCC22 FE assistant&rdquo;</a>
+is a helpful tool for calculating combined creep modulus and tensile
+strength to be used.</li>
+<li>Use &ldquo;combined creep modulus&rdquo; that accounts for
+construction sequence;</li>
+<li>Use concrete tensile strength of concrete at the time it is
+first cracked. If that happens earlier than 28-days (e.g. when slab
+above is cast and supported by the considered slab), then tensile
+strength will be smaller than the tabulated one in codes.</li>
+<li><a href="https://www.concretecentre.com/Resources/Publications/How-to-design-reinforced-concrete-flat-slabs-using.aspx">Concrete centre guidance</a> suggest that even the most detailed analysis will give value that is +15% to -30% from the actual deflection.</li>
+</ul>
+</li>
+</ul>
+<h3 id="punching-shear">
+  Punching shear
+  <a class="anchor" href="#punching-shear">#</a>
+</h3>
+<p>I have removed this section because not only these checks and considerations are
+highly dependent on code, but also new generation of Eurocodes intend to re-define code requirements. Therefore it is very likely that my experience to date will not be relevant in the future.</p>
+<p>A very short comment would be - if you have <strong>large openings</strong> next columns and you are designing to EN 1992-1-1, the it is very possible that top <strong>reinforcement will not be determined by FEA analysis</strong> and design, but required punching shear capacity.</p>
+<h2 id="design-of-beams">
+  Design of beams
+  <a class="anchor" href="#design-of-beams">#</a>
+</h2>
+<p>Most of the concrete beams will be part of beam/slab system and will be
+acting as ribs (downstand beams).</p>
+<h3 id="torsion-in-beams">
+  Torsion in beams
+  <a class="anchor" href="#torsion-in-beams">#</a>
+</h3>
+<p>Beam embedded in slab will appear to have a torsion
+effects.</p>
+<ul>
+<li>If the torsion in statically indeterminate structures is caused by
+the compatibility of
+<a href="https://www.dlubal.com/en/solutions/online-services/glossary/000053">deformations</a>
+(compatibility torsion), it is not necessary to perform the torsion
+design, according to EN 1992-1-1, 6.3.1 (2).</li>
+<li>&ldquo;caused by compatibility&rdquo; basically means that the stability of
+structure does not rely on torsional resistance of the beam.</li>
+<li>This will be particularly relevant for edge beams. If you want to
+ensure that these &ldquo;compatibility effects&rdquo; are accounted in the slab
+design, I suggest that you reduce the torsion stiffness of beams.</li>
+</ul>
+<h3 id="stiffness-of-downstand-beams">
+  Stiffness of downstand beams
+  <a class="anchor" href="#stiffness-of-downstand-beams">#</a>
+</h3>
+<p>Be careful when representing the stiffness of
+downstand beams. I am feeling a bit &ldquo;old school&rdquo; and consider that a
+<strong>separate design of beams</strong> (using manual load takedown) is the simplest
+and safest way to go, as none of the options below appears too appealing
+to me.
+However, I believe that many engineers would disagree with me.</p>
+<p>Here are your options for FE modelling of downstand beams:</p>
+<ul>
+<li>
+<p>Model these are <strong>rectangular beams with centroid aligning with slab</strong>
+centroid;
+<img src="img/downstand1.png" alt="Thermal break" title="Thermal break"/></p>
+<ul>
+<li>The modelled beam is less stiff than the actually downstand beam
+with T-section and therefore attracts less forces;</li>
+<li>A conservative option for assessing elastic deflections;</li>
+<li>Workaround for ULS design using this option is to manually increase
+beam stiffness by the ratio between I for rectangular beam and
+T-section beam. This will then &ldquo;attract&rdquo; more forces to the beam.
+Worth to read the <a href="https://forums.autodesk.com/t5/robot-structural-analysis-forum/how-to-design-reinforcement-for-rc-t-slab-t-beam-in-robot/m-p/3185418">discussion on Autodesk Robot forum</a></li>
+</ul>
+</li>
+<li>
+<p>Model these as <strong>rectangular beams under the slab</strong> (with rigid links
+linking to slab)
+<img src="img/downstand2.png" alt="Thermal break" title="Thermal break"/></p>
+<ul>
+<li>Beam stiffness will be represented closer to reality. A relatively
+good option you want to assess elastic deformations of the slab;</li>
+<li>Rectangular beam will likely have tension forces due to push/pull
+effects between top slab in compression and bottom of the beam in
+tension.</li>
+<li>Only use these forces in design if there is an option to integrate
+forces over both slab and beam. Something similar to &ldquo;result beam&rdquo;
+or &ldquo;pier&rdquo;. This is the approach Dlubal RFEM uses.</li>
+<li>If you use this option, make sure you include both bending moment
+and axial force in the beam design.</li>
+</ul>
+</li>
+<li>
+<p>Model a <strong>rib beam as a bar (1D) element with T-section properties</strong>.
+Place centroid of T-beam aligned with centroid of modelled slab.
+<img src="img/downstand3.png" alt="Thermal break" title="Thermal break"/></p>
+<ul>
+<li>This double-counts for stiffness of slab, therefore, this is not
+conservative for assessment of elastic deformations;</li>
+<li>Depending on the capabilities of your design modules of software,
+you might not be able to design reinforcement for T-shaped beam.</li>
+<li>In my opinion, a good option for design if in the slab portion of
+T-beam you place both the reinforcement calculated for surface and
+slab.</li>
+</ul>
+</li>
+</ul>
+</article>
+ 
+      
+
+      <footer class="book-footer">
+        
+  <div class="flex flex-wrap justify-between">
+
+
+
+
+
+</div>
+
+
+
+  <script>(function(){function e(e){const t=window.getSelection(),n=document.createRange();n.selectNodeContents(e),t.removeAllRanges(),t.addRange(n)}document.querySelectorAll("pre code").forEach(t=>{t.addEventListener("click",function(){if(window.getSelection().toString())return;e(t.parentElement),navigator.clipboard&&navigator.clipboard.writeText(t.parentElement.textContent)})})})()</script>
+
+
+ 
+        
+      </footer>
+
+      
+  
+ 
+
+      <label for="menu-control" class="hidden book-menu-overlay"></label>
+    </div>
+
+    
+    <aside class="book-toc">
+      <div class="book-toc-content">
+        
+  
+<nav id="TableOfContents">
+  <ul>
+    <li><a href="#considerations-in-overall-model">Considerations in overall model</a></li>
+    <li><a href="#stability-design----keeping-it-simple">Stability design &ndash; keeping it simple</a></li>
+    <li><a href="#stability-design----stiffness-reduction-due-to-cracking-and-creep">Stability design &ndash; stiffness reduction due to cracking and creep</a>
+      <ul>
+        <li><a href="#second-order-effects-caused-by-cracking-and-creep">Second-order effects caused by cracking and creep</a></li>
+        <li><a href="#about-sls---building-sway">About SLS - building sway</a></li>
+        <li><a href="#about-uls-design-of-core-walls">About ULS design of core walls</a></li>
+      </ul>
+    </li>
+    <li><a href="#stability-design----axial-shortening">Stability design &ndash; axial shortening</a></li>
+    <li><a href="#design-of-flat-slabs">Design of flat slabs</a>
+      <ul>
+        <li><a href="#helpful-literature">Helpful literature</a></li>
+        <li><a href="#uls-design">ULS design</a></li>
+        <li><a href="#hogging-moments">Hogging moments</a></li>
+        <li><a href="#fe-local-axis">FE local axis</a></li>
+        <li><a href="#wood-and-armer-moments">Wood and Armer moments</a></li>
+        <li><a href="#connections-with-shearcore-walls">Connections with shear/core walls</a></li>
+        <li><a href="#height-of-the-columns">Height of the columns</a></li>
+        <li><a href="#thermal-breaks">Thermal breaks</a></li>
+        <li><a href="#deflections-of-flat-slabs">Deflections of flat slabs</a></li>
+        <li><a href="#punching-shear">Punching shear</a></li>
+      </ul>
+    </li>
+    <li><a href="#design-of-beams">Design of beams</a>
+      <ul>
+        <li><a href="#torsion-in-beams">Torsion in beams</a></li>
+        <li><a href="#stiffness-of-downstand-beams">Stiffness of downstand beams</a></li>
+      </ul>
+    </li>
+  </ul>
+</nav>
+
+
+ 
+      </div>
+    </aside>
+    
+  </main>
+
+  
+</body>
+</html>
+
+
+
+
+
+
+
+
+
+
+
+

@@ -1,0 +1,860 @@
+<!DOCTYPE html>
+<html lang="en-us" dir="ltr">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="Modelling Geometry#There are three sections about modelling - geometry, supports and loads. In these sections I am covering main &ldquo;toolset&rdquo; to create a finite element model.
+Nodes#Geometry nodes vs. FE nodes#There are actually two types of nodes. In this section I talk about nodes that define the geometry.
+The finite element mesh will create more nodes &ndash; both the line members and surfaces will have intermediate nodes defining finite elements.">
+<meta name="theme-color" media="(prefers-color-scheme: light)" content="#ffffff">
+<meta name="theme-color" media="(prefers-color-scheme: dark)" content="#343a40">
+<meta name="color-scheme" content="light dark"><meta property="og:title" content="03 Geometry" />
+<meta property="og:description" content="Modelling Geometry#There are three sections about modelling - geometry, supports and loads. In these sections I am covering main &ldquo;toolset&rdquo; to create a finite element model.
+Nodes#Geometry nodes vs. FE nodes#There are actually two types of nodes. In this section I talk about nodes that define the geometry.
+The finite element mesh will create more nodes &ndash; both the line members and surfaces will have intermediate nodes defining finite elements." />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://structures.lv/notes/docs/modelgeometry/" /><meta property="article:section" content="docs" />
+
+
+
+<title>03 Geometry | Engineer&#39;s notes on design using FEA</title>
+<link rel="manifest" href="/notes/manifest.json">
+<link rel="icon" href="/notes/favicon.png" >
+<link rel="stylesheet" href="/notes/book.min.33a48f5432973b8ff9a82679d9e45d67f2c15d4399bd2829269455cfe390b5e8.css" integrity="sha256-M6SPVDKXO4/5qCZ52eRdZ/LBXUOZvSgpJpRVz&#43;OQteg=" crossorigin="anonymous">
+  <script defer src="/notes/flexsearch.min.js"></script>
+  <script defer src="/notes/en.search.min.91455c75d71f6e311cc359c3b69d34f78d8c70ef4059e70b66a2dc60ceddf6b7.js" integrity="sha256-kUVcddcfbjEcw1nDtp00942McO9AWecLZqLcYM7d9rc=" crossorigin="anonymous"></script>
+
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-7FJT3L107Y"></script>
+<script>
+var doNotTrack = false;
+if (!doNotTrack) {
+	window.dataLayer = window.dataLayer || [];
+	function gtag(){dataLayer.push(arguments);}
+	gtag('js', new Date());
+	gtag('config', 'G-7FJT3L107Y', { 'anonymize_ip': false });
+}
+</script>
+<!--
+Made with Book Theme
+https://github.com/alex-shpak/hugo-book
+-->
+  
+</head>
+<body dir="ltr">
+  <input type="checkbox" class="hidden toggle" id="menu-control" />
+  <input type="checkbox" class="hidden toggle" id="toc-control" />
+  <main class="container flex">
+    <aside class="book-menu">
+      <div class="book-menu-content">
+        
+  <nav>
+<h2 class="book-brand">
+  <a class="flex align-center" href="/notes/"><span>Engineer&#39;s notes on design using FEA</span>
+  </a>
+</h2>
+
+
+<div class="book-search">
+  <input type="text" id="book-search-input" placeholder="Search" aria-label="Search" maxlength="64" data-hotkeys="s/" />
+  <div class="book-search-spinner hidden"></div>
+  <ul id="book-search-results"></ul>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+  
+  <ul>
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/notes/docs/introduction/" class="">Introduction</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/notes/docs/designflow/" class="">01 Design Flow</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/notes/docs/idealworld/" class="">02 The Ideal World</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/notes/docs/modelgeometry/" class="active">03 Geometry</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/notes/docs/modelsupports/" class="">04 Supports</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/notes/docs/modelloads/" class="">05 Loads and Combinations</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/notes/docs/meshing/" class="">06 Meshing</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/notes/docs/instabilities/" class="">07 Instabilities</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/notes/docs/analysis/" class="">08 Analysis</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/notes/docs/results/" class="">09 Results</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/notes/docs/concrete/" class="">10 Reinforced Concrete</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/notes/docs/steel/" class="">11 Steel</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/notes/docs/about/" class="">About me</a>
+  
+
+        </li>
+      
+    
+  </ul>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</nav>
+
+
+
+
+  <script>(function(){var e=document.querySelector("aside .book-menu-content");addEventListener("beforeunload",function(){localStorage.setItem("menu.scrollTop",e.scrollTop)}),e.scrollTop=localStorage.getItem("menu.scrollTop")})()</script>
+
+
+ 
+      </div>
+    </aside>
+
+    <div class="book-page">
+      <header class="book-header">
+        
+  <div class="flex align-center justify-between">
+  <label for="menu-control">
+    <img src="/notes/svg/menu.svg" class="book-icon" alt="Menu" />
+  </label>
+
+  <strong>03 Geometry</strong>
+
+  <label for="toc-control">
+    
+    <img src="/notes/svg/toc.svg" class="book-icon" alt="Table of Contents" />
+    
+  </label>
+</div>
+
+
+  
+  <aside class="hidden clearfix">
+    
+  
+<nav id="TableOfContents">
+  <ul>
+    <li><a href="#nodes">Nodes</a>
+      <ul>
+        <li><a href="#geometry-nodes-vs-fe-nodes">Geometry nodes vs. FE nodes</a></li>
+        <li><a href="#parameters">Parameters</a></li>
+        <li><a href="#commentary">Commentary</a></li>
+      </ul>
+    </li>
+    <li><a href="#members">Members</a>
+      <ul>
+        <li><a href="#parameters-1">Parameters</a></li>
+        <li><a href="#commentary-1">Commentary</a></li>
+      </ul>
+    </li>
+    <li><a href="#surfaces">Surfaces</a>
+      <ul>
+        <li><a href="#parameters-2">Parameters</a></li>
+        <li><a href="#do-you-need-to-model-surfaces">Do you need to model surfaces?</a></li>
+        <li><a href="#commentary-2">Commentary:</a></li>
+      </ul>
+    </li>
+    <li><a href="#export-from-bim-software">Export from BIM software</a></li>
+  </ul>
+</nav>
+
+
+
+  </aside>
+  
+ 
+      </header>
+
+      
+      
+  <article class="markdown book-article"><h1 id="modelling-geometry">
+  Modelling Geometry
+  <a class="anchor" href="#modelling-geometry">#</a>
+</h1>
+<p>There are three sections about modelling - geometry, supports and loads. In these sections I am covering main &ldquo;toolset&rdquo; to create a finite element model.</p>
+<h2 id="nodes">
+  Nodes
+  <a class="anchor" href="#nodes">#</a>
+</h2>
+<h3 id="geometry-nodes-vs-fe-nodes">
+  Geometry nodes vs. FE nodes
+  <a class="anchor" href="#geometry-nodes-vs-fe-nodes">#</a>
+</h3>
+<p>There are actually two types of nodes. In this section I talk about
+nodes that define the geometry.<br>
+The finite element mesh will create more nodes &ndash; both the line members
+and surfaces will have intermediate nodes defining finite elements.</p>
+
+<div class="book-expand">
+  <label>
+    <div class="book-expand-head flex justify-between">
+      <span>Geometry nodes vs. FE notes</span>
+      <span>show images v</span>
+    </div>
+    <input type="checkbox" class="hidden" />
+    <div class="book-expand-content markdown-inner">
+      <p><strong>Geometry nodes</strong>
+<img src="img/geonodes.png" alt="Geometry nodes" title="Geometry nodes"/></p>
+<p><strong>FE nodes</strong>
+<img src="img/fenodes.png" alt="FE nodes" title="FE nodes"/></p>
+
+    </div>
+  </label>
+</div>
+
+<h3 id="parameters">
+  Parameters
+  <a class="anchor" href="#parameters">#</a>
+</h3>
+<p>It is as simple as it sounds:</p>
+<ul>
+<li>X, Y, Z coordinates.</li>
+<li>Restraints = supports.<br>
+Almost all programs allow you do define a &ldquo;support type&rdquo; which then
+can be applied to multiple nodes.</li>
+<li>Some programs allow you to use different coordinate systems. Either
+Cartesian (XYZ) vs. Polar (distance and angles).</li>
+</ul>
+<h3 id="commentary">
+  Commentary
+  <a class="anchor" href="#commentary">#</a>
+</h3>
+<h4 id="precision-matters">
+  Precision matters
+  <a class="anchor" href="#precision-matters">#</a>
+</h4>
+<p>If you have just a rectangular/orthogonal structure &ndash; great! ..because
+you might be one of the very few &ldquo;lucky ones&rdquo;.</p>
+<p>A lot of models need to represent inclinations, weird angles caused by
+existing building site restraints or architectural intent. And other
+features that lead to &ldquo;exact&rdquo; coordinates that can&rsquo;t be rounded. The
+<strong>&ldquo;exact coordinates&rdquo;</strong> would be indefinitely long string of numbers after
+the comma (or &ldquo;non-terminating decimals&rdquo;). However, we need the coordinates to be finite. And programming limits and numeric types used in programming means that every single coordinate is rounded at some precision.</p>
+<p>Keep in mind that the coordinates that software display may be rounded
+just to display those and actually may have more numbers after the
+decimal point.</p>
+<ul>
+<li>To check this with Autodesk Robot, go to &hellip; &ldquo;units&rdquo; and set more decimal
+places;</li>
+<li>To check this with Dlubal RFEM, go to &ldquo;full precision&rdquo;.</li>
+</ul>
+<details open><summary>See exact location of your geometry nodes</summary>
+  <div class="markdown-inner">
+    <p><strong>Dlubal RFEM:</strong><br>
+<img src="img/rfemfullprecision.png" alt="Exact node coordinates" title="Exact node coordinates"/></p>
+<p><strong>Autodesk Robot:</strong><br>
+<img src="img/robotfullprecision.png" alt="Exact node coordinates" title="Exact node coordinates"/></p>
+
+  </div>
+</details>
+
+<p>There are <strong>two general approaches</strong> to deal with rounding of
+coordinates:</p>
+<ul>
+<li>Doing it at modelling stage &ndash; allowing, say, only 1mm increments of
+coordinates. Most frequently such updates are done when doing
+&ldquo;regenerate model&rdquo; (or similarly named) tool.</li>
+</ul>
+<details open><summary>Model regeneration functionality</summary>
+  <div class="markdown-inner">
+    <p><strong>Dlubal RFEM:</strong><br>
+<img src="img/rfemregenerate.png" alt="Regenerate model" title="Regenerate model"/></p>
+<p><strong>Autodesk Robot:</strong><br>
+<img src="img/robotregenerate.png" alt="Regenerate model" title="Regenerate model"/></p>
+
+  </div>
+</details>
+
+<ul>
+<li>Doing it at the meshing stage &ndash; if the auto-mesh feature is used,
+usually software has certain &ldquo;tolerance&rdquo; setting which determines
+whether the nodes close to each other are &ldquo;joined&rdquo; into one node in
+finite element mesh.</li>
+</ul>
+<p>For overall building models I personally would recommend for sticking to
+precision of 1mm.</p>
+<h2 id="members">
+  Members
+  <a class="anchor" href="#members">#</a>
+</h2>
+<p>Surprisingly, members = 1D elements have the <strong>most parameters</strong>. This is
+because a physical 3D solid is &ldquo;squeezed&rdquo; into 1D bar.</p>
+<h3 id="parameters-1">
+  Parameters
+  <a class="anchor" href="#parameters-1">#</a>
+</h3>
+<p>The minimum set of parameters every Civil/Structural FE software has:</p>
+<ul>
+<li>start node;</li>
+<li>end node (sometimes start/end node is replaced with &ldquo;line&rdquo;);</li>
+<li>cross section;</li>
+<li>material (often cross section has material assigned);</li>
+<li>rotation of the section along longitudinal axis (often called &ldquo;beta
+angle&rdquo;);</li>
+<li>rotational releases (hinges) at start/end of the member;</li>
+<li>translational=movement releases at start/end of the member;</li>
+</ul>
+<p>The further parameters are useful, but the implementation depends on the
+program:</p>
+<ul>
+<li>Stiffness modifiers. Preferably, software would allow separate
+modification for axial/bending/shear stiffness;</li>
+<li>Option to make member as:
+<ul>
+<li>Tension/compression only;</li>
+<li>Truss = tension &amp; compression, but no bending</li>
+<li>Rigid = representing rigid coupling between nodes on the member;</li>
+</ul>
+</li>
+</ul>
+<h3 id="commentary-1">
+  Commentary
+  <a class="anchor" href="#commentary-1">#</a>
+</h3>
+<h4 id="comments-on-geometry">
+  Comments on geometry:
+  <a class="anchor" href="#comments-on-geometry">#</a>
+</h4>
+<ul>
+<li>All modern programs allow to model in 3D. I strongly suggest to use
+3D model even for planar structures (such as trusses), because then
+you must explicitly state your assumptions about supports and releases.</li>
+<li>Split of members, sets of members. If you will be using design tools
+integrated in software it is likely that the split of members will
+matter. Try to avoid extra nodes in the middle of the members that physically  and for design purposes will be continuous.</li>
+<li>Local axis &ndash; keep consistent along the length of continuous members and preferably use same rotation for columns as well.</li>
+</ul>
+<h4 id="other-comments">
+  Other comments:
+  <a class="anchor" href="#other-comments">#</a>
+</h4>
+<ul>
+<li>
+<p><strong>Rotational releases</strong>. The likely scenario where you would need to use
+a rotational spring, is to use the exact stiffness of steel or
+timber connection, calculated in a separate model. However, in most
+of cases the rotations/translations will be either free or fixed.</p>
+</li>
+<li>
+<p><strong>Translational releases</strong> &ndash; bearing supports. I would strongly advise
+to be consistent in use of supports and member end releases. I
+personally use support properties (i.e. remove restraint one
+direction), rather than properties of releases.</p>
+<ul>
+<li>Most frequently use for axial releases might be connections with
+long slotted holes. For example slotted holes on top of columns
+supporting façade.</li>
+</ul>
+</li>
+<li>
+<p>Be careful with releasing rotation if there are <strong>large axial forces</strong>.
+Connection may turn out with many bolts, large/stiff plates that
+eventually add significant rotational stiffness.</p>
+</li>
+<li>
+<p><strong>Tension/Compression</strong> only members (no bending stiffness):</p>
+<ul>
+<li>Tension only members are usually used for steel tension bracing or
+representing stability diaphragms. Generally &ndash; tension-only FE
+members usually represent members/surfaces with little or no
+buckling resistance.</li>
+<li>Compression only members are usually used in cases where connections
+at ends are not able to take tension, for example timber bracing.</li>
+</ul>
+</li>
+<li>
+<p><strong>Rigid links</strong> and use cases for those:</p>
+<ul>
+<li>Dealing with high stress peaks:
+<ul>
+<li>Intersections of member and surface. For example RC beam continuously anchored in RC wall;</li>
+<li>Modelling areas of Bolt holes;</li>
+</ul>
+</li>
+<li>Modelling eccentricities:
+<ul>
+<li>Eccentricities at beam/column interface</li>
+<li>Sizes of sections. Truss eccentricities &ndash; from Eurocode.</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<details open><summary>Use of rigid links</summary>
+  <div class="markdown-inner">
+    <p><strong>Modelling eccentricities in truss</strong><br>
+<img src="img/rigidlinktruss.png" alt="Truss eccentricities" title="Truss eccentricities"/></p>
+<p><strong>Modelling bolt holes in steel details</strong><br>
+<img src="img/rigidbolthole.png" alt="Bolt holes" title="Bolt holes"/></p>
+<p><strong>Modelling column section sizes flat slabs</strong><br>
+<img src="img/rigidlinkflatslab.png" alt="Flat slabs" title="Flat slabs"/></p>
+
+  </div>
+</details>
+
+<ul>
+<li><strong>Stiffness modifiers</strong>:
+<ul>
+<li>These are most widely used to model cracking/creep effects in
+concrete. See <a href="/docs/concrete/">Concrete material section</a>.</li>
+<li>Be careful and write down how and where you apply those. There may
+be multiple ways how to apply those:
+<ul>
+<li>Some engineers might use materials with adjusted E and G;</li>
+<li>Some engineers apply modifiers to cross-sections &ndash; I personally
+prefer this;</li>
+<li>Some engineers apply modifiers to members individually;</li>
+</ul>
+</li>
+<li>Check that they are considered in calculations &ndash; do your test runs
+and compare internal forces between structure with stiffness
+modifiers and without.</li>
+</ul>
+</li>
+</ul>
+<details open><summary>Surface stiffness modification in Dlubal RFEM</summary>
+  <div class="markdown-inner">
+    <img src="img/rfemmodifiers.png" alt="Regenerate model" title="Regenerate model"/>
+  </div>
+</details>
+
+<h2 id="surfaces">
+  Surfaces
+  <a class="anchor" href="#surfaces">#</a>
+</h2>
+<h3 id="parameters-2">
+  Parameters
+  <a class="anchor" href="#parameters-2">#</a>
+</h3>
+<p>Basic parameters that most of civil/structural engineering software has:</p>
+<ul>
+<li>Geometry &ndash; lines or nodes defining perimeter;</li>
+<li>Material;</li>
+<li>Thickness;</li>
+<li>Stiffness type:
+<ul>
+<li>Normal;</li>
+<li>Orthotropic (think of a corrugated sheet or hollow core precast
+plank);</li>
+<li>Membrane (no bending);</li>
+</ul>
+</li>
+<li>Geometry of openings;</li>
+</ul>
+<p>Additional parameters that might not be available in all software:</p>
+<ul>
+<li>FE auto-meshing settings specific to surface (.e.g different mesh size);</li>
+<li>Hinges &ndash; linear releases along the edges;</li>
+<li>Stiffness modifiers;</li>
+</ul>
+<h3 id="do-you-need-to-model-surfaces">
+  Do you need to model surfaces?
+  <a class="anchor" href="#do-you-need-to-model-surfaces">#</a>
+</h3>
+<p>When I think &ldquo;surfaces&rdquo;, I usually think concrete slabs/planks, plates
+in steel details and glass panes. It <strong>might be that you don&rsquo;t even need to model</strong> surfaces with stiffness:</p>
+<ul>
+<li>If main purpose is to <strong>distribute loads</strong> on members &ndash; there are tools in software
+for that:
+<ul>
+<li>For Dlubal RFEM &ndash; &ldquo;Generation of area loads&rdquo;;</li>
+<li>Autodesk Robot &ndash; &ldquo;Cladding members&rdquo;;</li>
+</ul>
+</li>
+<li>If main purpose is to model <strong>diaphragm</strong> - what is the minimum you can
+do? Coarse mesh? Can you do rigid links only? Can you replace this
+with fictitious bracing?</li>
+<li>For the design purposes, almost always the &ldquo;bar&rdquo; 1D members will be
+more convenient to design. Therefore, I suggest replacing <strong>narrow
+strips</strong> of RC slabs/walls with members and designing these as
+members. For columns/walls, Eurocodes considers &ldquo;column&rdquo; a member
+with width/length ratio 1:4 or less.</li>
+</ul>
+<h3 id="commentary-2">
+  Commentary:
+  <a class="anchor" href="#commentary-2">#</a>
+</h3>
+<h4 id="geometry">
+  Geometry
+  <a class="anchor" href="#geometry">#</a>
+</h4>
+<ul>
+<li>
+<p>Understand what <strong>defines the geometry</strong> of surface&ndash; lines, nodes or
+coordinates.</p>
+<ul>
+<li>Surfaces in Autodesk Robot are defined by coordinates of contour.</li>
+<li>Surfaces in RFEM are defined by lines (and lines are then defined by nodes).</li>
+<li>Surfaces in SAP2000 are defined by perimeter nodes.</li>
+</ul>
+</li>
+<li>
+<p><strong>Connection with members</strong> &ndash; for most software, the members that are placed
+on surface plane and intersect it, will be embedded and fixed to
+surfaces during auto-meshing stage.</p>
+</li>
+<li>
+<p><strong>Orientation of surfaces.</strong> If you are doing RC design &ndash; follow where
+top/bottom is (direction of z axis or axis &ldquo;3&rdquo; in some software).</p>
+</li>
+<li>
+<p>Consider <strong>centreline of thickness</strong>. For example, if you model
+100x100x10 hollow section, actually you would be modelling 90x90x10.
+And it can actually matter as it would have significant effect on
+stiffness and section modulus that the section has..</p>
+</li>
+</ul>
+<details open><summary>Example - considering centreline of thickness</summary>
+  <div class="markdown-inner">
+    <img src="img/steelcentrelines.png" alt="cantilevered beam" title="cantilevered beam"/>
+  </div>
+</details>
+
+<h4 id="material">
+  Material
+  <a class="anchor" href="#material">#</a>
+</h4>
+<ul>
+<li>Choose properties according to building code. In Eurocodes this
+would be section 3 at every code (timber, steel , concrete,
+aluminium).</li>
+<li>See whether there are extra &ldquo;information&rdquo; embedded in properties on
+material you choose. For example &ndash; &ldquo;cracked concrete&rdquo; with already
+reduced properties.</li>
+<li>Linear or non-linear. I urge you to start any model with all
+materials being linear and understand the basic behaviour of model first.</li>
+</ul>
+<h4 id="thickness">
+  Thickness
+  <a class="anchor" href="#thickness">#</a>
+</h4>
+<p>Think, what does the thickness represent? What are you trying to
+design?</p>
+<ul>
+<li><strong>Composite slabs</strong> &ndash; should you model top only? Or do you want the
+correct weight &ndash; meaning &ldquo;average&rdquo; thickness?.</li>
+<li>If you decide to model tension-only <strong>stability diaphragm</strong> with plate
+that can take compression/tension, it would be reasonable to assume
+just half of the stiffness &ndash; similarly as modelling tension braces.</li>
+<li><strong>RC Slab overlaps</strong> &ndash; if you want to represent the weight, but not
+added stiffness (because of the way it might be detailed), thus
+keeping the thickness of one of overlapped slabs but adding extra
+self weight as load.</li>
+</ul>
+<h4 id="hinges">
+  Hinges
+  <a class="anchor" href="#hinges">#</a>
+</h4>
+<p>There can be linear releases defined on the edges of the surfaces.</p>
+<ul>
+<li>Be careful modelling steel details &ndash; <strong>welded joints</strong> will not behave like
+hinges.</li>
+<li>Hinge may also represent an assumption regarding the <strong>load path in
+reinforced concrete</strong>.
+<ul>
+<li>Precast panels transferring bending one-way only;</li>
+<li>Slab not transferring any moment to core;</li>
+<li>Thermal breaks adding additional deflection to concrete slabs;</li>
+</ul>
+</li>
+</ul>
+<h4 id="openings">
+  Openings
+  <a class="anchor" href="#openings">#</a>
+</h4>
+<p>If you use auto-mesh, adding openings means additional complexity to meshing algorithm.</p>
+<p>Think what you want to achieve with the model?</p>
+<ul>
+<li>In overall models for stability and vertical elements&rsquo; design, the modelling of small MEP openings is an <strong>over-complication</strong> &ndash; model just the big
+risers, small ones are likely to change often and influence design nominally.</li>
+<li>In slab models, I would not try to model openings smaller than 300x300mm.</li>
+<li>For steel connection models, I suggest using openings at <strong>locations of bolts</strong>
+&ndash; and model bolt via rigid links. See <a href="/docs/steel/">Steel material section</a>.</li>
+</ul>
+<h2 id="export-from-bim-software">
+  Export from BIM software
+  <a class="anchor" href="#export-from-bim-software">#</a>
+</h2>
+<p>Import/Export of models from BIM software like <strong>Autodesk Revit or Tekla
+Structures</strong> is a huge topic, but I&rsquo;ll try to cover basics based on
+my experience exporting from Revit.</p>
+<p>Don&rsquo;t expect to the export to go like in some advertisement videos: <strong>two
+clicks and model ready</strong>. It doesn&rsquo;t work like that. It is often still (at
+year 2020) an &ldquo;open question&rdquo; whether the FE model geometry should be
+generated from BIM model or build from the scratch.</p>
+<p>Things to think about when exporting from Revit:</p>
+<ul>
+<li>Do you have <strong>analytical 3D view</strong> set up in Revit, can you see and
+explore the analytical model only?</li>
+<li>Are all elements you need defined as &ldquo;structural&rdquo;, do they have
+<strong>analytical lines/boundaries</strong>?</li>
+<li>Previously I described rounding in FE software. Similarly, there is
+rounding= <strong>&ldquo;tolerance&rdquo;</strong> settings in Revit. This will allow you to snap
+column ends to nearby levels.</li>
+<li>Make analytical slabs or beams to &ldquo;project&rdquo; to <strong>Revit &ldquo;levels&rdquo;</strong> &ndash;
+this will ensure that floors are at the correct elevation.</li>
+<li>Pay attention to slab <strong>edges that are supported on walls</strong>. For example
+&ndash; slabs around core walls. This is a common location where slab
+boundaries go wrong.</li>
+<li>A good practice for Revit modelling to ensure correct analytical
+model is to <strong>split walls and columns</strong> at every intersection with slab.</li>
+<li>When the export is done, pay attention to rotation of sections. I
+have had multiple occurrences with incorrect rotation being exported, a
+software bug.</li>
+</ul>
+<p>You might be interested to look into solutions that are based on &ldquo;object
+models&rdquo; - idea that there is a <strong>one &ldquo;object model&rdquo;</strong> that is program
+independent and data can be exchanged between multiple BIM and analysis tools:</p>
+<ul>
+<li><a href="https://bhom.xyz/">https://bhom.xyz/</a></li>
+<li><a href="https://geometrygym.wordpress.com/">https://geometrygym.wordpress.com/</a></li>
+<li><a href="https://docs.hypar.io/">https://docs.hypar.io/</a></li>
+</ul>
+</article>
+ 
+      
+
+      <footer class="book-footer">
+        
+  <div class="flex flex-wrap justify-between">
+
+
+
+
+
+</div>
+
+
+
+  <script>(function(){function e(e){const t=window.getSelection(),n=document.createRange();n.selectNodeContents(e),t.removeAllRanges(),t.addRange(n)}document.querySelectorAll("pre code").forEach(t=>{t.addEventListener("click",function(){if(window.getSelection().toString())return;e(t.parentElement),navigator.clipboard&&navigator.clipboard.writeText(t.parentElement.textContent)})})})()</script>
+
+
+ 
+        
+      </footer>
+
+      
+  
+ 
+
+      <label for="menu-control" class="hidden book-menu-overlay"></label>
+    </div>
+
+    
+    <aside class="book-toc">
+      <div class="book-toc-content">
+        
+  
+<nav id="TableOfContents">
+  <ul>
+    <li><a href="#nodes">Nodes</a>
+      <ul>
+        <li><a href="#geometry-nodes-vs-fe-nodes">Geometry nodes vs. FE nodes</a></li>
+        <li><a href="#parameters">Parameters</a></li>
+        <li><a href="#commentary">Commentary</a></li>
+      </ul>
+    </li>
+    <li><a href="#members">Members</a>
+      <ul>
+        <li><a href="#parameters-1">Parameters</a></li>
+        <li><a href="#commentary-1">Commentary</a></li>
+      </ul>
+    </li>
+    <li><a href="#surfaces">Surfaces</a>
+      <ul>
+        <li><a href="#parameters-2">Parameters</a></li>
+        <li><a href="#do-you-need-to-model-surfaces">Do you need to model surfaces?</a></li>
+        <li><a href="#commentary-2">Commentary:</a></li>
+      </ul>
+    </li>
+    <li><a href="#export-from-bim-software">Export from BIM software</a></li>
+  </ul>
+</nav>
+
+
+ 
+      </div>
+    </aside>
+    
+  </main>
+
+  
+</body>
+</html>
+
+
+
+
+
+
+
+
+
+
+
+
